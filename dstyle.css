@@ -1,0 +1,157 @@
+/* Reset & base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Header */
+header {
+  background-color: #232f3e;
+  color: #fff;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+header h1 {
+  font-size: 24px;
+}
+nav a {
+  color: #ffd700;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+#titles{
+  padding: 20px 60px;
+}
+/* Sections */
+section {
+  padding: 40px 60px;
+}
+section h2 {
+  color: #232f3e;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+section ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+section p {
+  margin-bottom: 15px;
+}
+
+/* Footer */
+footer {
+  background-color: #232f3e;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  nav {
+    margin-top: 10px;
+  }
+  section {
+    padding: 20px;
+  }
+}
+#objectives ol {
+  margin-left: 20px;
+  padding-left: 15px;
+}
+#objectives ol li {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+.algo-card {
+  background-color: #f9f9fc;
+  border-left: 5px solid #5b9bd5;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.algo-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.algo-card details {
+  margin-top: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.algo-card code, .algo-card pre {
+  background-color: #eef;
+  padding: 4px;
+  border-radius: 4px;
+  display: block;
+  white-space: pre-wrap;
+}
+.algo-card pre, .algo-card code {
+  background-color: #f4f4f4;
+  border-left: 3px solid #5b9bd5;
+  padding: 10px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  overflow-x: auto;
+  white-space: pre;
+  border-radius: 6px;
+}
+
+.algo-card iframe {
+  width: 100%;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.algo-card a {
+  color: #2a5885;
+  text-decoration: underline;
+}
+#dp-visual table {
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px #ccc;
+}
+#dp-visual td {
+  width: 40px;
+  text-align: center;
+  font-size: 18px;
+}
+#edit-dp-visual table {
+  margin: auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px #ccc;
+}
+#edit-dp-visual td {
+  width: 40px;
+  text-align: center;
+  font-size: 18px;
+}
