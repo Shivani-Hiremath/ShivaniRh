@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fenwick Tree | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="fenwick-tree" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Fenwick Tree (Binary Indexed Tree)</h1>
+    <p><strong>Category:</strong> Data Structures, Range Query</p>
+    <p><strong>Description:</strong> Efficient data structure for cumulative frequency tables and prefix sums, supporting updates and queries in logarithmic time.</p>
+
+    <p><strong>📦 Business Cases:</strong></p>
+    <ul>
+      <li>Real-time update and query of metrics in AWS CloudWatch dashboards.</li>
+      <li>Maintaining prefix sums or counts in large-scale distributed logs.</li>
+      <li>Efficient event counting in AWS Lambda streaming data.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Uses binary indexing to store partial sums.</li>
+        <li>Updates and prefix queries are performed by traversing parent nodes via bit manipulation.</li>
+        <li>
+          A normal array takes <b>O(k)</b> time to get the sum from 1 to k,
+          while a Fenwick Tree takes only <b>O(log n)</b> time for both 
+          <strong>prefix sum</strong> and <strong>updates</strong>, 
+          making it much faster for large data.
+        </li>
+        <li>
+          Each node at index <i>i</i> stores the sum of a specific range, 
+          determined by the <em>last set bit</em> of <i>i</i> (using <i>i & -i</i>), 
+          allowing it to <strong>jump smartly</strong> through indices using binary operations.
+        </li>
+      </ul>
+      <div style="text-align: center;">
+        <img src="/assets/image.png" alt="Fenwick Tree Visualization" style="width: 100%; max-width: 600px; border-radius: 8px;">
+      </div>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <h2>Initial Array</h2>
+      <p>The array values are:</p>
+      <p>Index: 1 2 3 4 5 6 7 8 9 10</p>
+      <p>Values: 3 2 -1 6 5 4 -3 3 7 2</p>
+      <div style="text-align: center;">
+        <p><b>Fenwick Tree Update:</b></p>
+        <img src="/assets/fenwick1.jpg" alt="Fenwick Tree Update" style="width: 100%; max-width: 600px; border-radius: 8px;">
+        <p><b>Fenwick Tree Query:</b></p>
+        <img src="/assets/fenwick2.jpg" alt="Fenwick Tree Query" style="width: 100%; max-width: 600px; border-radius: 8px; border: black 3px solid;">
+      </div>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/fenwick-tree.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Build Time:</strong> O(N log N)</li>
+        <li><strong>Update:</strong> O(log N)</li>
+        <li><strong>Prefix Query:</strong> O(log N)</li>
+        <li><strong>Space:</strong> O(N)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Fenwick, P. M. (1994).
+      <a href="https://en.wikipedia.org/wiki/Fenwick_tree" target="_blank">
+        Wikipedia: Fenwick Tree (Binary Indexed Tree)
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/data_structures/fenwick.html" target="_blank">
+        CP-Algorithms: Fenwick Tree
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/binary-indexed-tree-or-fenwick-tree-2/" target="_blank">
+        GeeksforGeeks: Fenwick Tree
+      </a>
+    </li>
+   
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

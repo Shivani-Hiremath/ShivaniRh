@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Huffman Coding | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="huffman-coding" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Huffman Coding</h1>
+    <p><strong>Category:</strong> Data Compression</p>
+    <p><strong>Description:</strong> Huffman Coding is a greedy algorithm used to compress data without losing information. It assigns variable-length binary codes to input characters based on their frequencies—the more frequent a character, the shorter its code.</p>
+
+    <p><strong>🎬 Business Case (Amazon Prime):</strong></p>
+    <ul>
+      <li>Used in compressing movie subtitles or captions to save storage and bandwidth.</li>
+      <li>Efficient for storing compressed metadata like actor tags, genres, or user notes.</li>
+      <li>Helps in optimizing stream buffer storage by compressing frequently accessed UI strings or identifiers.</li>
+      <li>Can be integrated in offline download storage mechanisms where space is limited.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Count frequency of each character in the input.</li>
+        <li>Build a priority queue (min-heap) where each node is a character and its frequency.</li>
+        <li>Extract two nodes with lowest frequency and merge them into a new node with combined frequency.</li>
+        <li>Repeat until one node remains — this forms the root of the Huffman Tree.</li>
+        <li>Assign binary codes by traversing the tree: left as 0, right as 1.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <img src="/assets/huffman.png"width="800px" height="800" style="border:1px solid #ccc; border-radius: 10px; margin-left: 150px;"></img>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/huffman-coding.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time Complexity:</strong> O(n log n), where n is the number of characters.</li>
+        <li><strong>Space Complexity:</strong> O(n) for storing codes and the tree.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Huffman, D. A. (1952).
+      <a href="https://en.wikipedia.org/wiki/Huffman_coding" target="_blank">
+        Wikipedia: Huffman Coding
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/" target="_blank">
+        GeeksforGeeks: Huffman Coding
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/strings/huffman.html" target="_blank">
+        CP-Algorithms: Huffman Coding
+      </a>
+    </li>
+    <li>
+      <a href="https://stackoverflow.com/questions/70245937/why-huffmans-coding-algorithm-takes-more-bit-than-the-original-size" target="_blank">
+        Stack Overflow: Huffman Coding Size Issue
+      </a>
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

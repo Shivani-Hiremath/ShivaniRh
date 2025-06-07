@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Segment Tree | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="segment-tree" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Segment Tree</h1>
+    <p><strong>Category:</strong> Data Structures, Range Query</p>
+    <p><strong>Description:</strong> A tree-based data structure that allows efficient range queries and updates in logarithmic time.</p>
+
+    <p><strong>📦 Use Cases (AWS Context):</strong></p>
+    <ul>
+      <li>Real-time log analytics using AWS Lambda or Kinesis Firehose.</li>
+      <li>Efficient range-sum or max query over IoT data streams in AWS IoT Analytics.</li>
+      <li>Query-based cost monitoring in AWS Cost Explorer.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Divide the array into segments (typically halves).</li>
+        <li>Store results of range queries in a binary tree format.</li>
+        <li>Update and query operations take O(log N) time.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/segmenttree" width="100%" height="400" style="border:none;"></iframe>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/segment-tree.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Build Time:</strong> O(N)</li>
+        <li><strong>Query/Update:</strong> O(log N)</li>
+        <li><strong>Space:</strong> O(2N)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Segment_tree" target="_blank">
+        Wikipedia: Segment Tree
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/segment-tree-data-structure/" target="_blank">
+        GeeksforGeeks: Segment Tree Data Structure
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/data_structures/segment_tree.html" target="_blank">
+        CP-Algorithms: Segment Tree
+      </a>
+    </li>
+    <li>
+      Visualization powered by 
+      <a href="https://visualgo.net/en/segmenttree" target="_blank">
+        VisuAlgo: Segment Tree Visualizer
+      </a>
+    </li>
+  </ol>
+</div>
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

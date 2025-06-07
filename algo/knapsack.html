@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>0/1 Knapsack Problem | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+<section id="knapsack-dp">
+  <div class="algo-card">
+    <h1>0/1 Knapsack Problem</h1>
+    <p><strong>Category:</strong> Dynamic Programming</p>
+    <p><strong>Description:</strong> Given weights and profits of items and a knapsack of capacity <i>w</i>, find the maximum profit achievable by including or excluding items (each item can be picked at most once).</p>
+    <p><strong>📦 Business Case:</strong></p>
+<ul>
+  <li>Select the best set of products to show on a limited space like homepage or deals section.</li>
+  <li>Decide which items to keep in a delivery truck to maximize value within weight limits.</li>
+  <li>Choose the right mix of ads or sponsored products to display based on budget and profit.</li>
+  <li>Help customers decide what to buy within a certain budget to get the best value.</li>
+  <li>Pick the best combination of discounts or offers to apply without going over limits.</li>
+</ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Given items each with a weight <i>w<sub>i</sub></i> and value <i>v<sub>i</sub></i>, and a knapsack capacity <i>W</i>.</li>
+        <li>Goal: Maximize total value without exceeding weight <i>W</i>.</li>
+        <li>Called "0/1" because each item can be either taken (1) or left (0).</li>
+        <li>Define <i>dp[i][w]</i> as the max profit for first <i>i</i> items and capacity <i>w</i>.</li>
+        <li>Use a 1D array to optimize space, updating it in reverse to avoid overwriting values.</li>
+        <li>No partial items allowed (unlike fractional knapsack).</li>
+        <li>For each item, decide to include it (if it fits) or exclude it.</li>
+        <li>Aim to find the combination with the highest total value under the weight limit.</li>
+        <li>Exhibits optimal substructure: solution built from smaller subproblems.</li>
+        <li>Has overlapping subproblems, making dynamic programming effective.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <img src="/assets/knapsack.jpg" alt="Knapsack Visualization" style="width: 100%; max-width: 600px; border-radius: 8px; margin-bottom: 20px;height: 800px;margin-left: 200px;">
+      <p>
+        Items: weights = [1, 3, 4], profits = [15, 50, 60], Capacity = 5
+      </p>
+      <div id="knapsack-visual" style="margin: 20px 0; display: flex; justify-content: center;"></div>
+      <button onclick="startKnapsackVisualization()">▶ Start Visualization</button>
+      <script>
+        const weights = [1, 3, 4];
+        const profits = [15, 50, 60];
+        const capacity = 5;
+        const knapsackDelay = 800;
+
+        let knapsackDp = [];
+        let knapsackN = weights.length;
+
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Render the DP table with colors
+        // Highlight the cell being updated in yellow
+        function renderTable(currentI = -1, currentW = -1) {
+          let html = "<table border='1' cellpadding='8' style='border-collapse: collapse; text-align: center; font-family: Arial, sans-serif;'>";
+          html += "<tr style='background-color: #4CAF50; color: white;'><th>i\\w</th>";
+          for (let w = 0; w <= capacity; w++) {
+            html += `<th>${w}</th>`;
+          }
+          html += "</tr>";
+
+          for (let i = 0; i <= knapsackN; i++) {
+            html += `<tr>`;
+            if (i === 0) {
+              html += `<th style='background-color: #4CAF50; color: white;'>0</th>`;
+            } else {
+              html += `<th style='background-color: #4CAF50; color: white;'>${i} (w=${weights[i-1]}, p=${profits[i-1]})</th>`;
+            }
+
+            for (let w = 0; w <= capacity; w++) {
+              let bgColor = '#f0f8ff'; // default light blue background
+
+              // Gray background for the first row and first column (base cases)
+              if (i === 0 || w === 0) bgColor = '#d3d3d3';
+
+              // Highlight current cell being updated
+              if (i === currentI && w === currentW) bgColor = '#ffeb3b'; // bright yellow
+
+              // Make max values a bit greenish for visibility
+              if (knapsackDp[i] && knapsackDp[i][w] === Math.max(knapsackDp[i-1]?.[w] ?? 0, profits[i-1] + (knapsackDp[i-1]?.[w - weights[i-1]] ?? 0))) {
+                bgColor = bgColor === '#ffeb3b' ? '#ffe066' : bgColor; // lighter yellow if already yellow
+              }
+
+              html += `<td style="background-color: ${bgColor}; font-weight: bold;">${knapsackDp[i][w]}</td>`;
+            }
+            html += `</tr>`;
+          }
+
+          html += `</table>`;
+          document.getElementById("knapsack-visual").innerHTML = html;
+        }
+
+        // Initialize and render DP table with zeros
+        function initializeTable() {
+          knapsackDp = Array.from({ length: knapsackN + 1 }, () => Array(capacity + 1).fill(0));
+          renderTable();
+        }
+
+        // Run visualization step by step
+        async function startKnapsackVisualization() {
+          initializeTable();
+          await sleep(knapsackDelay);
+
+          for (let i = 1; i <= knapsackN; i++) {
+            for (let w = 0; w <= capacity; w++) {
+              if (weights[i - 1] <= w) {
+                knapsackDp[i][w] = Math.max(
+                  profits[i - 1] + knapsackDp[i - 1][w - weights[i - 1]],
+                  knapsackDp[i - 1][w]
+                );
+              } else {
+                knapsackDp[i][w] = knapsackDp[i - 1][w];
+              }
+              renderTable(i, w);
+              await sleep(knapsackDelay);
+            }
+          }
+        }
+
+        // Show initial table on page load
+        initializeTable();
+      </script>
+      <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 900px; text-align: left;">
+        <thead style="background-color: #f2f2f2;">
+          <tr>
+            <th>i (items)</th>
+            <th>Capacity w</th>
+            <th>dp[i][w] explanation</th>
+            <th>Value selected</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0</td>
+            <td>all</td>
+            <td>No items means 0 profit</td>
+            <td>dp[0][w] = 0</td>
+          </tr>
+          <tr>
+            <td>1 (Item 1: weight 1, profit 15)</td>
+            <td>0</td>
+            <td>Capacity 0 means no space, profit 0</td>
+            <td>dp[1][0] = 0</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>1</td>
+            <td>Item fits, take it or not</td>
+            <td>max(15 + dp[0][0], dp[0][1]) = 15</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>2 to 5</td>
+            <td>Same as capacity 1, can take item</td>
+            <td>dp[1][w] = 15</td>
+          </tr>
+          <tr>
+            <td>2 (Item 2: weight 3, profit 50)</td>
+            <td>0 to 2</td>
+            <td>Can't fit item 2 in capacity &lt;3</td>
+            <td>dp[2][w] = dp[1][w]</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>3</td>
+            <td>Can fit item 2: max(50 + dp[1][0], dp[1][3]) = max(50 + 0, 15) = 50</td>
+            <td>dp[2][3] = 50</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>4</td>
+            <td>max(50 + dp[1][1], dp[1][4]) = max(50 + 15, 15) = 65</td>
+            <td>dp[2][4] = 65</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>5</td>
+            <td>max(50 + dp[1][2], dp[1][5]) = max(50 + 15, 15) = 65</td>
+            <td>dp[2][5] = 65</td>
+          </tr>
+          <tr>
+            <td>3 (Item 3: weight 4, profit 60)</td>
+            <td>0 to 3</td>
+            <td>Can't fit item 3 in capacity &lt;4</td>
+            <td>dp[3][w] = dp[2][w]</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>4</td>
+            <td>max(60 + dp[2][0], dp[2][4]) = max(60 + 0, 65) = 65</td>
+            <td>dp[3][4] = 65</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>5</td>
+            <td>max(60 + dp[2][1], dp[2][5]) = max(60 + 15, 65) = 75</td>
+            <td>dp[3][5] = 75</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/knapsack.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(N × W)</li>
+        <li><strong>Space:</strong> O(N × W)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Bellman, R. (1957).
+      <a href="https://en.wikipedia.org/wiki/Knapsack_problem" target="_blank">
+        Wikipedia: Knapsack Problem
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/" target="_blank">
+        GeeksforGeeks: 0/1 Knapsack Problem
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/dynamic_programming/knapsack.html" target="_blank">
+        CP-Algorithms: Knapsack Problem
+      </a>
+    </li>
+    <li>
+      Visualization is made by Shivani using HTML, CSS, and JavaScript.
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>
+</body>
+</html>

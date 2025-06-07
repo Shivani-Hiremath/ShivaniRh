@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Conway’s Game of Life | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="conways-game-of-life" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Conway’s Game of Life</h1>
+    <p><strong>Category:</strong> Cellular Automaton, Simulation</p>
+    <p><strong>Description:</strong> Zero-player game simulating cell evolution on a grid based on simple rules.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Warehouse Robotics (Kiva Bots):</strong> Amazon can simulate how robots move inside warehouses using Game of Life rules. Each robot can be thought of as a "live" cell, and the grid helps model paths, avoid congestion, and prevent collisions — just like cells dying due to overcrowding.</li>
+      <li><strong>Supply Chain Optimization:</strong> Think of each cell as a warehouse. Using Game of Life logic, Amazon can model inventory movement across fulfillment centers. For example, a "dead" (empty) warehouse surrounded by "live" (stocked) warehouses might be restocked — like the reproduction rule in GoL.</li>
+      <li><strong>Server/Node Health Monitoring (AWS):</strong> In Amazon Web Services (AWS), each server or node can be treated as a cell. If a server fails (dead cell), and neighboring nodes are also under stress, it can simulate failure propagation or trigger auto-scaling. This helps in designing more resilient systems.</li>
+      <li><strong>Customer Behavior Prediction:</strong> Each customer can be represented as a cell. If surrounding users buy a product (live), the current user might also get influenced and buy it. This helps simulate product virality, social trends, and recommendation effects.</li>
+      <li><strong>Training & Simulation for Engineers:</strong> Amazon can use the Game of Life as a teaching tool for new engineers or interns. It’s a simple way to explain complex systems, emergent behavior, and distributed decision-making in a visually intuitive way.</li>
+      <li><strong>AI/ML Simulation:</strong> Game of Life-like environments can be used to train AI agents in simulations. This helps test how autonomous agents interact with others in a dynamic system — useful in reinforcement learning and research.</li>
+    </ul>
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Conway’s Game of Life is a <strong>zero-player game</strong> designed by British mathematician <strong>John Conway</strong> in 1970. It's a <strong>cellular automaton</strong> — a simulation where a grid of cells evolves over time based on a set of simple rules.</li>
+        <li>The game takes place on a <strong>grid</strong> (like a chessboard), where each <strong>cell</strong> is either Alive (1) or Dead (0).</li>
+        <li>Each cell’s state in the <strong>next generation</strong> is determined by its <strong>eight neighbors</strong> (cells around it).</li>
+      </ul>
+      <br>
+      <b>Rules of the Game:</b>
+      <ul>
+        <li><strong>Underpopulation:</strong> A live cell with fewer than 2 live neighbors dies.</li>
+        <li><strong>Survival:</strong> A live cell with 2 or 3 live neighbors lives on.</li>
+        <li><strong>Overpopulation:</strong> A live cell with more than 3 live neighbors dies.</li>
+        <li><strong>Reproduction:</strong> A dead cell with exactly 3 live neighbors becomes a live cell.</li>
+      </ul>
+      <br>
+      <h3>Example:</h3>
+      <pre>
+Gen 1:         Gen 2:
+0 1 0          0 0 0
+0 1 0   --->   1 1 1
+0 1 0          0 0 0
+      </pre>
+      <p>This is called a <strong>blinker</strong>, one of the simplest oscillators.</p>
+    </details>
+    <details open>
+      <summary>📊 Visualization</summary>
+      <div style="text-align: center;">
+        <img src="/assets/conways.gif" alt="Conway's Game of Life Animation" style="width: 100%; max-width: 500px; border-radius: 10px; margin: 20px 0;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">Conway's Game of Life Simulation</figcaption>
+      </div>
+    </details>
+    
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Gardner, M. (1970). 
+      <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life" target="_blank">
+        Wikipedia: Conway's Game of Life
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/conways-game-life-python-implementation/" target="_blank">
+        GeeksforGeeks: Conway's Game of Life Implementation
+      </a>
+    </li>
+    <li>
+      <a href="https://playgameoflife.com/" target="_blank">
+        Interactive Game of Life Simulator
+      </a>
+    </li>
+    <li>
+      Visualization powered by 
+      <a href="https://www.youtube.com/watch?v=C2vgICfQawE" target="_blank">
+        YouTube: Game of Life Visualization
+      </a>
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

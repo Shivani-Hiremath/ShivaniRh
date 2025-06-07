@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Longest Common Subsequence | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section class="algo-card" style="max-width: 1300px; margin: 48px auto 32px auto; padding: 32px 36px 32px 36px;">
+    <h1>Longest Common Subsequence (LCS)</h1>
+    <p><strong>Category:</strong> Dynamic Programming</p>
+    <p><strong>Description:</strong> Finds the length of the longest subsequence present in both strings (not necessarily contiguous).</p>
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li>LCS can help match user search queries with product names even if word order is different. When a user types a query like "Samsung mobile charger", LCS can help match it with titles like "Samsung Fast Mobile Charger Type-C", even if the words are not in exact order.</li>
+      <li>Amazon's chatbot can use LCS to detect similar complaints or support messages from users.</li>
+      <li>Amazon's hiring system can match resumes to job descriptions using LCS for skill comparison.</li>
+    </ul>
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Use a DP table <i>dp[i][j]</i> where <i>i</i> and <i>j</i> index characters of the two strings.</li>
+        <li>If characters match, extend the LCS; otherwise take max of skipping a character from either string.</li>
+      </ul>
+    </details>
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>
+        Given <code>str1 = "AGGTAB"</code> <code>str2 = "GXTXAYB"</code>
+      </p>
+      <p>Step-by-step DP Table Update with i,j indices</p>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <div id="lcs-visual" style="margin: 20px 0;"></div>
+        <button onclick="startLCSVisualization()">▶ Start</button>
+      </div>
+      <script>
+        const str1 = "AGGTAB";
+        const str2 = "GXTXAYB";
+        const lcsDelay = 800;
+        const lcsN = str1.length;
+        const lcsM = str2.length;
+        const lcsDp = Array.from({ length: lcsN + 1 }, () => Array(lcsM + 1).fill(0));
+        const lcsContainer = document.getElementById("lcs-visual");
+        let lcsHighlight = [-1, -1];
+
+        function renderTable() {
+          let html = "<table border='1' cellpadding='16' style='border-collapse: collapse; text-align: center; font-size: 1.2rem;'>";
+          html += "<tr><th style='min-width:60px;'></th><th style='min-width:60px;'></th>";
+          for (let j = 0; j <= lcsM; j++) {
+            html += `<th style='min-width:60px;'>${j > 0 ? str2[j - 1] : ""}</th>`;
+          }
+          html += "</tr>";
+
+          for (let i = 0; i <= lcsN; i++) {
+            html += `<tr><th style='min-width:60px;'>${i > 0 ? str1[i - 1] : "-"}</th><th style='min-width:60px;'>${i}</th>`;
+            for (let j = 0; j <= lcsM; j++) {
+              let bg = "#fff";
+              if (i === 0 || j === 0) bg = "#e0e0e0";
+              if (i === lcsHighlight[0] && j === lcsHighlight[1]) bg = "#b2f0b2";
+              html += `<td style="background-color:${bg}; min-width:60px; width:60px; height:40px; font-weight:bold;">${lcsDp[i][j]}</td>`;
+            }
+            html += "</tr>";
+          }
+          html += "</table>";
+          lcsContainer.innerHTML = html;
+        }
+
+        // Show initial empty table
+        function showInitialTable() {
+          for (let i = 0; i <= lcsN; i++) {
+            for (let j = 0; j <= lcsM; j++) {
+              lcsDp[i][j] = 0;
+            }
+          }
+          lcsHighlight = [-1, -1];
+          renderTable();
+        }
+        showInitialTable();
+
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function startLCSVisualization() {
+          // Reset table before animation
+          for (let i = 0; i <= lcsN; i++) {
+            for (let j = 0; j <= lcsM; j++) {
+              lcsDp[i][j] = 0;
+            }
+          }
+          lcsHighlight = [-1, -1];
+          renderTable();
+          await sleep(lcsDelay);
+
+          for (let i = 1; i <= lcsN; i++) {
+            for (let j = 1; j <= lcsM; j++) {
+              if (str1[i - 1] === str2[j - 1]) {
+                lcsDp[i][j] = lcsDp[i - 1][j - 1] + 1;
+              } else {
+                lcsDp[i][j] = Math.max(lcsDp[i - 1][j], lcsDp[i][j - 1]);
+              }
+              lcsHighlight = [i, j];
+              renderTable();
+              await sleep(lcsDelay);
+            }
+          }
+          lcsHighlight = [-1, -1];
+          renderTable();
+        }
+      </script>
+    </details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/lcs.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(N × M)</li>
+        <li><strong>Space:</strong> O(N × M)</li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        Hirschberg, D. S. (1975).
+        <a href="https://en.wikipedia.org/wiki/Longest_common_subsequence" target="_blank">
+          Wikipedia: Longest Common Subsequence
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/" target="_blank">
+          GeeksforGeeks: Longest Common Subsequence
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/sequences/longest_common_subsequence.html" target="_blank">
+          CP-Algorithms: Longest Common Subsequence
+        </a>
+      </li>
+      <li>
+        Visualization is made by Shivani using HTML, CSS, and JavaScript.
+        
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

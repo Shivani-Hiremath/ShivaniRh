@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bellman-Ford Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section id="bellman-ford" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Bellman-Ford Algorithm</h1>
+    <p><strong>Category:</strong> Graph Algorithms</p>
+    <p><strong>Description:</strong> Computes shortest paths from a single source in a graph, even with negative weights.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+       <li>Find the best delivery route even when some roads have negative conditions like tolls or delays.</li>
+  <li>Handle changing delivery costs or road conditions over time and still find the cheapest route.</li>
+  <li>Plan routes where distance, time, and cost are all different and need to be balanced.</li>
+  <li>Help in international shipping where costs between locations can vary and include taxes or fees.</li>
+  <li>Ensure reliable delivery planning even when some routes might have unexpected issues or slowdowns.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Initialize distances to all vertices as ∞, except the source (0).</li>
+        <li>Relax all edges (V-1) times to find shortest paths.</li>
+        <li>Check one more time for any edge that can still be relaxed — to detect negative weight cycles.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>Visualization<sup><a href="#ref2">[2]</a></sup></p>
+      <iframe src="https://algoanim.ide.sk/index.php?page=showanim&id=50" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Note: Use the dropdown inside the visual to select <strong>Bellman-Ford</strong> and run step-by-step animation.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(V × E)</li>
+        <li><strong>Space:</strong> O(V)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      R. Bellman, "On a Routing Problem," 
+      <a href="https://www.jstor.org/stable/2032412" target="_blank">
+        JSTOR: On a Routing Problem
+      </a>
+    </li>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm" target="_blank">
+        Wikipedia: Bellman–Ford Algorithm
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/graph/bellman_ford.html" target="_blank">
+        CP-Algorithms: Bellman-Ford
+      </a>
+    </li>
+    <li>
+      Visualization powered by 
+      <a href="https://algoanim.ide.sk/index.php?page=showanim&id=50" target="_blank">
+        AlgoAnim: Bellman-Ford Visualization
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/" target="_blank">
+        GeeksforGeeks: Bellman-Ford Algorithm
+      </a>
+    </li>
+  </ol>
+</div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>

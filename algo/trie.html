@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trie (Prefix Tree) | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+  <style>
+    .trie-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 10px;
+    }
+    .trie-row figure {
+      flex: 1 1 320px;
+      max-width: 48%;
+      text-align: center;
+    }
+    .trie-row img {
+      width: 100%;
+      height: 260px;
+      max-width: 350px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section class="algo-card" style="max-width: 950px; margin: 48px auto 32px auto; padding: 32px 36px 32px 36px;">
+    <h1>Trie (Prefix Tree)</h1>
+    <p><strong>Category:</strong> Tree, String Data Structure</p>
+    <p><strong>Description:</strong> A tree-like data structure that stores strings by breaking them down into individual characters along paths, enabling fast prefix-based search and retrieval, can be used to autocomplete and suggest words.</p>
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li>Find all words that start with certain letters, like when typing in a search bar.</li>
+      <li>Quickly look up and manage data in large cloud storage systems.</li>
+      <li>Detect unsafe links or words while checking internet traffic in real time.</li>
+      <li>Help with spelling and suggest words while typing in chat apps or Word.</li>
+    </ul>
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Each node represents a character in the string.</li>
+        <li>Strings sharing common prefixes share paths in the trie, saving space and enabling prefix queries.</li>
+        <li>Search, insertion, and deletion operations traverse nodes character-by-character.</li>
+      </ul>
+    </details>
+    <details open>
+      <summary>📊 Visualization</summary>
+      <div class="trie-row">
+        <figure>
+          <figcaption style="font-weight: bold; margin-top: 8px;">Insert Operation Flowchart</figcaption>
+          <img src="/assets/trie1.jpg" alt="Trie Insert Operation">
+        </figure>
+        <figure>
+          <figcaption style="font-weight: bold; margin-top: 8px;">Search Operation Flowchart</figcaption>
+          <img src="/assets/trie2.jpg" alt="Trie Search Operation">
+        </figure>
+      </div>
+      <div class="trie-row">
+        <figure>
+          <figcaption style="font-weight: bold; margin-top: 8px;">Insert "app" and "apple" into Trie</figcaption>
+          <img src="/assets/trie3.jpg" alt="Insert app and apple">
+        </figure>
+        <figure>
+          <figcaption style="font-weight: bold; margin-top: 8px;">Search "app" in Trie</figcaption>
+          <img src="/assets/trie4.jpg" alt="Search app in Trie">
+        </figure>
+      </div>
+    </details>
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time Complexity:</strong> O(L) for search, insertion, and deletion, where L is the length of the word/prefix.</li>
+        <li><strong>Space Complexity:</strong> O(ALPHABET_SIZE × L × N) in the worst case, where N is the number of keys.</li>
+      </ul>
+    </details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/trie.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+  </section>
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Trie" target="_blank">
+          Wikipedia: Trie
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/trie-insert-and-search/" target="_blank">
+          GeeksforGeeks: Trie Insert and Search
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/string/trie.html" target="_blank">
+          CP-Algorithms: Trie
+        </a>
+      </li>
+    </ol>
+  </div>
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Persistent Segment Tree | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="persistent-segment-tree" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Persistent Segment Tree</h1>
+    <p><strong>Category:</strong> Data Structures, Range Query, Versioned Data</p>
+    <p><strong>Description:</strong> A versioned segment tree that allows access to previous versions of the data structure efficiently. Supports range queries and updates with persistence.</p>
+
+    <p><strong>📦 Use Cases (AWS Context):</strong></p>
+    <ul>
+      <li>Time-travel queries on historical logs and metrics in cloud services.</li>
+      <li>Version control for configuration data or datasets in distributed systems.</li>
+      <li>Efficient snapshotting and rollback in real-time analytics.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Each update creates a new version of the tree without duplicating the entire structure.</li>
+        <li>Shares unchanged nodes between versions to optimize space.</li>
+        <li>Queries and updates still run in O(log N) time per version.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <div style="text-align: center;">
+        <img src="/assets/persistent.png" alt="Persistent Segment Tree Visualization" style="width: 80%; max-width: 600px; border-radius: 8px; margin: 20px 0;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">Persistent Segment Tree Example Visualization</figcaption>
+    </details>
+
+    
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Update:</strong> O(log N) per version</li>
+        <li><strong>Query:</strong> O(log N)</li>
+        <li><strong>Space:</strong> O(N log N) for all versions combined</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

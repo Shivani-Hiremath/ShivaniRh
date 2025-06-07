@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rabin-Karp Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="rabin-karp" style="margin-top:50px;">
+  <div class="algo-card">
+    <h1>Rabin-Karp Algorithm</h1>
+    <p><strong>Category:</strong> AWS Log Monitoring & Security</p>
+    <p><strong>Description:</strong> Uses a rolling hash to compare pattern hashes with text hashes, enabling fast multi-pattern searching across massive log streams.</p>
+
+    <p><strong>📦 Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Scanning CloudWatch logs for multiple error signatures in real time.</li>
+      <li>GuardDuty-style detection of leaked credentials or attack fingerprints.</li>
+      <li>Plagiarism or duplicate-content checks in Kindle text ingestion.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Compute hash of the pattern(s).</li>
+        <li>Slide a window over the text, updating hash in O(1) via rolling hash.</li>
+        <li>If hashes match, verify characters to remove false positives.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <img src="/assets/RabinKarp.png" alt="Rabin-Karp Visualization" style="width: 100%; max-width: 600px; border-radius: 8px;">
+      <figcaption style="font-weight: bold; margin-top: 8px;">Rabin-Karp Example Visualization</figcaption>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/rabin-karp.cpp" target="_blank" class="code-btn">
+         <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Average Time:</strong> O(n + m) expected</li>
+        <li><strong>Worst Time:</strong> O(n m) (rare, many hash collisions)</li>
+        <li><strong>Space:</strong> O(1)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Rabin, M. O., & Karp, R. M. (1987).
+      <a href="https://en.wikipedia.org/wiki/Rabin%E2%80%93Karp_algorithm" target="_blank">
+        Wikipedia: Rabin–Karp Algorithm
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/" target="_blank">
+        GeeksforGeeks: Rabin-Karp Algorithm
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/string/rabin-karp.html" target="_blank">
+        CP-Algorithms: Rabin-Karp
+      </a>
+    </li>
+    
+  </ol>
+</div>
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

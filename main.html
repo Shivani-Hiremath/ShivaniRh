@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amazon-APS</title>
+  <link rel="stylesheet" href="dstyle.css" />
+  <style>
+    .algo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 900px;
+      margin: 0 auto 40px auto;
+      padding: 0;
+    }
+    .algo-list-item {
+      background: #f8fafc;
+      border: 1px solid #e0e7ef;
+      border-radius: 10px;
+      padding: 18px 22px 18px 60px;
+      position: relative;
+      transition: box-shadow 0.18s, border-color 0.18s;
+      font-size: 1.08rem;
+      line-height: 1.7;
+      box-shadow: 0 1px 6px #e0e7ef44;
+    }
+    .algo-list-item:hover {
+      border-color: #0097a7;
+      box-shadow: 0 4px 18px #00bcd422;
+    }
+    .algo-list-item .algo-num {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #0097a7;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      box-shadow: 0 1px 4px #0097a722;
+    }
+    .algo-list-item a {
+      color: #006778;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+    .algo-list-item a:hover {
+      color: #0097a7;
+      text-decoration: underline;
+    }
+    @media (max-width: 700px) {
+      .algo-list-item {
+        font-size: 1rem;
+        padding: 16px 12px 16px 48px;
+      }
+      .algo-list {
+        max-width: 99vw;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="#intro">Amazon</a>
+      <a href="#dsa">Why DSA</a>
+    </nav>
+  </header>
+
+  <section id="intro">
+    <h2>Amazon’s Vast Ecosystem</h2>
+    <p>Amazon is not just an e-commerce platform. It spans a massive ecosystem that includes:</p>
+    <ul>
+      <li><strong>Amazon Web Services (AWS):</strong> Cloud computing powering startups to Fortune 500 companies.</li>
+      <li><strong>Logistics:</strong> Managing how products are stored, delivered to customers, and transported using advanced systems and delivery centers.</li>
+      <li><strong>Streaming:</strong> Amazon Prime Video, music, live sports.</li>
+      <li><strong>AI & ML:</strong> Alexa, recommendation systems, dynamic pricing, fraud detection.</li>
+    </ul>
+  </section>
+  <img src="/assets/amazon.jpg" alt="amazon" style="display: block; margin: 0 auto;" />
+
+  <section id="dsa">
+    <h2>Why Algorithms & Data Structures Matter</h2>
+    <p>At Amazon's scale, intelligent system design is essential. Here's why DSA is critical:</p>
+    <ul>
+      <li><strong>Efficiency:</strong> Millions of transactions processed in real-time.</li>
+      <li><strong>Scalability:</strong> From startups to global operations, code must scale.</li>
+      <li><strong>Optimization:</strong> Route planning, warehouse operations, and pricing models depend on optimized algorithms.</li>
+      <li><strong>Low Latency:</strong> Instant recommendations, personalized search all rely on fast data access.</li>
+    </ul>
+  </section>
+
+  <section id="objectives">
+    <h2>Project Objectives</h2>
+    <p>This portfolio explains core Computer Science algorithms associated with Amazon’s real-world engineering challenges.</p>
+    <ol>
+      <li><strong>Bridge Theory with Practice:</strong> Demonstrate how foundational algorithms apply to complex business scenarios across Amazon's diverse ecosystem — from logistics to cloud computing.</li>
+      <li><strong>Map Algorithms to Business Cases:</strong> Organize and visualize how specific data structures and algorithms solve Amazon-scale problems in delivery optimization, recommendations, dynamic pricing, and more.</li>
+      <li><strong>Showcase Impact:</strong> Highlight how algorithmic thinking improves performance, scalability, personalization, and drives innovation at Amazon.</li>
+    </ol>
+  </section>
+
+  <section id="algo-list" style="padding: 40px 0;">
+    <h2 style="margin-left: 55px;">Amazon Business Cases:</h2>
+    <div class="algo-list">
+      <div class="algo-list-item"><span class="algo-num">1</span>
+        <a href="algo/subset-sum.html">Subset Sum Problem</a>: Optimize combinations of products in a shopping cart to meet specific promotional thresholds. <span style="color:#888;">(E-commerce Promotions)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">2</span>
+        <a href="algo/trie.html">Trie (Prefix Tree)</a>: Implement efficient autocomplete suggestions in Amazon's search bar, enhancing user experience. <span style="color:#888;">(Search Optimization)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">3</span>
+        <a href="algo/kmp.html">Knuth-Morris-Pratt (KMP) Algorithm</a>: Quickly recognize voice commands or repeated text patterns in Alexa's voice processing. <span style="color:#888;">(Alexa/Text Search)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">4</span>
+        <a href="algo/edit-distance.html">Edit Distance (Levenshtein Distance)</a>: Correct typos in user search queries to return relevant product results. <span style="color:#888;">(Search Correction)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">5</span>
+        <a href="algo/lcs.html">Longest Common Subsequence (LCS)</a>: Summarize customer reviews by identifying common sentiments across multiple reviews. <span style="color:#888;">(Review Summarization)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">6</span>
+        <a href="algo/johnson-trotter.html">Johnson-Trotter Algorithm</a>: Generate unique permutations for A/B testing different product display orders. <span style="color:#888;">(UI Testing)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">7</span>
+        <a href="algo/knapsack.html">0/1 Knapsack Problem</a>: Select the most valuable set of items to ship within weight constraints in delivery drones. <span style="color:#888;">(Logistics Optimization)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">8</span>
+        <a href="algo/dijkstras.html">Dijkstra's Algorithm</a>: Compute the shortest delivery routes for drivers, optimizing delivery times. <span style="color:#888;">(Logistics/Mapping)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">9</span>
+        <a href="algo/astar.html">A* (A-Star) Algorithm</a>: Estimate optimal delivery paths using heuristics like traffic conditions and delivery deadlines. <span style="color:#888;">(Real-time Navigation)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">10</span>
+        <a href="algo/bellman-ford.html">Bellman-Ford Algorithm</a>: Handle dynamic changes in delivery routes, such as road closures or traffic jams. <span style="color:#888;">(Resilient Routing)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">11</span>
+        <a href="algo/floyd-warshall.html">Floyd-Warshall Algorithm</a>: Precompute all-pairs shortest paths between fulfillment centers for efficient logistics planning. <span style="color:#888;">(Route Preprocessing)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">12</span>
+        <a href="algo/ford-fulkerson.html">Ford-Fulkerson Algorithm</a>: Maximize the flow of goods through Amazon's supply chain network. <span style="color:#888;">(Supply Chain Optimization)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">13</span>
+        <a href="algo/kruskal.html">Kruskal’s Algorithm</a>: Design cost-effective network connections between data centers in AWS. <span style="color:#888;">(Network Design)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">14</span>
+        <a href="algo/boruvka.html">Boruvka’s Algorithm</a>: Parallelize the process of connecting various warehouses in the logistics network. <span style="color:#888;">(Distributed Logistics)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">15</span>
+        <a href="algo/assignment.html">Hungarian Algorithm (Assignment Problem)</a>: Assign delivery drivers to routes in a way that minimizes total delivery time. <span style="color:#888;">(Workforce Allocation)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">16</span>
+        <a href="algo/stable-marriage.html">Stable Marriage Problem</a>: Match customers with products or services based on preferences and availability. <span style="color:#888;">(Recommendation Systems)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">17</span>
+        <a href="algo/min-cost-max-flow.html">Min-Cost Max-Flow Algorithm</a>: Optimize the transportation of goods to minimize cost while maximizing throughput. <span style="color:#888;">(Logistics Optimization)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">18</span>
+        <a href="algo/coin-change.html">Coin Change Algorithm</a>: Determine the optimal way to provide change in Amazon Pay transactions. <span style="color:#888;">(Payment Systems)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">19</span>
+        <a href="algo/quick-sort.html">Quick Sort Algorithm</a>: Efficiently sort product listings based on various attributes like price or rating. <span style="color:#888;">(Frontend Sorting)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">20</span>
+        <a href="algo/tim-sort.html">Tim Sort</a>: Sort large datasets in AWS services, combining merge sort and insertion sort for efficiency. <span style="color:#888;">(Data Processing)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">21</span>
+        <a href="algo/segment-tree.html">Segment Tree</a>: Perform range queries on product ratings or sales data in real-time dashboards. <span style="color:#888;">(Data Analytics)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">22</span>
+        <a href="algo/fenwick-tree.html">Fenwick Tree (Binary Indexed Tree)</a>: Maintain cumulative frequency tables for quick updates and queries in sales tracking. <span style="color:#888;">(Live Metrics)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">23</span>
+        <a href="algo/mos.html">Mo’s Algorithm</a>: Process multiple range queries efficiently on large datasets, such as user activity logs. <span style="color:#888;">(Data Analysis)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">24</span>
+        <a href="algo/persistent-segment-tree.html">Persistent Segment Tree</a>: Access historical versions of data, useful in tracking changes over time in inventory. <span style="color:#888;">(Versioned Data Access)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">25</span>
+        <a href="algo/rabin-karp.html">Rabin-Karp Algorithm</a>: Detect plagiarism or duplicate content in product descriptions across the platform. <span style="color:#888;">(Content Moderation)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">26</span>
+        <a href="algo/skip-list.html">Skip List</a>: Implement efficient search operations in sorted data, such as user transaction histories. <span style="color:#888;">(Database Indexing)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">27</span>
+        <a href="algo/bst.html">Binary Search Tree (BST)</a>: Organize and retrieve product information quickly in the backend systems. <span style="color:#888;">(Data Retrieval)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">28</span>
+        <a href="algo/kd-tree.html">KD Tree (k-dimensional Tree)</a>: Facilitate nearest neighbor searches in multi-dimensional data, like customer preferences. <span style="color:#888;">(Recommendation Engines)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">29</span>
+        <a href="algo/sqrt.html">Square Root Decomposition</a>: Optimize query processing time on large datasets by dividing them into blocks. <span style="color:#888;">(Batch Processing)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">30</span>
+        <a href="algo/consistent-hashing.html">Consistent Hashing</a>: Distribute workloads evenly across servers in AWS, ensuring scalability and fault tolerance. <span style="color:#888;">(Load Balancing)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">31</span>
+        <a href="algo/bloom-filter.html">Bloom Filters</a>: Quickly check if an item is in a set, such as verifying if a user has already seen a product. <span style="color:#888;">(Caching Systems)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">32</span>
+        <a href="algo/aho-corasick.html">Aho-Corasick Algorithm</a>: Search for multiple keywords simultaneously in product reviews or descriptions. <span style="color:#888;">(Text Analysis)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">33</span>
+        <a href="algo/huffman-coding.html">Huffman Coding</a>: Compress data efficiently for storage or transmission, such as in Prime Video streaming. <span style="color:#888;">(Data Compression)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">34</span>
+        <a href="algo/union-find.html">Union-Find (Disjoint Set Union)</a>: Manage groups of connected components, like clustering similar products. <span style="color:#888;">(Recommendation Clustering)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">35</span>
+        <a href="algo/page-replacement.html">Page Replacement Algorithms (LRU, LFU)</a>: Manage cache memory effectively in AWS services to optimize performance. <span style="color:#888;">(Memory Management)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">36</span>
+        <a href="algo/boyer-moore.html">Boyer-Moore Algorithm</a>: Perform fast substring searches in large text bodies, such as scanning product descriptions. <span style="color:#888;">(Text Search)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">37</span>
+        <a href="algo/pagerank.html">PageRank Algorithm</a>: Rank products or sellers based on importance and relevance, improving search results. <span style="color:#888;">(Search Ranking)</span>
+      </div>
+      <div class="algo-list-item"><span class="algo-num">38</span>
+        <a href="algo/conways-game-of-life.html">Conway’s Game of Life</a>: Simulate dynamic systems, potentially modeling warehouse automation or traffic flow. <span style="color:#888;">(Simulation Modeling)</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Floyd-Warshall Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section id="floyd-warshall" style="margin-top: 50px;">
+    <div class="algo-card">
+      <h1>Floyd-Warshall Algorithm</h1>
+      <p><strong>Category:</strong> All-Pairs Shortest Path</p>
+      <p><strong>Description:</strong> Computes shortest paths between all pairs of vertices in a weighted graph.</p>
+
+      <p><strong>📦 Business Case:</strong></p>
+      <ul>
+        <li>Optimizing delivery times between all warehouses.</li>
+        <li>Efficient for pre-computing shortest routes between multiple depots.</li>
+        <li>Can be used to analyze network latency or costs across many endpoints.</li>
+      </ul>
+
+      <details open>
+        <summary>🧠 How It Works?</summary>
+        <ul>
+          <li>Initialize a matrix with direct distances between nodes (∞ if no edge).</li>
+          <li>Iterate using each node as an intermediate point and update shortest paths.</li>
+          <li>Uses Dynamic Programming concept: dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j])</li>
+        </ul>
+      </details>
+
+      <details open>
+        <summary>📊 Visualization</summary>
+        <iframe src="https://algoanim.ide.sk/index.php?page=showanim&id=50" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+        <p style="font-size: 0.9rem;">Click 'Start' to watch the step-by-step execution of Floyd-Warshall.</p>
+      </details>
+
+      <details open>
+        <summary>👩‍💻 View Code</summary>
+        <a href="/codes/floyd-warshall.cpp" target="_blank" class="code-btn">
+          <i class="uil uil-github"></i> Click here for code
+        </a>
+      </details>
+
+      <details open>
+        <summary>🧮 Complexity Analysis</summary>
+        <ul>
+          <li><strong>Time:</strong> O(V³)</li>
+          <li><strong>Space:</strong> O(V²)</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        Floyd, R. W. (1962).
+        <a href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm" target="_blank">
+          Wikipedia: Floyd–Warshall Algorithm
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html" target="_blank">
+          CP-Algorithms: Floyd–Warshall Algorithm
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/" target="_blank">
+          GeeksforGeeks: Floyd–Warshall Algorithm
+        </a>
+      </li>
+      <li>
+        Visualization powered by 
+        <a href="https://algoanim.ide.sk/index.php?page=showanim&id=50" target="_blank">
+          AlgoAnim: Floyd-Warshall Visualization
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

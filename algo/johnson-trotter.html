@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Johnson-Trotter Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section class="algo-card" style="max-width: 950px; margin: 48px auto 32px auto; padding: 32px 36px 32px 36px;">
+    <h1>Johnson-Trotter Algorithm</h1>
+    <p><strong>Category:</strong> Permutation Generation</p>
+    <p><strong>Description:</strong> Generates all permutations of n elements by producing each permutation from the previous one by swapping adjacent elements.</p>
+    <p><strong>Business Case (Amazon Ecommerce):</strong></p>
+    <ul>
+      <li>Generating all possible product bundle permutations.</li>
+      <li>Testing UI/UX arrangements via permutations for better customer experience.</li>
+      <li>Simulating recommendation scenarios with various orderings.</li>
+    </ul>
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Assigns a direction to each element.</li>
+        <li>Finds the largest mobile element (one that can move in its assigned direction).</li>
+        <li>Swaps it with adjacent element in the direction.</li>
+        <li>Reverses directions of elements larger than the moved one.</li>
+        <li>Repeats until no mobile element exists.</li>
+      </ul>
+    </details>
+    <details open>
+      <summary>📊 Visualization</summary>
+      <img src="/assets/jt.png" width="80%" height="430"
+           style="border:1px solid #ccc;border-radius:10px;"></img>
+    </details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/johnson-trotter.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li>Time Complexity: O(n × n!) to generate all permutations</li>
+        <li>Space Complexity: O(n)</li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        Johnson, S. M., & Trotter, H. F. (1963).
+        <a href="https://en.wikipedia.org/wiki/Steinhaus–Johnson–Trotter_algorithm" target="_blank">
+          Wikipedia: Steinhaus–Johnson–Trotter Algorithm
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/johnson-trotter-algorithm/" target="_blank">
+          GeeksforGeeks: Johnson-Trotter Algorithm
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/combinatorics/generating_permutations.html" target="_blank">
+          CP-Algorithms: Generating Permutations
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

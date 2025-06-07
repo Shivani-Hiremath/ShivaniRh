@@ -3,10 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Amazon & DSA Portfolio</title>
+  <title>Amazon-APS</title>
   <link rel="stylesheet" href="dstyle.css" />
   <style>
     /* Colored cells for DP table */
+    .consistent-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  margin: 32px 0 24px 0;
+}
+.consistent-cards .card {
+  background: #f7fafc;
+  border: 1.5px solid #00bcd4;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #00bcd41a;
+  padding: 22px 28px;
+  width: 320px;
+  max-width: 90vw;
+  min-height: 220px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.consistent-cards .card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 6px 24px #00bcd433;
+  border-color: #0097a7;
+}
+.consistent-cards .card h2 {
+  color: #0097a7;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.consistent-cards .card ul {
+  padding-left: 18px;
+  margin: 0;
+}
+.consistent-cards .card ul li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+@media (max-width: 1100px) {
+  .consistent-cards {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .consistent-cards .card {
+    width: 90vw;
+    min-width: 260px;
+    max-width: 100%;
+  }
+}
     .true-cell {
       background-color: #c8f7c5; /* light green */
       font-weight: bold;
@@ -46,6 +96,7 @@
       <li><strong>AI & ML:</strong> Alexa, recommendation systems, dynamic pricing, fraud detection.</li>
     </ul>
   </section>
+   <img src="/assets/amazon.jpg" alt="amazon" style="display: block; margin: 0 auto;" />
 
   <section id="dsa">
     <h2>Why Algorithms & Data Structures Matter</h2>
@@ -70,10 +121,10 @@
 <!-- Add this before the Subset Sum section -->
 
 <h1 id="titles" >Business Cases</h1>
-<h2 id="titles" >1. E-commerce & Recommendation Systems</h2>
+<h2 id="titles" >1. Product and Search Recommendation Systems</h2>
   <section id="ecommerce-dp">
     <div class="algo-card">
-      <h3>📌 Subset Sum</h3>
+      <h3>1. Subset Sum</h3>
       <p><strong>Category:</strong> Dynamic Programming</p>
       <p><strong>Description:</strong> Determines whether a subset of given numbers adds up to a target sum.</p>
       <p><strong>📦 Business Case:</strong> 
@@ -87,7 +138,7 @@
         </ul>
       </p>
 
-      <details>
+      <details open>
         <summary>🧠 How It Works</summary>
         <ul>
           <li>Create a DP table: dp[i][j] where i = index, j = sum.</li>
@@ -96,95 +147,116 @@
         </ul>
       </details>
 
-      <details>
-        <summary>📊 Visualization</summary>
-        <p>Given nums = {3, 34, 4, 12, 5, 2}, target sum = 9</p>
-        <p>Step-by-step DP Table Update</p>
-        <div id="dp-visual" style="margin: 20px 0;"></div>
-        <button onclick="startVisualization()">▶ Start Slow Visualization</button>
+      <details open>
+        
+  <summary>📊 Visualization</summary>
+  <p>Given nums = {3, 34, 4, 12, 5, 2}, target sum = 9</p>
+  <p>Step-by-step DP Table Update</p>
+  <div id="dp-visual" style="margin: 20px 0;"></div>
+  <button onclick="startVisualization()">▶ Start Visualization</button>
 
-        <script>
-          const nums = [3, 34, 4, 12, 5, 2];
-          const target = 9;
-          const delay = 800; // ms delay between steps for slow animation
+  <script>
+    const nums = [3, 34, 4, 12, 5, 2];
+    const target = 9;
+    const delay = 200;
+    const n = nums.length;
 
-          function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-          }
-
-          async function startVisualization() {
-            const n = nums.length;
-            const dp = Array.from({ length: n + 1 }, () => Array(target + 1).fill(false));
-            dp[0][0] = true;
-
-            const container = document.getElementById("dp-visual");
-
-            function renderTable() {
-              let html = "<table style='border-collapse: collapse; text-align: center;'>";
-              html += "<tr><th>i\\j</th>";
-              for (let j = 0; j <= target; j++) {
-                html += `<th>${j}</th>`;
-              }
-              html += "</tr>";
-
-              for (let i = 0; i <= n; i++) {
-                html += `<tr><th>${i}</th>`;
-                for (let j = 0; j <= target; j++) {
-                  let cell = dp[i][j] ? "T" : "F";
-                  let cellClass = dp[i][j] ? "true-cell" : "false-cell";
-                  html += `<td class="${cellClass}">${cell}</td>`;
-                }
-                html += "</tr>";
-              }
-              html += "</table>";
-              container.innerHTML = html;
-            }
-
-            renderTable();
-            await sleep(delay);
-
-            for (let i = 1; i <= n; i++) {
-              for (let j = 0; j <= target; j++) {
-                dp[i][j] = dp[i - 1][j];
-                if (j >= nums[i - 1]) {
-                  dp[i][j] = dp[i][j] || dp[i - 1][j - nums[i - 1]];
-                }
-                renderTable();
-                await sleep(delay);
-              }
-            }
-          }
-        </script>
-      </details>
-
-      <details>
-        <summary>👩‍💻 View Code (C++)</summary>
-        <pre><code>
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-using namespace std;
-
-bool isSubsetSum(vector&lt;int&gt;& nums, int target) {
-    vector&lt;bool&gt; dp(target + 1, false);
-    dp[0] = true;
-    for (int num : nums) {
-        for (int j = target; j &gt;= num; --j) {
-            dp[j] = dp[j] || dp[j - num];
-        }
+    // Create DP table and set first column to true
+    const dp = Array.from({ length: n + 1 }, () => Array(target + 1).fill(false));
+    for (let i = 0; i <= n; i++) {
+      dp[i][0] = true; // First column (sum = 0) should be true
     }
-    return dp[target];
-}
 
-int main() {
-    vector&lt;int&gt; nums = {3, 34, 4, 12, 5, 2};
-    int sum = 9;
-    cout &lt;&lt; (isSubsetSum(nums, sum) ? "Found a subset" : "No subset found") &lt;&lt; endl;
-    return 0;
+    const container = document.getElementById("dp-visual");
+
+    function renderTable() {
+      let html = "<table style='border-collapse: collapse; text-align: center;'>";
+      html += "<tr><th>i\\j</th>";
+      for (let j = 0; j <= target; j++) {
+        html += `<th>${j}</th>`;
+      }
+      html += "</tr>";
+
+      for (let i = 0; i <= n; i++) {
+        html += `<tr><th>${i}</th>`;
+        for (let j = 0; j <= target; j++) {
+          const cellValue = dp[i][j] ? "T" : "F";
+          const cellClass = dp[i][j] ? "true-cell" : "false-cell";
+          html += `<td class="${cellClass}">${cellValue}</td>`;
+        }
+        html += "</tr>";
+      }
+      html += "</table>";
+      container.innerHTML = html;
+    }
+
+    renderTable(); // Show initial table with first column true
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function startVisualization() {
+      for (let i = 1; i <= n; i++) {
+        for (let j = 1; j <= target; j++) { // j=1 because j=0 already handled
+          dp[i][j] = dp[i - 1][j];
+          if (j >= nums[i - 1]) {
+            dp[i][j] = dp[i][j] || dp[i - 1][j - nums[i - 1]];
+          }
+          renderTable();
+          await sleep(delay);
+        }
+      }
+    }
+  </script>
+<!-- Add this CSS to your <style> section or dstyle.css -->
+<style>
+.trie-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 10px;
 }
-        </code></pre>
+.trie-row figure {
+  flex: 1 1 320px;
+  max-width: 48%;
+  text-align: center;
+}
+.trie-row img {
+  width: 100%;
+  height: 260px;
+  max-width: 350px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+</style>
+  <style>
+    .true-cell {
+      background-color: #b2f2bb; /* Light green */
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+    .false-cell {
+      background-color: #ffe3e3; /* Light red */
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+    table, th, td {
+      border: 1px solid #aaa;
+    }
+  </style>
+</details>
+
+      <details open>
+        <summary>👩‍💻 View Code (C++)</summary>
+        <a href="https://github.com/Shivani-Hiremath/APS/blob/main/subsetSum.cpp" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
       </details>
 
-      <details>
+      <details open>
         <summary>🧮 Complexity Analysis</summary>
         <ul>
           <li><strong>Time:</strong> O(N × Sum)</li>
@@ -194,14 +266,141 @@ int main() {
     </div>
   </section>
 
+  <section id="trie">
+  <div class="algo-card">
+    <h3>2 Trie (Prefix Tree)</h3>
+    <p><strong>Category:</strong> Tree, String Data Structure</p>
+    <p><strong>Description:</strong> A tree-like data structure that stores strings by breaking them down into individual characters along paths, enabling fast prefix-based search and retrieval, can u used to autocomplete and suggest words.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+  <li>Find all words that start with certain letters, like when typing in a search bar.</li>
+  <li>Quickly look up and manage data in large cloud storage systems.</li>
+  <li>Detect unsafe links or words while checking internet traffic in real time.</li>
+  <li>Help with spelling and suggest words while typing in chat apps or Word.</li>
+   </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Each node represents a character in the string.</li>
+        <li>Strings sharing common prefixes share paths in the trie, saving space and enabling prefix queries.</li>
+        <li>Search, insertion, and deletion operations traverse nodes character-by-character.</li>
+      </ul>
+    </details>
+<details open>
+      <summary>📊 Visualization</summary>
+      <!-- Replace your current image block with this -->
+<div class="trie-row">
+  <figure>
+        <figcaption style="font-weight: bold; margin-top: 8px;">Insert Operation Flowchart</figcaption>
+
+    <img src="/assets/trie1.jpg" alt="Trie Insert Operation">
+  </figure>
+  <figure>
+        <figcaption style="font-weight: bold; margin-top: 8px;">Search Operation Flowchart</figcaption>
+
+    <img src="/assets/trie2.jpg" alt="Trie Search Operation">
+  </figure>
+</div>
+<div class="trie-row">
+  <figure>
+        <figcaption style="font-weight: bold; margin-top: 8px;">Insert "app" and "apple" into Trie</figcaption>
+
+    <img src="/assets/trie3.jpg" alt="Insert app and apple">
+  </figure>
+  <figure>
+        <figcaption style="font-weight: bold; margin-top: 8px;">Search "app" in Trie</figcaption>
+
+    <img src="/assets/trie4.jpg" alt="Search app in Trie">
+  </figure>
+</div>
+      
+
+    </details>
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time Complexity:</strong> O(L) for search, insertion, and deletion, where L is the length of the word/prefix.</li>
+        <li><strong>Space Complexity:</strong> O(ALPHABET_SIZE × L × N) in the worst case, where N is the number of keys.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
+    </details>
+  </div>
+</section>
+<section id="kmp" style="margin-top:50px;">
+  <div class="algo-card">
+    <h3>📌 Knuth-Morris-Pratt (KMP) Algorithm</h3>
+    <p><strong>Category:</strong> Product Search Optimisation (E-commerce)</p>
+    <p><strong>Description:</strong> Linear-time substring search that uses a prefix-function table to skip redundant comparisons, making “search-as-you-type” smooth on millions of product titles and descriptions.</p>
+
+    <p><strong>📦 Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Real-time “did you mean?” suggestions in the search bar.</li>
+      <li>Fast autocomplete matching against huge product catalogues.</li>
+      <li>Lightning search inside long product descriptions or reviews.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Pre-compute the <em>Longest Prefix Suffix</em> (LPS) table for the pattern (O(m)).</li>
+        <li>Scan the text; on mismatch, jump using LPS instead of restarting (O(n)).</li>
+        <li>Total complexity = O(n + m) without backtracking.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://leoriether.github.io/kmp-simulator/" width="100%" height="430"
+              style="border:1px solid #ccc;border-radius:10px;"></iframe>
+      <p style="font-size:0.9rem;">Select “KMP” in the visualiser to watch step-by-step skips.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/String/KMP"
+         target="_blank" class="code-btn">
+         <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(n + m)</li>
+        <li><strong>Space:</strong> O(m) (LPS table)</li>
+        <li><strong>Stable / Streaming:</strong> Yes—works left-to-right, single pass.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+
   <section id="edit-distance" style="margin-top: 50px;">
   <div class="algo-card">
-    <h3>🔹 Edit Distance (Levenshtein Distance)</h3>
+    <h3>3 Edit Distance (Levenshtein Distance)</h3>
     <p><strong>Category:</strong> Dynamic Programming</p>
     <p><strong>Description:</strong> Calculates the minimum number of operations (insert, delete, replace) required to convert one string to another.</p>
-    <p><strong>💼 Business Case:</strong> Used in Amazon search engines to correct typos or suggest similar product names.</p>
+    <p><strong>💼 Business Case:</strong> 
+    
+<ul>
+  <li><b>Edit distance</b> helps fix spelling mistakes in search and shows the correct results by picking the word with the lowest edit distance. (e.g., "hedphones" → "headphones")</li>
+  <li>It suggests the right words while typing, even if there are small errors. (e.g., "iphon" → "iPhone")</li>
+  <li>It finds items with similar names, even if they are spelled slightly differently. (e.g., "nikke shoes" → "Nike shoes")</li>
+  <li>It connects users with similar interests, even if they use different words. </li>
+  <li>It treats different spellings or short forms of the same word as one, giving better recommendations. (e.g., "SciFi" and "Sci-Fi")</li>
+</ul>
 
-    <details>
+
+
+    <details open>
       <summary>🧠 How It Works</summary>
       <ul>
         <li>Create a DP table dp[i][j] where i and j represent indices in word1 and word2.</li>
@@ -211,101 +410,106 @@ int main() {
       </ul>
     </details>
 
-    <details>
-      <summary>📊 Visualization</summary>
-      <p>Example: word1 = "kitten", word2 = "sitting"</p>
-      <div id="edit-dp-visual" style="margin: 20px 0;"></div>
-      <button onclick="startEditDistanceVisualization()">▶ Start Slow Visualization</button>
+   
+  <details open>
+  <summary>📊 Visualization</summary>
+  <div style="text-align: center;">
+  <img src="/assets/editDistance.jpg" alt="Edit Distance Visualization" style="width: 100%; max-width: 600px; border-radius: 8px; margin-bottom: 20px;height: 600px;">
+</div>
 
-      <script>
-        const word1 = "kitten";
-        const word2 = "sitting";
-        const delay2 = 700;
+  <p>Example: word1 = "kitten", word2 = "sitting"</p>
+  <div id="edit-dp-visual" style="margin: 20px 0; display: flex; justify-content: center;"></div>
+  <button onclick="startEditDistanceVisualization()">▶ Start</button>
 
-        function sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms));
+  <script>
+    const word1 = "kitten";
+    const word2 = "sitting";
+    const delay2 = 500;
+    const m = word1.length;
+    const n2 = word2.length;
+    let editDp = [];
+    let currentI = -1;
+    let currentJ = -1;
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function renderTable() {
+      let html = "<table border='1' cellpadding='8' style='border-collapse: collapse; background-color: #f9f9ff; text-align: center;'>";
+      html += "<tr><th></th><th></th>";
+      for (let j = 0; j < word2.length; j++) {
+        html += `<th>${word2[j]}</th>`;
+      }
+      html += "</tr>";
+
+      for (let i = 0; i <= m; i++) {
+        html += "<tr>";
+        html += i === 0 ? "<th></th>" : `<th>${word1[i - 1]}</th>`;
+        html += `<th>${i}</th>`;
+
+        for (let j = 0; j <= n2; j++) {
+          let bgColor = "#fff";
+          if (i === 0 || j === 0) bgColor = "#e0e0e0";
+          if (i === currentI && j === currentJ) bgColor = "#b2f0b2"; // active cell
+          html += `<td style="background-color:${bgColor}">${editDp[i][j]}</td>`;
         }
+        html += "</tr>";
+      }
 
-        async function startEditDistanceVisualization() {
-          const m = word1.length;
-          const n = word2.length;
-          const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+      html += "</table>";
+      document.getElementById("edit-dp-visual").innerHTML = html;
+    }
 
-          for (let i = 0; i <= m; i++) dp[i][0] = i;
-          for (let j = 0; j <= n; j++) dp[0][j] = j;
+    function initializeDP() {
+      editDp = Array.from({ length: m + 1 }, () => Array(n2 + 1).fill(0));
+      for (let i = 0; i <= m; i++) editDp[i][0] = i;
+      for (let j = 0; j <= n2; j++) editDp[0][j] = j;
+      currentI = -1;
+      currentJ = -1;
+      renderTable();
+    }
 
-          const container = document.getElementById("edit-dp-visual");
+    async function startEditDistanceVisualization() {
+      initializeDP();
+      await sleep(delay2);
 
-          function renderTable() {
-            let html = "<table border='1' cellpadding='8' style='border-collapse: collapse; background-color: #f9f9ff;'>";
-            html += "<tr><td></td><td></td>" + [...word2].map(c => `<td><strong>${c}</strong></td>`).join('') + "</tr>";
-            for (let i = 0; i <= m; i++) {
-              html += "<tr>";
-              html += i === 0 ? "<td></td>" : `<td><strong>${word1[i - 1]}</strong></td>`;
-              for (let j = 0; j <= n; j++) {
-                const val = dp[i][j];
-                const bg = i === 0 || j === 0 ? "#e0e0e0" : "#fff";
-                html += `<td style='background-color:${bg}'>${val}</td>`;
-              }
-              html += "</tr>";
-            }
-            html += "</table>";
-            container.innerHTML = html;
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n2; j++) {
+          if (word1[i - 1] === word2[j - 1]) {
+            editDp[i][j] = editDp[i - 1][j - 1];
+          } else {
+            editDp[i][j] = 1 + Math.min(
+              editDp[i - 1][j],     // delete
+              editDp[i][j - 1],     // insert
+              editDp[i - 1][j - 1]  // replace
+            );
           }
-
+          currentI = i;
+          currentJ = j;
           renderTable();
           await sleep(delay2);
-
-          for (let i = 1; i <= m; i++) {
-            for (let j = 1; j <= n; j++) {
-              if (word1[i - 1] === word2[j - 1]) {
-                dp[i][j] = dp[i - 1][j - 1];
-              } else {
-                dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
-              }
-              renderTable();
-              await sleep(delay2);
-            }
-          }
         }
-      </script>
-    </details>
+      }
 
-    <details>
-      <summary>👩‍💻 View Code (C++)</summary>
-      <pre><code>
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;string&gt;
-using namespace std;
-
-int editDistance(string word1, string word2) {
-    int m = word1.length(), n = word2.length();
-    vector&lt;vector&lt;int&gt;&gt; dp(m + 1, vector&lt;int&gt;(n + 1));
-
-    for (int i = 0; i &lt;= m; i++) dp[i][0] = i;
-    for (int j = 0; j &lt;= n; j++) dp[0][j] = j;
-
-    for (int i = 1; i &lt;= m; i++) {
-        for (int j = 1; j &lt;= n; j++) {
-            if (word1[i - 1] == word2[j - 1])
-                dp[i][j] = dp[i - 1][j - 1];
-            else
-                dp[i][j] = 1 + min({ dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1] });
-        }
+      currentI = -1;
+      currentJ = -1;
+      renderTable(); // final render to remove highlight
     }
-    return dp[m][n];
-}
 
-int main() {
-    string a = "kitten", b = "sitting";
-    cout &lt;&lt; "Edit Distance: " &lt;&lt; editDistance(a, b) &lt;&lt; endl;
-    return 0;
-}
-      </code></pre>
+    // Initial table shown on page load
+    initializeDP();
+  </script>
+</details>
+
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
     </details>
-
-    <details>
+    <details open>
       <summary>📊 Complexity Analysis</summary>
       <ul>
         <li><strong>Time:</strong> O(m × n)</li>
@@ -313,121 +517,129 @@ int main() {
       </ul>
     </details>
   </div>
+  
 </section>
 <section id="lcs-dp">
   <div class="algo-card">
-    <h3>📌 Longest Common Subsequence (LCS)</h3>
+    <h3>4 Longest Common Subsequence (LCS)</h3>
     <p><strong>Category:</strong> Dynamic Programming</p>
     <p><strong>Description:</strong> Finds the length of the longest subsequence present in both strings (not necessarily contiguous).</p>
     <p><strong>📦 Business Case:</strong></p>
-    <ul>
-      <li>Used in comparing customer queries with product descriptions.</li>
-      <li>Helps in version control systems for diff/merge functionality.</li>
-      <li>Improves search relevance by matching similar patterns.</li>
-    </ul>
+  <ul>
+  <li>LCS can help match user search queries with product names even if word order is different.  When a user types a query like "Samsung mobile charger", LCS can help match it with titles like "Samsung Fast Mobile Charger Type-C", even if the words are not in exact order.</li>
+  <li>Amazon's chatbot can use LCS to detect similar complaints or support messages from users.</li>
+  <li>Amazon's hiring system can match resumes to job descriptions using LCS for skill comparison.</li>
+</ul>
 
-    <details>
+
+    <details open>
       <summary>🧠 How It Works</summary>
       <ul>
-        <li>Use a DP table <code>dp[i][j]</code> where <code>i</code> and <code>j</code> index characters of the two strings.</li>
+        <li>Use a DP table <i>dp[i][j]</i> where <i>i</i> and <i>j</i> index characters of the two strings.</li>
         <li>If characters match, extend the LCS; otherwise take max of skipping a character from either string.</li>
       </ul>
     </details>
 
-    <details>
-      <summary>📊 Visualization</summary>
-      <p>
-        Given str1 = "AGGTAB", str2 = "GXTXAYB"
-      </p>
-      <p>Step-by-step DP Table Update with i,j indices</p>
-      <div id="lcs-visual" style="margin: 20px 0;"></div>
-      <button onclick="startLCSVisualization()">▶ Start Slow Visualization</button>
+   <details open>
+  <summary>📊 Visualization</summary>
+  <p>
+    Given <code>str1 = "AGGTAB"</code><code>str2 = "GXTXAYB"</code>
+  </p>
+  <p>Step-by-step DP Table Update with i,j indices</p>
+  <div id="lcs-visual" style="margin: 20px 0; display: flex; justify-content: center;"></div>
 
-      <script>
-        const str1 = "AGGTAB";
-        const str2 = "GXTXAYB";
-        const lcsDelay = 800;
+  <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+  <div id="lcs-visual" style="margin: 20px 0;"></div>
+  <button onclick="startLCSVisualization()">▶ Start</button>
+</div>
 
-        function sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms));
-        }
 
-        async function startLCSVisualization() {
-          const n = str1.length;
-          const m = str2.length;
-          const dp = Array.from({ length: n + 1 }, () => Array(m + 1).fill(0));
+  <script>
+  const str1 = "AGGTAB";
+  const str2 = "GXTXAYB";
+  const lcsDelay = 800;
 
-          const container = document.getElementById("lcs-visual");
+  const lcsN = str1.length;
+  const lcsM = str2.length;
+  const lcsDp = Array.from({ length: lcsN + 1 }, () => Array(lcsM + 1).fill(0));
+  const lcsContainer = document.getElementById("lcs-visual");
+  let lcsHighlight = [-1, -1];
 
-          function renderTable() {
-            let html = "<table border='1' cellpadding='8' style='border-collapse: collapse; text-align: center;'>";
-            html += "<tr><th>i\\j</th><th>-</th>";
-            for (let j = 0; j <= m; j++) {
-              html += `<th>${j > 0 ? str2[j - 1] : ""}</th>`;
-            }
-            html += "</tr>";
-
-            for (let i = 0; i <= n; i++) {
-              html += `<tr><th>${i > 0 ? str1[i - 1] : "-"}</th><th>${i}</th>`;
-              for (let j = 0; j <= m; j++) {
-                html += `<td>${dp[i][j]}</td>`;
-              }
-              html += "</tr>";
-            }
-            html += "</table>";
-            container.innerHTML = html;
-          }
-
-          renderTable();
-          await sleep(lcsDelay);
-
-          for (let i = 1; i <= n; i++) {
-            for (let j = 1; j <= m; j++) {
-              if (str1[i - 1] === str2[j - 1]) {
-                dp[i][j] = dp[i - 1][j - 1] + 1;
-              } else {
-                dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-              }
-              renderTable();
-              await sleep(lcsDelay);
-            }
-          }
-        }
-      </script>
-    </details>
-
-    <details>
-      <summary>👩‍💻 View Code (C++)</summary>
-      <pre><code>
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;string&gt;
-using namespace std;
-
-int longestCommonSubsequence(string text1, string text2) {
-    int n = text1.size(), m = text2.size();
-    vector&lt;vector&lt;int&gt;&gt; dp(n + 1, vector&lt;int&gt;(m + 1, 0));
-    for (int i = 1; i &lt;= n; ++i) {
-        for (int j = 1; j &lt;= m; ++j) {
-            if (text1[i - 1] == text2[j - 1])
-                dp[i][j] = 1 + dp[i - 1][j - 1];
-            else
-                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
-        }
+  function renderTable() {
+    let html = "<table border='1' cellpadding='8' style='border-collapse: collapse; text-align: center;'>";
+    html += "<tr><th>i\\j</th><th>-</th>";
+    for (let j = 0; j <= lcsM; j++) {
+      html += `<th>${j > 0 ? str2[j - 1] : ""}</th>`;
     }
-    return dp[n][m];
-}
+    html += "</tr>";
 
-int main() {
-    string a = "AGGTAB";
-    string b = "GXTXAYB";
-    cout &lt;&lt; "Length of LCS is " &lt;&lt; longestCommonSubsequence(a, b) &lt;&lt; endl;
-    return 0;
-}
-      </code></pre>
+    for (let i = 0; i <= lcsN; i++) {
+      html += `<tr><th>${i > 0 ? str1[i - 1] : "-"}</th><th>${i}</th>`;
+      for (let j = 0; j <= lcsM; j++) {
+        let bg = "#fff";
+        if (i === 0 || j === 0) bg = "#e0e0e0";
+        if (i === lcsHighlight[0] && j === lcsHighlight[1]) bg = "#b2f0b2";
+        html += `<td style="background-color:${bg}">${lcsDp[i][j]}</td>`;
+      }
+      html += "</tr>";
+    }
+    html += "</table>";
+    lcsContainer.innerHTML = html;
+  }
+
+  // Show initial empty table
+  function showInitialTable() {
+    for (let i = 0; i <= lcsN; i++) {
+      for (let j = 0; j <= lcsM; j++) {
+        lcsDp[i][j] = 0;
+      }
+    }
+    lcsHighlight = [-1, -1];
+    renderTable();
+  }
+  showInitialTable();
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function startLCSVisualization() {
+    // Reset table before animation
+    for (let i = 0; i <= lcsN; i++) {
+      for (let j = 0; j <= lcsM; j++) {
+        lcsDp[i][j] = 0;
+      }
+    }
+    lcsHighlight = [-1, -1];
+    renderTable();
+    await sleep(lcsDelay);
+
+    for (let i = 1; i <= lcsN; i++) {
+      for (let j = 1; j <= lcsM; j++) {
+        if (str1[i - 1] === str2[j - 1]) {
+          lcsDp[i][j] = lcsDp[i - 1][j - 1] + 1;
+        } else {
+          lcsDp[i][j] = Math.max(lcsDp[i - 1][j], lcsDp[i][j - 1]);
+        }
+        lcsHighlight = [i, j];
+        renderTable();
+        await sleep(lcsDelay);
+      }
+    }
+    lcsHighlight = [-1, -1];
+    renderTable();
+  }
+</script>
+</details>
+
+  <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
     </details>
 
-    <details>
+    <details open>
       <summary>🧮 Complexity Analysis</summary>
       <ul>
         <li><strong>Time:</strong> O(N × M)</li>
@@ -436,123 +648,269 @@ int main() {
     </details>
   </div>
 </section>
-
-<section id="knapsack-dp">
+<section id="johnson-trotter">
   <div class="algo-card">
-    <h3>🎒 0/1 Knapsack Problem</h3>
-    <p><strong>Category:</strong> Dynamic Programming</p>
-    <p><strong>Description:</strong> Given weights and profits of items and a knapsack of capacity <code>W</code>, find the maximum profit achievable by including or excluding items (each item can be picked at most once).</p>
-    <p><strong>📦 Business Case:</strong></p>
+    <h3>📌 Johnson-Trotter Algorithm</h3>
+    <p><strong>Category:</strong> Permutation Generation</p>
+    <p><strong>Description:</strong> Generates all permutations of n elements by producing each permutation from the previous one by swapping adjacent elements.</p>
+
+    <p><strong>Business Case (Amazon Ecommerce):</strong></p>
     <ul>
-      <li>Used in budget allocation and asset selection in finance.</li>
-      <li>Optimizes product placement in limited storage capacity.</li>
-      <li>Used in logistics for weight-restricted shipments.</li>
+      <li>Generating all possible product bundle permutations.</li>
+      <li>Testing UI/UX arrangements via permutations for better customer experience.</li>
+      <li>Simulating recommendation scenarios with various orderings.</li>
     </ul>
 
-    <details>
+    <details open>
       <summary>🧠 How It Works</summary>
       <ul>
-        <li>Define <code>dp[i][w]</code> as the max profit for first <code>i</code> items and capacity <code>w</code>.</li>
-        <li>Either take the item (if it fits) or skip it — whichever gives more profit.</li>
+        <li>Assigns a direction to each element.</li>
+        <li>Finds the largest mobile element (one that can move in its assigned direction).</li>
+        <li>Swaps it with adjacent element in the direction.</li>
+        <li>Reverses directions of elements larger than the moved one.</li>
+        <li>Repeats until no mobile element exists.</li>
       </ul>
     </details>
 
-    <details>
+    <details open>
       <summary>📊 Visualization</summary>
-      <p>
-        Items: weights = [1, 3, 4], profits = [15, 50, 60], Capacity = 5
-      </p>
-      <div id="knapsack-visual" style="margin: 20px 0;"></div>
-      <button onclick="startKnapsackVisualization()">▶ Start Visualization</button>
-
-      <script>
-        const weights = [1, 3, 4];
-        const profits = [15, 50, 60];
-        const capacity = 5;
-        const knapsackDelay = 800;
-
-        function sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms));
-        }
-
-        async function startKnapsackVisualization() {
-          const n = weights.length;
-          const dp = Array.from({ length: n + 1 }, () => Array(capacity + 1).fill(0));
-          const container = document.getElementById("knapsack-visual");
-
-          function renderTable() {
-            let html = "<table border='1' cellpadding='8' style='border-collapse: collapse; text-align: center;'>";
-            html += "<tr><th>i\\w</th>";
-            for (let w = 0; w <= capacity; w++) {
-              html += `<th>${w}</th>`;
-            }
-            html += "</tr>";
-
-            for (let i = 0; i <= n; i++) {
-              html += `<tr><th>${i}</th>`;
-              for (let w = 0; w <= capacity; w++) {
-                html += `<td>${dp[i][w]}</td>`;
-              }
-              html += "</tr>";
-            }
-
-            html += "</table>";
-            container.innerHTML = html;
-          }
-
-          renderTable();
-          await sleep(knapsackDelay);
-  
-          for (let i = 1; i <= n; i++) {
-            for (let w = 0; w <= capacity; w++) {
-              if (weights[i - 1] <= w) {
-                dp[i][w] = Math.max(
-                  profits[i - 1] + dp[i - 1][w - weights[i - 1]],
-                  dp[i - 1][w]
-                );
-              } else {
-                dp[i][w] = dp[i - 1][w];
-              }
-              renderTable();
-              await sleep(knapsackDelay);
-            }
-          }
-        }
-      </script>
+      <p>Show step-by-step adjacent swaps producing permutations, with arrows indicating directions.</p>
     </details>
 
-    <details>
+    <details open>
       <summary>👩‍💻 View Code (C++)</summary>
-      <pre><code>
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-using namespace std;
-
-int knapsack(int W, vector&lt;int&gt;& weights, vector&lt;int&gt;& profits, int n) {
-    vector&lt;vector&lt;int&gt;&gt; dp(n + 1, vector&lt;int&gt;(W + 1, 0));
-
-    for (int i = 1; i &lt;= n; ++i) {
-        for (int w = 0; w &lt;= W; ++w) {
-            if (weights[i - 1] &lt;= w)
-                dp[i][w] = max(profits[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w]);
-            else
-                dp[i][w] = dp[i - 1][w];
-        }
-    }
-    return dp[n][W];
-}
-
-int main() {
-    vector&lt;int&gt; weights = {1, 3, 4};
-    vector&lt;int&gt; profits = {15, 50, 60};
-    int capacity = 5;
-    cout &lt;&lt; "Max profit = " &lt;&lt; knapsack(capacity, weights, profits, weights.size()) &lt;&lt; endl;
-    return 0;
-}
-      </code></pre>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/JohnsonTrotter" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
     </details>
 
-    <details>
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li>Time Complexity: O(n * n!) to generate all permutations</li>
+        <li>Space Complexity: O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="knapsack-dp">
+  <div class="algo-card">
+    <h3>5. 0/1 Knapsack Problem</h3>
+    <p><strong>Category:</strong> Dynamic Programming</p>
+    <p><strong>Description:</strong> Given weights and profits of items and a knapsack of capacity <i>w</i>, find the maximum profit achievable by including or excluding items (each item can be picked at most once).</p>
+    <p><strong>📦 Business Case:</strong></p>
+<ul>
+  <li>Select the best set of products to show on a limited space like homepage or deals section.</li>
+  <li>Decide which items to keep in a delivery truck to maximize value within weight limits.</li>
+  <li>Choose the right mix of ads or sponsored products to display based on budget and profit.</li>
+  <li>Help customers decide what to buy within a certain budget to get the best value.</li>
+  <li>Pick the best combination of discounts or offers to apply without going over limits.</li>
+</ul>
+
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+  <li>Given items each with a weight <i>w<sub>i</sub></i> and value <i>v<sub>i</sub></i>, and a knapsack capacity <i>W</i>.</li>
+  <li>Goal: Maximize total value without exceeding weight <i>W</i>.</li>
+  <li>Called "0/1" because each item can be either taken (1) or left (0).</li>
+   <li>Define <i>dp[i][w]</i> as the max profit for first <i>i</i> items and capacity <i>w</i>.</li>
+        <li>Use a 1D array to optimize space, updating it in reverse to avoid overwriting values.</li>
+  <li>No partial items allowed (unlike fractional knapsack).</li>
+  <li>For each item, decide to include it (if it fits) or exclude it.</li>
+  <li>Aim to find the combination with the highest total value under the weight limit.</li>
+  <li>Exhibits optimal substructure: solution built from smaller subproblems.</li>
+  <li>Has overlapping subproblems, making dynamic programming effective.</li>
+
+      </ul>
+    </details>
+
+    <details open>
+  <summary>📊 Visualization</summary>
+    <img src="/assets/knapsack.jpg" alt="Knapsack Visualization" style="width: 100%; max-width: 600px; border-radius: 8px; margin-bottom: 20px;height: 800px;margin-left: 200px;">
+
+  <p>
+    Items: weights = [1, 3, 4], profits = [15, 50, 60], Capacity = 5
+  </p>
+  <div id="knapsack-visual" style="margin: 20px 0; display: flex; justify-content: center;"></div>
+  <button onclick="startKnapsackVisualization()">▶ Start Visualization</button>
+
+  <script>
+    const weights = [1, 3, 4];
+    const profits = [15, 50, 60];
+    const capacity = 5;
+    const knapsackDelay = 800;
+
+    let knapsackDp = [];
+    let knapsackN = weights.length;
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    // Render the DP table with colors
+    // Highlight the cell being updated in yellow
+    function renderTable(currentI = -1, currentW = -1) {
+      let html = "<table border='1' cellpadding='8' style='border-collapse: collapse; text-align: center; font-family: Arial, sans-serif;'>";
+      html += "<tr style='background-color: #4CAF50; color: white;'><th>i\\w</th>";
+      for (let w = 0; w <= capacity; w++) {
+        html += `<th>${w}</th>`;
+      }
+      html += "</tr>";
+
+      for (let i = 0; i <= knapsackN; i++) {
+        html += `<tr>`;
+        if (i === 0) {
+          html += `<th style='background-color: #4CAF50; color: white;'>0</th>`;
+        } else {
+          html += `<th style='background-color: #4CAF50; color: white;'>${i} (w=${weights[i-1]}, p=${profits[i-1]})</th>`;
+        }
+
+        for (let w = 0; w <= capacity; w++) {
+          let bgColor = '#f0f8ff'; // default light blue background
+
+          // Gray background for the first row and first column (base cases)
+          if (i === 0 || w === 0) bgColor = '#d3d3d3';
+
+          // Highlight current cell being updated
+          if (i === currentI && w === currentW) bgColor = '#ffeb3b'; // bright yellow
+
+          // Make max values a bit greenish for visibility
+          if (knapsackDp[i] && knapsackDp[i][w] === Math.max(knapsackDp[i-1]?.[w] ?? 0, profits[i-1] + (knapsackDp[i-1]?.[w - weights[i-1]] ?? 0))) {
+            bgColor = bgColor === '#ffeb3b' ? '#ffe066' : bgColor; // lighter yellow if already yellow
+          }
+
+          html += `<td style="background-color: ${bgColor}; font-weight: bold;">${knapsackDp[i][w]}</td>`;
+        }
+        html += `</tr>`;
+      }
+
+      html += `</table>`;
+      document.getElementById("knapsack-visual").innerHTML = html;
+    }
+
+    // Initialize and render DP table with zeros
+    function initializeTable() {
+      knapsackDp = Array.from({ length: knapsackN + 1 }, () => Array(capacity + 1).fill(0));
+      renderTable();
+    }
+
+    // Run visualization step by step
+    async function startKnapsackVisualization() {
+      initializeTable();
+      await sleep(knapsackDelay);
+
+      for (let i = 1; i <= knapsackN; i++) {
+        for (let w = 0; w <= capacity; w++) {
+          if (weights[i - 1] <= w) {
+            knapsackDp[i][w] = Math.max(
+              profits[i - 1] + knapsackDp[i - 1][w - weights[i - 1]],
+              knapsackDp[i - 1][w]
+            );
+          } else {
+            knapsackDp[i][w] = knapsackDp[i - 1][w];
+          }
+          renderTable(i, w);
+          await sleep(knapsackDelay);
+        }
+      }
+    }
+
+    // Show initial table on page load
+    initializeTable();
+      </script>
+      <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 900px; text-align: left;">
+  <thead style="background-color: #f2f2f2;">
+    <tr>
+      <th>i (items)</th>
+      <th>Capacity w</th>
+      <th>dp[i][w] explanation</th>
+      <th>Value selected</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>all</td>
+      <td>No items means 0 profit</td>
+      <td>dp[0][w] = 0</td>
+    </tr>
+    <tr>
+      <td>1 (Item 1: weight 1, profit 15)</td>
+      <td>0</td>
+      <td>Capacity 0 means no space, profit 0</td>
+      <td>dp[1][0] = 0</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>1</td>
+      <td>Item fits, take it or not</td>
+      <td>max(15 + dp[0][0], dp[0][1]) = 15</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>2 to 5</td>
+      <td>Same as capacity 1, can take item</td>
+      <td>dp[1][w] = 15</td>
+    </tr>
+    <tr>
+      <td>2 (Item 2: weight 3, profit 50)</td>
+      <td>0 to 2</td>
+      <td>Can't fit item 2 in capacity &lt;3</td>
+      <td>dp[2][w] = dp[1][w]</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>3</td>
+      <td>Can fit item 2: max(50 + dp[1][0], dp[1][3]) = max(50 + 0, 15) = 50</td>
+      <td>dp[2][3] = 50</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>4</td>
+      <td>max(50 + dp[1][1], dp[1][4]) = max(50 + 15, 15) = 65</td>
+      <td>dp[2][4] = 65</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>5</td>
+      <td>max(50 + dp[1][2], dp[1][5]) = max(50 + 15, 15) = 65</td>
+      <td>dp[2][5] = 65</td>
+    </tr>
+    <tr>
+      <td>3 (Item 3: weight 4, profit 60)</td>
+      <td>0 to 3</td>
+      <td>Can't fit item 3 in capacity &lt;4</td>
+      <td>dp[3][w] = dp[2][w]</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>4</td>
+      <td>max(60 + dp[2][0], dp[2][4]) = max(60 + 0, 65) = 65</td>
+      <td>dp[3][4] = 65</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>5</td>
+      <td>max(60 + dp[2][1], dp[2][5]) = max(60 + 15, 65) = 75</td>
+      <td>dp[3][5] = 75</td>
+    </tr>
+  </tbody>
+</table>
+
+</details>
+
+
+    <details open>
+      
+       <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
+
+    </details>
+
+    <details open>
       <summary>🧮 Complexity Analysis</summary>
       <ul>
         <li><strong>Time:</strong> O(N × W)</li>
@@ -562,94 +920,1958 @@ int main() {
   </div>
 </section>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dijkstra's Algorithm — Portfolio</title>
-  <style>
-    body {
-      font-family: sans-serif;
-    }
-    .algo-card {
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      margin: 20px;
-      background-color: #f5faff;
-    }
-    .highlight {
-      background-color: #c8f7c5;
-    }
-    table {
-      border-collapse: collapse;
-      margin: 10px 0;
-    }
-    table td, table th {
-      border: 1px solid #aaa;
-      padding: 6px 10px;
-      text-align: center;
-    }
-    .node {
-      padding: 6px;
-      background: #e2efff;
-      border-radius: 6px;
-      margin: 4px;
-      display: inline-block;
-    }
-  </style>
-</head>
+
 <h2 id="titles">Logistics and Route Optimization</h2>
+<section id="dijkstras">
+  <div class="algo-card">
+    <h3>📌 Dijkstra's Algorithm</h3>
+    <p><strong>Category:</strong> Shortest Path Optimization</p>
+    <p><strong>Description:</strong> An efficient algorithm for finding the shortest paths from a single source node to all other nodes in a weighted graph with non-negative weights.</p>
 
-<body>
-  <section id="dijkstra">
-    <div class="algo-card">
-      <h3>📌 Dijkstra's Algorithm</h3>
-      <p><strong>Category:</strong> Graph Algorithm (Greedy)</p>
-      <p><strong>Description:</strong> Finds the shortest path from a source node to all other nodes in a weighted graph.</p>
-      <p><strong>🚚 Business Case</strong> Used by delivery services like Amazon or FedEx to determine the fastest delivery route.</p>
+    <p><strong>Business Case (Amazon Logistics):</strong></p>
+    <ul>
+      <li>Optimizing delivery routes between warehouses and customer addresses.</li>
+      <li>Minimizing shipping cost and delivery time using real-time traffic and distance data.</li>
+      <li>Dynamic rerouting during disruptions or traffic congestion.</li>
+    </ul>
 
-      <details >
-        <summary>🧠 How It Works</summary>
-        <ul>
-          <li>Initialize distances to all vertices as infinity, except the source which is 0.</li>
-          <li>Use a priority queue to greedily pick the next minimum distance node.</li>
-          <li>Update distances of its neighbors if a shorter path is found.</li>
-          <li>Repeat until all nodes are visited.</li>
-        </ul>
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Start with the source node, assigning it a tentative distance of 0, and all others ∞.</li>
+        <li>Visit the unvisited node with the smallest known distance.</li>
+        <li>For each neighboring node, calculate tentative distances and update if smaller.</li>
+        <li>Mark the current node as visited and repeat until all nodes are visited.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>Visualize Amazon delivery hubs and homes as graph nodes. Dijkstra's will find the shortest path considering traffic weights.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (Python)</summary>
+      <pre><code>import heapq
+
+def dijkstra(graph, start):
+    distances = {node: float('infinity') for node in graph}
+    distances[start] = 0
+    pq = [(0, start)]
+
+    while pq:
+        current_distance, current_node = heapq.heappop(pq)
+
+        if current_distance > distances[current_node]:
+            continue
+
+        for neighbor, weight in graph[current_node]:
+            distance = current_distance + weight
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                heapq.heappush(pq, (distance, neighbor))
+
+    return distances
+
+# Example graph
+amazon_network = {
+    'Warehouse': [('Area1', 5), ('Area2', 2)],
+    'Area1': [('Area3', 2)],
+    'Area2': [('Area3', 4), ('Area4', 7)],
+    'Area3': [('Area4', 1)],
+    'Area4': []
+}
+
+print(dijkstra(amazon_network, 'Warehouse'))</code></pre>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li>Time Complexity: O((V + E) log V) with a min-heap (priority queue)</li>
+        <li>Space Complexity: O(V)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+
+<section id="a-star">
+  <div class="algo-card">
+    <h3>7. A* (A-Star) Algorithm</h3>
+    <p><strong>Category:</strong> Graph Algorithm (Heuristic Search)</p>
+    <p><strong>Description:</strong> A* finds the most optimal path between a start and goal node using both actual cost (g) and estimated cost (h). It guarantees the shortest path if the heuristic is admissible.</p>
+
+    <p><strong>🚚 Business Case</strong></p>
+    <ul>
+      <li>Compute the most efficient delivery route using traffic and location data.</li>
+      <li>Guide autonomous robots through optimal picking paths in large Amazon warehouses.</li>
+      <li>Handle last-mile delivery by dynamically adjusting to blocked roads or weather alerts.</li>
+      <li>Assist drones in computing safe and shortest airborne delivery paths.</li>
+      <li>Optimize internal logistics like restocking paths inside fulfillment centers.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Start from the source node and evaluate paths using <code><b>f(n) = g(n) + h(n)</b></code>.</li>
+        <li><b>g(n)</b> = cost from source to current node.</li>
+        <li><b>h(n)</b> = heuristic estimated cost to goal (e.g., Euclidean or Manhattan distance).</li>
+        <li>Use a priority queue to pick the node with the lowest <i>f(n)</i>.</li>
+        <li>Repeat until the goal is reached with the shortest estimated cost.</li>
+      </ul>
+      <div style="text-align: center;">
+        <img src="/assets/astar.png" alt="A* Algorithm Example" style="width: 100%; max-width: 500px; border-radius: 10px; margin: 20px 0;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">Given graph</figcaption>
+      </div>
+      <div style="text-align: center;">
+        <img src="/assets/a2.png" alt="A* Algorithm Example" style="width: 100%; max-width: 500px; border-radius: 10px; margin: 20px 0;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">A* </figcaption>
+      </div>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>
+        Try out this interactive A* Algorithm demo:<br>
+        <iframe src="https://qiao.github.io/PathFinding.js/visual/" width="100%" height="500" style="border:1px solid #aaa; border-radius:8px;"></iframe>
+      </p>
+    </details>
+     <details open>
+  <summary><strong>🧠 How to Decide Heuristics?</strong></summary>
+  <p>Heuristics in A* search help estimate the remaining cost to the goal. In logistics and warehouse settings like Amazon, smart heuristics can make A* faster and more accurate. Below are key techniques to design effective heuristics using domain knowledge:</p>
+  <ul>
+    <li><strong>Base Geometry Heuristics (Manhattan, Euclidean):</strong> Use Manhattan for 4-way grids, Euclidean for drone-style diagonal movement.</li>
+    
+    <li><strong>Traffic & Congestion Awareness:</strong> Include delays from high-traffic areas using real-time data or precomputed traffic scores.</li>
+    
+    <li><strong>Intersection Waiting Time:</strong> Add average wait time at intersections to prevent route congestion and delays.</li>
+    
+    <li><strong>Zone-Based Weights:</strong> Assign penalties to slow zones like packing areas or cold storage to discourage traversal unless necessary.</li>
+    
+    <li><strong>Fuel/Energy Estimation:</strong> For drones or electric vehicles, estimate remaining energy cost using terrain, load, and weather/wind data.</li>
+    
+    <li><strong>Learning from History (Data-Driven):</strong> Use past route data to train ML models that predict remaining cost to goal more precisely than geometric distance.</li>
+    
+    <li><strong>Path Difficulty Heuristics:</strong> Penalize paths with sharp turns, slopes, or narrow passages that slow down robotic navigation.</li>
+    
+    <li><strong>Heuristics with Time Windows:</strong> Add penalties when the estimated arrival time is outside of allowed delivery slots.</li>
+    
+    <li><strong>Dynamic Obstacle Prediction:</strong> Estimate delays from human movement or temporary obstructions and reflect that in the heuristic.</li>
+    
+    <li><strong>Time-of-Day Dependent Heuristics:</strong> Adjust weights based on peak vs non-peak warehouse traffic or urban congestion patterns.</li>
+    
+    <li><strong>Map Knowledge - Avoid Trouble Spots:</strong> Use known blacklisted or blocked zones to bias heuristic away from unreliable paths.</li>
+    
+    <li><strong>Charging Station Awareness:</strong> In long-range or battery-constrained navigation, bias the heuristic toward paths with recharge stations.</li>
+    
+    <li><strong>Physical Constraints of Environment:</strong> Penalize paths unsuitable for heavy load, large size, or fragile cargo.</li>
+    
+    <li><strong>Goal-Based Tuning:</strong> For multi-pick scenarios, design the heuristic to guide efficient ordering and clustering of goal points.</li>
+  </ul>
+
+  <h4>Summary: A Good Heuristic is...</h4>
+  <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 600px;">
+    <thead style="background-color: #f2f2f2;">
+      <tr>
+        <th>Feature</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Admissible</td>
+        <td>Never overestimates the true cost</td>
+      </tr>
+      <tr>
+        <td>Consistent</td>
+        <td>Follows triangle inequality (h(x) ≤ h(y) + cost(x, y))</td>
+      </tr>
+      <tr>
+        <td>Fast to compute</td>
+        <td>Lightweight enough for real-time usage</td>
+      </tr>
+      <tr>
+        <td>Domain-aware</td>
+        <td>Incorporates real-world constraints and context</td>
+      </tr>
+      <tr>
+        <td>Adaptable</td>
+        <td>Can be updated with traffic, time, or learned data</td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+    <details open>
+      <summary>👩‍💻 View Code </summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Graph/Astar" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O((V + E) log V) — with binary heap and admissible heuristic</li>
+        <li><strong>Space:</strong> O(V)</li>
+        <li><strong>Best Case:</strong> When heuristic is close to actual distance, fewer nodes are explored</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+
+<section id="bellman-ford" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>8. Bellman-Ford Algorithm</h3>
+    <p><strong>Category:</strong> Graph Algorithms</p>
+    <p><strong>Description:</strong> Computes shortest paths from a single source in a graph, even with negative weights.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+       <li>Find the best delivery route even when some roads have negative conditions like tolls or delays.</li>
+  <li>Handle changing delivery costs or road conditions over time and still find the cheapest route.</li>
+  <li>Plan routes where distance, time, and cost are all different and need to be balanced.</li>
+  <li>Help in international shipping where costs between locations can vary and include taxes or fees.</li>
+  <li>Ensure reliable delivery planning even when some routes might have unexpected issues or slowdowns.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Initialize distances to all vertices as ∞, except the source (0).</li>
+        <li>Relax all edges (V-1) times to find shortest paths.</li>
+        <li>Check one more time for any edge that can still be relaxed — to detect negative weight cycles.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>Visualization<sup><a href="#ref2">[2]</a></sup></p>
+      <iframe src="https://algoanim.ide.sk/index.php?page=showanim&id=50" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Note: Use the dropdown inside the visual to select <strong>Bellman-Ford</strong> and run step-by-step animation.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(V × E)</li>
+        <li><strong>Space:</strong> O(V)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="floyd-warshall" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>9. Floyd-Warshall Algorithm</h3>
+    <p><strong>Category:</strong> All-Pairs Shortest Path</p>
+    <p><strong>Description:</strong> Computes shortest paths between all pairs of vertices in a weighted graph.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li>Optimizing delivery times between all warehouses.</li>
+      <li>Efficient for pre-computing shortest routes between multiple depots.</li>
+      <li>Can be used to analyze network latency or costs across many endpoints.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Initialize a matrix with direct distances between nodes (∞ if no edge).</li>
+        <li>Iterate using each node as an intermediate point and update shortest paths.</li>
+        <li>Uses Dynamic Programming concept: dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j])</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization (Powered by AlgoAnim)</summary>
+      <iframe src="https://algoanim.ide.sk/index.php?page=showanim&id=50" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Click 'Start' to watch the step-by-step execution of Floyd-Warshall.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(V³)</li>
+        <li><strong>Space:</strong> O(V²)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="ford-fulkerson">
+  <div class="algo-card">
+    <h3>📌 Ford-Fulkerson Algorithm</h3>
+    <p><strong>Category:</strong> Network Flow Optimization</p>
+    <p><strong>Description:</strong> Finds the maximum flow possible from a source to sink in a flow network using augmenting paths.</p>
+
+    <p><strong>Business Case (Amazon Logistics):</strong></p>
+    <ul>
+      <li>Optimizing delivery routes for maximum throughput.</li>
+      <li>Efficient resource allocation in warehouse networks.</li>
+      <li>Network bandwidth optimization in AWS infrastructure.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Start with zero flow in the network.</li>
+        <li>Find augmenting paths using DFS or BFS from source to sink.</li>
+        <li>Increase flow along the path by minimum residual capacity.</li>
+        <li>Update residual graph and repeat until no augmenting path exists.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>Step-by-step flow increments on graph edges with residual capacities.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/FordFulkerson" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li>Time Complexity: O(max_flow * E), where E = number of edges</li>
+        <li>Space Complexity: O(V + E), V = vertices</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="kruskals" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>10. Kruskal's Algorithm</h3>
+    <p><strong>Category:</strong> Minimum Spanning Tree (MST)</p>
+    <p><strong>Description:</strong> Greedy algorithm to find a MST by selecting the lowest-weight edges first.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+<ul>
+  <li>Build the most cost-effective network of warehouses connected by roads or transport routes.</li>
+  <li>Design efficient delivery routes that connect multiple distribution centers with minimal total distance.</li>
+  <li>Plan new transportation links to expand coverage without unnecessary expenses.</li>
+  <li>Help optimize the layout of supply chains by minimizing infrastructure costs.</li>
+  <li>Connect various delivery hubs ensuring the whole network stays linked with the least total cost.</li>
+</ul>
+
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Sort all edges by increasing weight.</li>
+        <li>Use Disjoint Set (Union-Find) to avoid cycles.</li>
+        <li>Keep adding the smallest edge that doesn’t form a cycle.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization (Powered by VisuAlgo)</summary>
+      <iframe src="https://visualgo.net/en/mst" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">In the dropdown, select <strong>Kruskal</strong> to visualize.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(E log E)</li>
+        <li><strong>Space:</strong> O(V)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="floyd-warshall" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>11. Floyd-Warshall Algorithm</h3>
+    <p><strong>Category:</strong> All-Pairs Shortest Path</p>
+    <p><strong>Description:</strong> Computes shortest paths between all pairs of vertices in a weighted graph.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li>Optimizing delivery times between all warehouses.</li>
+      <li>Efficient for pre-computing shortest routes between multiple depots.</li>
+      <li>Can be used to analyze network latency or costs across many endpoints.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Initialize a matrix with direct distances between nodes (∞ if no edge).</li>
+        <li>Iterate using each node as an intermediate point and update shortest paths.</li>
+        <li>Uses Dynamic Programming concept: dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j])</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization (Powered by AlgoAnim)</summary>
+      <iframe src="https://algoanim.ide.sk/index.php?page=showanim&id=50" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Click 'Start' to watch the step-by-step execution of Floyd-Warshall.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(V³)</li>
+        <li><strong>Space:</strong> O(V²)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="kruskals" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>12. Kruskal's Algorithm</h3>
+    <p><strong>Category:</strong> Minimum Spanning Tree (MST)</p>
+    <p><strong>Description:</strong> Greedy algorithm to find a MST by selecting the lowest-weight edges first.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li>Designing cheapest route layouts like pipeline connections or fiber optics.</li>
+      <li>Connecting warehouses to distribution hubs with minimum total cost.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Sort all edges by increasing weight.</li>
+        <li>Use Disjoint Set (Union-Find) to avoid cycles.</li>
+        <li>Keep adding the smallest edge that doesn’t form a cycle.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization (Powered by VisuAlgo)</summary>
+      <iframe src="https://visualgo.net/en/mst" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">In the dropdown, select <strong>Kruskal</strong> to visualize.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(E log E)</li>
+        <li><strong>Space:</strong> O(V)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<!-- Next: Prim's and Boruvka coming up -->
+<section id="boruvka">
+  <div class="algo-card">
+    <h3>13. Boruvka's Algorithm</h3>
+    <p><strong>Category:</strong> Greedy, Minimum Spanning Tree</p>
+    <p><strong>Description:</strong> Adds the smallest edge from each component until only one component (the MST) remains.</p>
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li>Initial MST construction for distributed or parallelized network systems.</li>
+      <li>Creating hierarchical subgraphs for Amazon’s multi-warehouse networks.</li>
+      <li>Fast convergence when implemented in parallel/distributed environments.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Each node starts as a separate component.</li>
+        <li>Find the cheapest edge connecting each component to a different one.</li>
+        <li>Merge connected components and repeat until one component remains.</li>
+
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>No live animation available. Try this flowchart-style simulation:</p>
+      <ul>
+        <li>Imagine 4 warehouses: A, B, C, D.</li>
+        <li>Cheapest connections: A-B, C-D.</li>
+        <li>Merge A-B and C-D to make two clusters.</li>
+        <li>Repeat with cheapest edge between the clusters until one remains.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+  <i class="uil uil-github"></i> Click here for code
+</a>
+       </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(E log V)</li>
+        <li><strong>Space:</strong> O(V + E)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<h2 id="titles">Inventory management and Operations</h2>
+<section id="assignment-problem">
+  <div class="algo-card">
+    <h3>14. Assignment Problem</h3>
+    <p><strong>Category:</strong> Optimization, Matching, Hungarian Algorithm</p>
+    <p><strong>Description:</strong> Assign <em>n</em> agents to <em>n</em> tasks so each task is done by exactly one agent and the total cost is minimised. A classic solution is the Hungarian algorithm running in O(n³).</p>
+
+    <p><strong>📦Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Warehouse robots ↔ picking routes</li>
+      <li>Parcels ↔ delivery vans</li>
+      <li>Support tickets ↔ agents</li>
+      <li>Drones ↔ delivery coordinates</li>
+      <li>Ads ↔ on‑page slots</li>
+      <li>Compute jobs ↔ AWS instances</li>
+      <li>Packages ↔ last‑mile hubs</li>
+    </ul>
+ <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Model as a bipartite graph: agents on one side, tasks on the other, edges weighted by cost.</li>
+        <li>Hungarian algorithm subtracts row/column minima, covers zeros, adjusts the matrix until an optimal zero‑covering matching is found.</li>
+        <li>Result is a minimum‑cost one‑to‑one assignment.</li>
+      </ul>
       </details>
+    <!-- 1. Visualisation comes first -->
+    <details open>
+      <summary>📊 Visualisation</summary>
+     <div style="text-align: center;">
+    <img src="/assets/assign.png" alt="Assignment Algorithm Example" style="width: 100%; max-width:1000px; margin: 20px 0;">
+    <figcaption style="font-weight: bold; margin-top: 8px;">Demonstration of Assignment Problem</figcaption>
+  </div>
+    </details>
 
-      <details>
-  <summary>📊 Visualization</summary>
+    <!-- 2. Code reference comes after visualisation -->
+    <details open>
+      <summary>👩‍💻 View Code </summary>
+      <a href="https://github.com/tdulcet/Hungarian-Algorithm" target="_blank" class="code-btn">GitHub – Hungarian Algorithm</a>
+    </details>
+
+    <!-- 3. How it works + complexity -->
+   <details open>
+      <h4>🧮 Complexity Analysis</h4>
+      <ul>
+        <li><strong>Time:</strong> O(n³)</li>
+        <li><strong>Space:</strong> O(n²)</li>
+        <li><strong>Optimality:</strong> Guarantees global minimum cost for square matrices with non‑negative weights.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="stable-marriage">
+  <div class="algo-card">
+    <h3>15. Stable Marriage Problem</h3>
+    <p><strong>Category:</strong> Matching Algorithm</p>
+    <p><strong>Description:</strong> The Stable Marriage Problem seeks to find a stable matching between two equally sized sets of elements given an ordering of preferences for each element. A matching is stable if there is no pair of elements that would both prefer each other over their current partners.</p>
+
+    <p><strong>Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Matching delivery personnel to delivery zones based on mutual preferences (e.g., experience in area vs. route convenience).</li>
+      <li>Assigning interns to projects based on intern preferences and project needs.</li>
+      <li>Pairing customer service agents to types of tickets or customers for better satisfaction.</li>
+      <li>Matching buyers and sellers in a marketplace based on mutual preferences.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Each person (from one group) proposes to their highest-preferred person (from the other group) who hasn’t rejected them.</li>
+        <li>The receiving person accepts the proposal if they are free or prefer the new proposer over their current match.</li>
+        <li>This continues until everyone is matched.</li>
+        <li>The algorithm ensures no pair would prefer each other over their assigned match.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    margin: 20px;
+    color: #333;
+  }
+
+  .algo-card h2 {
+    color: #9a9a9a;
+    margin-bottom: 15px;
+  }
+  .algo-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .step-title {
+    font-weight: 700;
+    color: #2e7d32;
+    margin: 25px 0 12px 0;
+    font-size: 1.2rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .grid div {
+    background: #fff;
+    padding: 14px 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
+    font-size: 0.95rem;
+  }
+  .header {
+    font-weight: 700;
+    background-color: #66bb6a;
+    color: white;
+  }
+  .match {
+    background-color: #c8e6c9;
+    font-weight: 600;
+  }
+  .propose {
+    background-color: #fff9c4;
+  }
+  hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1.5px solid #e0e0e0;
+  }
+  /* Responsive */
+  @media (max-width: 650px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="algo-card">
+
+  <p>In this example, <strong>Drivers (D1, D2, D3)</strong> are matched to <strong>Delivery Zones (Z1, Z2, Z3)</strong> based on mutual preferences. The goal is to find a <em>stable</em> matching where no driver-zone pair prefers each other over their current matches.</p>
+
+  <hr />
+
+  <h3>Preferences</h3>
+  <table style="width:100%; border-collapse: collapse; margin-bottom: 25px;">
+    <thead>
+      <tr style="background: #66bb6a; color: white;">
+        <th style="padding:8px; border: 1px solid #ddd;">Driver</th>
+        <th style="padding:8px; border: 1px solid #ddd;">Preferences (Zones)</th>
+        <th style="padding:8px; border: 1px solid #ddd;">Zone</th>
+        <th style="padding:8px; border: 1px solid #ddd;">Preferences (Drivers)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:8px; border: 1px solid #ddd;">D1</td>
+        <td style="padding:8px; border: 1px solid #ddd;">Z2 &gt; Z1 &gt; Z3</td>
+        <td style="padding:8px; border: 1px solid #ddd;">Z1</td>
+        <td style="padding:8px; border: 1px solid #ddd;">D3 &gt; D1 &gt; D2</td>
+      </tr>
+      <tr>
+        <td style="padding:8px; border: 1px solid #ddd;">D2</td>
+        <td style="padding:8px; border: 1px solid #ddd;">Z1 &gt; Z3 &gt; Z2</td>
+        <td style="padding:8px; border: 1px solid #ddd;">Z2</td>
+        <td style="padding:8px; border: 1px solid #ddd;">D1 &gt; D3 &gt; D2</td>
+      </tr>
+      <tr>
+        <td style="padding:8px; border: 1px solid #ddd;">D3</td>
+        <td style="padding:8px; border: 1px solid #ddd;">Z1 &gt; Z2 &gt; Z3</td>
+        <td style="padding:8px; border: 1px solid #ddd;">Z3</td>
+        <td style="padding:8px; border: 1px solid #ddd;">D2 &gt; D3 &gt; D1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <!-- Step 0 -->
+  <div class="step-title">Step 0: Initialization - Everyone is free, no matches yet</div>
+  <div class="grid">
+    <div class="header">Drivers</div>
+    <div class="header">Current Proposals</div>
+    <div class="header">Zones (Free/Matched)</div>
+
+    <div>D1</div><div>-</div><div>Free</div>
+    <div>D2</div><div>-</div><div>Free</div>
+    <div>D3</div><div>-</div><div>Free</div>
+  </div>
+
+  <hr />
+
+  <!-- Step 1 -->
+  <div class="step-title">Step 1: Drivers propose to their top choice</div>
+  <div class="grid">
+    <div class="header">Drivers</div>
+    <div class="header">Current Proposals</div>
+    <div class="header">Zones (Free/Matched)</div>
+
+    <div>D1</div><div class="propose">Proposes to Z2</div><div>Z2 (Free)</div>
+    <div>D2</div><div class="propose">Proposes to Z1</div><div>Z1 (Free)</div>
+    <div>D3</div><div class="propose">Proposes to Z1</div><div>Z1 (Contested)</div>
+  </div>
+
+  <hr />
+
+  <!-- Step 2 -->
+  <div class="step-title">Step 2: Zones decide which proposal to accept</div>
+  <div class="grid">
+    <div class="header">Drivers</div>
+    <div class="header">Status</div>
+    <div class="header">Zones</div>
+
+    <div>D1</div><div class="match">Matched with Z2</div><div>Z2 (Matched with D1)</div>
+    <div>D2</div><div>Rejected by Z1, free again</div><div>Z1 (Matched with D3)</div>
+    <div>D3</div><div class="match">Matched with Z1</div><div>Z1 (Matched with D3)</div>
+  </div>
+
+  <hr />
+
+  <!-- Step 3 -->
+  <div class="step-title">Step 3: Rejected drivers propose to next choice</div>
+  <div class="grid">
+    <div class="header">Drivers</div>
+    <div class="header">Current Proposals</div>
+    <div class="header">Zones (Free/Matched)</div>
+
+    <div>D1</div><div>Matched with Z2</div><div>Z2 (Matched with D1)</div>
+    <div>D2</div><div class="propose">Proposes to Z3</div><div>Z3 (Free)</div>
+    <div>D3</div><div>Matched with Z1</div><div>Z1 (Matched with D3)</div>
+  </div>
+
+  <hr />
+
+  <!-- Step 4 -->
+  <div class="step-title">Step 4: Zones decide again - Final matches</div>
+  <div class="grid">
+    <div class="header">Drivers</div>
+    <div class="header">Match</div>
+    <div class="header">Zones</div>
+
+    <div>D1</div><div class="match">Z2</div><div>Z2 (Matched with D1)</div>
+    <div>D2</div><div class="match">Z3</div><div>Z3 (Matched with D2)</div>
+    <div>D3</div><div class="match">Z1</div><div>Z1 (Matched with D3)</div>
+  </div>
+
+  <hr />
+
+  <h3>Summary:</h3>
   <p>
-    Explore an interactive Dijkstra's Algorithm visualization here:<br>
-    <iframe src="https://tanxh33.github.io/visualise-dijkstra/" width="100%" height="500" style="border:1px solid #aaa; border-radius:8px;"></iframe>
+    Each driver proposes to zones based on preference order.<br />
+    Zones accept the best proposal and reject others.<br />
+    Rejected drivers try next zones.<br />
+    Process repeats until everyone is matched.<br />
+    Resulting matches are stable - no driver-zone pair would prefer each other over their current partners.
+  </p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time Complexity:</strong> O(n²) where n is the number of elements in one group</li>
+        <li><strong>Space Complexity:</strong> O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="min-cost-max-flow" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>16. Min-Cost Max-Flow Algorithm</h3>
+    <p><strong>Category:</strong> Flow Algorithms, Network Optimization</p>
+    <p><strong>Description:</strong> Computes the maximum flow from a source to a sink in a flow network such that the cost of the flow is minimized. It extends the max-flow problem by assigning costs to each edge and aiming to achieve the maximum flow at the lowest cost.</p>
+
+    <p><strong>📦 Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Assigning delivery trucks to delivery zones with minimal travel cost.</li>
+      <li>Mapping parcels to distribution hubs while minimizing fuel cost and delivery delays.</li>
+      <li>Allocating computing resources in AWS data centers efficiently based on load and energy costs.</li>
+      <li>Optimizing flow of goods in multi-tier supply chains with cost and capacity constraints.</li>
+      <li>Minimizing total shipping cost across cross-docking points in logistics networks.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Construct a residual graph from the original flow network with capacities and costs.</li>
+        <li>Repeatedly find shortest path (with minimum cost) from source to sink using Dijkstra or Bellman-Ford with potentials.</li>
+        <li>Push as much flow as possible through the path found and update residual capacities and costs.</li>
+        <li>Repeat until no more augmenting paths are available that improve the cost.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://isabek.github.io/" width="100%" height="650" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Click 'Max Flow' and then add costs to simulate Min-Cost Max-Flow scenarios.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/mission-peace/interview/blob/master/src/com/interview/graph/MinCostMaxFlow.java" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(F · E · logV), where F = total flow, E = edges, V = vertices (with Dijkstra + potentials)</li>
+        <li><strong>Space:</strong> O(V²) (adjacency matrix) or O(E) (adjacency list)</li>
+        <li><strong>Best Use Case:</strong> When both capacity and cost matter, especially in logistics and infrastructure allocation</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="coin-change" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>17. Coin Change Algorithm</h3>
+    <p><strong>Category:</strong> Dynamic Programming, Optimization</p>
+    <p><strong>Description:</strong> Finds the minimum number of coins needed to make a certain amount from given coin denominations, or counts the total number of ways to make that amount.</p>
+
+    <p><strong>Business Case:</strong></p>
+    <ul>
+      <li>Optimizing packaging by minimizing the number of standard box sizes to pack products efficiently.</li>
+      <li>Calculating the minimum change returned in cash-on-delivery transactions using available coin/bill denominations.</li>
+      <li>Allocating AWS compute/storage units in fixed sizes to fulfill client resource requests efficiently.</li>
+      <li>Bundling products into fixed-size quantities for discounts and promotions.</li>
+      <li>Breaking down gift card values into smaller denominations for redemption flexibility.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Initialize an array dp[] where dp[x] stores the minimum coins needed for amount x.</li>
+        <li>Set dp[0] = 0 (0 coins needed to make amount 0).</li>
+        <li>For each coin, update dp for amounts greater or equal to coin’s value.</li>
+        <li>Result is dp[amount], the minimum coins needed, or count of combinations.</li>
+      </ul>
+    </details>
+
+    <details open>
+  <summary>📊 Visualization</summary>
+  <p style="text-align:center;">Visualizing how coin denominations build up to target amount step-by-step.</p>
+  <iframe 
+    src="https://jhabarsingh.github.io/DSALGO-VISUALIZER/templates/dynamic/coin_change_making.html" 
+    width="100%" 
+    height="650" 
+    style="border:1px solid #ccc; border-radius:10px;">
+  </iframe>
+  <p style="font-size: 0.9rem; text-align:center;">
+    If the visualization does not load, 
+    <a href="https://jhabarsingh.github.io/DSALGO-VISUALIZER/templates/dynamic/coin_change_making.html" target="_blank">
+      click here to open it in a new tab
+    </a>.
   </p>
 </details>
-      <details>
-        <summary>👩‍💻 View Code (C++)</summary>
-        </details>
 
-      <details>
-        <summary>🧮 Complexity Analysis</summary>
-        <ul>
-          <li><strong>Time:</strong> O((V + E) log V)</li>
-          <li><strong>Space:</strong> O(V)</li>
-        </ul>
-      </details>
-    </div>
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/CoinChange" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(N * M), where N = amount, M = number of coins</li>
+        <li><strong>Space:</strong> O(N) for dp array</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<h2 id="titles">Sorting product listings on web and inventories</h2>
+
+<section id="quick-sort" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>18. Quick Sort Algorithm</h3>
+    <p><strong>Category:</strong> Sorting, Divide and Conquer</p>
+    <p><strong>Description:</strong> Efficient sorting algorithm using divide and conquer by selecting a pivot, partitioning array, and recursively sorting partitions.</p>
+
+    <p><strong>Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Sorting product listings by price, rating, or popularity to improve user experience.</li>
+      <li>Ordering shipment batches by destination or priority to optimize delivery routes.</li>
+      <li>Sorting inventory based on stock levels or expiration dates to manage warehouse efficiently.</li>
+      <li>Ranking customer reviews or recommendation scores for fast retrieval.</li>
+      <li>Sorting log data by timestamp for error tracking and performance monitoring.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Choose a pivot element from the array (commonly last or random element).</li>
+        <li>Partition the array so elements less than pivot are on left, greater on right.</li>
+        <li>Recursively apply the same process to left and right subarrays.</li>
+      </ul>
+    </details>
+   
+    <details open>
+  <summary>📊 Visualization</summary>
+  <p style="text-align:center;">Visualizing how coin denominations build up to target amount step-by-step.</p>
+  
+  <p style="font-size: 0.9rem; text-align:center;">
+    If the visualization does not load, 
+    <a href="https://jhabarsingh.github.io/DSALGO-VISUALIZER/templates/divide_and_conquer/quick.html" target="_blank">
+      click here to open it in a new tab
+    </a>.
+  </p>
+</details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/QuickSort" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> Average case O(N log N), Worst case O(N²) (depends on pivot choice)</li>
+        <li><strong>Space:</strong> O(log N) due to recursion stack</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="tim-sort" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>19. Tim Sort</h3>
+    <p><strong>Category:</strong> Hybrid Sorting Algorithm</p>
+    <p><strong>Description:</strong> Tim Sort is a hybrid stable sorting algorithm derived from merge sort and insertion sort. It is optimized to perform well on many kinds of real-world data by exploiting existing order in the array.</p>
+
+    <p><strong>📦 Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Efficiently sorting partially sorted customer order histories for faster access and display.</li>
+      <li>Sorting product listings by multiple criteria such as price, ratings, and availability where data often arrives sorted in chunks.</li>
+      <li>Optimizing sorting of event logs and clickstream data, which tends to have locally ordered runs.</li>
+      <li>Handling large datasets like inventory or transaction records where partial ordering exists due to batch updates.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Uses a combination of merge sort and insertion sort.</li>
+        <li>Designed to take advantage of existing order in data, making it efficient for real-world scenarios.</li>
+        <li>Splits the data into small chunks called "runs" (typically size 32 or 64).</li>
+        <li>Sorts each run using insertion sort, which is efficient for small or nearly sorted arrays.</li>
+        <li>Merges runs using a merge sort-like process to produce a fully sorted array.</li>
+        <li>Exploits existing order in data to minimize comparisons and copying.</li>
+      </ul>
+      <div style="text-align: center;">
+    <img src="/assets/tim.png" alt="Tim Sort Visualization" style="width: 100%; max-width: 500px; border-radius: 10px; margin: 20px 0;">
+    <figcaption style="font-weight: bold; margin-top: 8px;">Tim Sort Process Visualization</figcaption>
+  </div>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/sorting" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Select "Tim Sort" from the dropdown to see the step-by-step animation.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/python/cpython/blob/main/Objects/listsort.txt" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code (Python's TimSort implementation)
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(n log n) worst case, O(n) best case for nearly sorted data</li>
+        <li><strong>Space:</strong> O(n)</li>
+        <li><strong>Stability:</strong> Stable sort, preserves relative order of equal elements</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<h2 id="titles">Cloud Computing & Data Processing (AWS)</h2>
+
+<section id="segment-tree">
+  <div class="algo-card">
+    <h3>20. Segment Tree</h3>
+    <p><strong>Category:</strong> Data Structures, Range Query</p>
+    <p><strong>Description:</strong> A tree-based data structure that allows efficient range queries and updates in logarithmic time.</p>
+
+    <p><strong>📦 Use Cases (AWS Context):</strong></p>
+    <ul>
+      <li>Real-time log analytics using AWS Lambda or Kinesis Firehose.</li>
+      <li>Efficient range-sum or max query over IoT data streams in AWS IoT Analytics.</li>
+      <li>Query-based cost monitoring in AWS Cost Explorer.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Divide the array into segments (typically halves).</li>
+        <li>Store results of range queries in a binary tree format.</li>
+        <li>Update and query operations take O(log N) time.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/segmenttree" width="100%" height="400" style="border:none;"></iframe>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p>Check out the implementation on GitHub:</p>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/SegmentTree" target="_blank">https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/SegmentTree</a></p>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Build Time:</strong> O(N)</li>
+        <li><strong>Query/Update:</strong> O(log N)</li>
+        <li><strong>Space:</strong> O(2N)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="fenwick-tree">
+  <div class="algo-card">
+    <h3>21. Fenwick Tree (Binary Indexed Tree)</h3>
+    <p><strong>Category:</strong> Data Structures, Range Query</p>
+    <p><strong>Description:</strong> Efficient data structure for cumulative frequency tables and prefix sums, supporting updates and queries in logarithmic time.</p>
+
+    <p><strong>📦 Business Cases:</strong></p>
+    <ul>
+      <li>Real-time update and query of metrics in AWS CloudWatch dashboards.</li>
+      <li>Maintaining prefix sums or counts in large-scale distributed logs.</li>
+      <li>Efficient event counting in AWS Lambda streaming data.</li>
+      
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Uses binary indexing to store partial sums.</li>
+        <li>Updates and prefix queries are performed by traversing parent nodes via bit manipulation.</li>
+        <li>
+      A normal array takes <b>O(k)</b> time to get the sum from 1 to k,
+      while a Fenwick Tree takes only <b>O(log n)</b> time for both 
+      <strong>prefix sum</strong> and <strong>updates</strong>, 
+      making it much faster for large data.
+    </li>
+    <li>
+      Each node at index <i>i</i> stores the sum of a specific range, 
+      determined by the <em>last set bit</em> of <i>i</i> (using <i>i & -i</i>), 
+      allowing it to <strong>jump smartly</strong> through indices using binary operations.
+    </li>
+      </ul>
+<div style="text-align: center;">
+  <img src="/assets/image.png" alt="Fenwick Tree Visualization" style="width: 100%; max-width: 600px; border-radius: 8px;">
+</div>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+       <h2>Initial Array</h2>
+  <p>The array values are:</p>
+  <p>Index: 1 2 3 4 5 6 7 8 9 10</p>
+  <p>Values: 3 2 -1 6 5 4 -3 3 7 2</p>
+
+  <div style="text-align: center;">
+  <p><b>Fenwick Tree Update:</b></p>
+  <img src="/assets/fenwick1.jpg" alt="Fenwick Tree Visualization" style="width: 100%; max-width: 600px; border-radius: 8px;">
+   <p><b>Fenwick Tree Query:</b></p>
+  <img src="/assets/fenwick2.jpg" alt="Fenwick Tree Visualization" style="width: 100%; max-width: 600px; border-radius: 8px;border: black 3px solid;">
+</div>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p>Check out the implementation on GitHub:</p>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/FenwickTree" target="_blank">https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/FenwickTree</a></p>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Build Time:</strong> O(N log N)</li>
+        <li><strong>Update:</strong> O(log N)</li>
+        <li><strong>Prefix Query:</strong> O(log N)</li>
+        <li><strong>Space:</strong> O(N)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="mos-algo">
+  <div class="algo-card">
+    <h3>📌 Mo’s Algorithm</h3>
+    <p><strong>Category:</strong> Query Optimization / Offline Queries</p>
+    <p><strong>Description:</strong> Efficiently answers range queries on static arrays using offline sorting and square root decomposition.</p>
+
+    <p><strong>Business Case (Amazon Analytics):</strong></p>
+    <ul>
+      <li>Answering range queries on user sales or activity data quickly.</li>
+      <li>Analyzing campaign performance over time intervals.</li>
+      <li>Efficiently processing logs and metrics in AWS big data services.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Sort queries offline based on block and right endpoint.</li>
+        <li>Process queries moving pointers to add/remove elements from current range.</li>
+        <li>Maintains frequency/count data efficiently to answer each query.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>Shows queries rearranged and processed in blocks for minimal pointer movement.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/MosAlgorithm" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li>Time Complexity: O((n + q) * √n), where q = number of queries</li>
+        <li>Space Complexity: O(n)</li>
+      </ul>
+    </details>
+  </div>
   </section>
-</body>
-</html>
+<section id="persistent-segment-tree">
+  <div class="algo-card">
+    <h3>22. Persistent Segment Tree</h3>
+    <p><strong>Category:</strong> Data Structures, Range Query, Versioned Data</p>
+    <p><strong>Description:</strong> A versioned segment tree that allows access to previous versions of the data structure efficiently. Supports range queries and updates with persistence.</p>
 
+    <p><strong>📦 Use Cases (AWS Context):</strong></p>
+    <ul>
+      <li>Time-travel queries on historical logs and metrics in cloud services.</li>
+      <li>Version control for configuration data or datasets in distributed systems.</li>
+      <li>Efficient snapshotting and rollback in real-time analytics.</li>
+    </ul>
 
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Each update creates a new version of the tree without duplicating the entire structure.</li>
+        <li>Shares unchanged nodes between versions to optimize space.</li>
+        <li>Queries and updates still run in O(log N) time per version.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>No interactive visualization available currently.</p>
+      <p>Refer to the GitHub code for implementation details.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p>Check out the implementation on GitHub:</p>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/PersistentSegmentTree" target="_blank">https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/PersistentSegmentTree</a></p>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Update:</strong> O(log N) per version</li>
+        <li><strong>Query:</strong> O(log N)</li>
+        <li><strong>Space:</strong> O(N log N) for all versions combined</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="rabin-karp" style="margin-top:50px;">
+  <div class="algo-card">
+    <h3>📌 Rabin-Karp Algorithm</h3>
+    <p><strong>Category:</strong> AWS Log Monitoring & Security</p>
+    <p><strong>Description:</strong> Uses a rolling hash to compare pattern hashes with text hashes, enabling fast multi-pattern searching across massive log streams.</p>
+
+    <p><strong>📦 Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Scanning CloudWatch logs for multiple error signatures in real time.</li>
+      <li>GuardDuty-style detection of leaked credentials or attack fingerprints.</li>
+      <li>Plagiarism or duplicate-content checks in Kindle text ingestion.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Compute hash of the pattern(s).</li>
+        <li>Slide a window over the text, updating hash in O(1) via rolling hash.</li>
+        <li>If hashes match, verify characters to remove false positives.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://algorithm-visualizer.org/algorithms/string-searching/rabin-karp"
+              width="100%" height="430"
+              style="border:1px solid #ccc;border-radius:10px;"></iframe>
+      <p style="font-size:0.9rem;">Watch rolling-hash collisions and verifications.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/String/RabinKarp"
+         target="_blank" class="code-btn">
+         <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Average Time:</strong> O(n + m) expected</li>
+        <li><strong>Worst Time:</strong> O(n m) (rare, many hash collisions)</li>
+        <li><strong>Space:</strong> O(1)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="skip-list">
+  <div class="algo-card">
+    <h3>23. Skip List</h3>
+    <p><strong>Category:</strong> Data Structures, Probabilistic, Indexed Search</p>
+    <p><strong>Description:</strong> A layered linked list data structure that allows fast search, insertion, and deletion operations — expected O(log n) time. It’s a simpler alternative to balanced trees with probabilistic balancing.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Real-time indexing:</strong> Efficiently index large datasets for quick lookups in distributed databases and caching systems.</li>
+      <li><strong>Dynamic ordered data:</strong> Ideal for systems where frequent insertions and deletions happen alongside fast search queries, such as messaging queues or leaderboard rankings.</li>
+      <li><strong>Cloud services & distributed storage:</strong> Skip lists are used in distributed key-value stores like Apache Cassandra for maintaining sorted data efficiently with concurrency support.</li>
+      <li><strong>Memory-efficient alternatives:</strong> When balanced trees are too complex or costly to maintain, skip lists provide a probabilistic, simpler data structure with comparable performance.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Multiple layers of linked lists where higher layers act as "express lanes" for faster traversal.</li>
+        <li>Elements are promoted to higher levels randomly, ensuring balanced height probabilistically.</li>
+        <li>Searches start from the top layer, skipping many elements, and drop down levels for precise positioning.</li>
+      </ul>
+      <div style="text-align: center;">
+  <img src="/assets/skip.jpg" alt="Skip List Visualization" style="width: 60%; max-width: 600px; border-radius: 8px; height: 500px;">
+</div>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/skiplist" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p>See full implementation on GitHub:</p>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/SkipList" target="_blank">https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/SkipList</a></p>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Search:</strong> O(log n) average</li>
+        <li><strong>Insertion:</strong> O(log n) average</li>
+        <li><strong>Deletion:</strong> O(log n) average</li>
+        <li><strong>Space:</strong> O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="binary-search-tree">
+  <div class="algo-card">
+    <h3>24. Binary Search Tree (BST)</h3>
+    <p><strong>Category:</strong> Data Structures, Tree</p>
+    <p><strong>Description:</strong> A tree data structure where each node has at most two children, with the left child containing values less than the parent and the right child containing values greater than the parent. Supports efficient search, insertion, and deletion.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li><strong>Sorted data storage:</strong> BSTs maintain data in sorted order allowing fast lookup, insertion, and deletion — useful in databases and file systems.</li>
+      <li><strong>In-memory indexing:</strong> BSTs provide quick access to records when building indexes for search engines or in-memory caches.</li>
+      <li><strong>Dynamic datasets:</strong> Suitable when data is frequently inserted or removed, such as managing user sessions or event logs.</li>
+      <li><strong>Foundations for advanced trees:</strong> BSTs are the base structure for self-balancing trees (AVL, Red-Black Trees) used in high-performance systems.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Each node has up to two children, left for smaller values, right for larger.</li>
+        <li>Operations use binary search logic to traverse the tree efficiently.</li>
+        <li>Balanced BSTs maintain height to O(log n) for optimal performance.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/bst" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p>See full implementation on GitHub:</p>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/BinarySearchTree" target="_blank">https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/BinarySearchTree</a></p>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Search:</strong> O(h), where h is tree height (O(log n) average, O(n) worst)</li>
+        <li><strong>Insertion:</strong> O(h)</li>
+        <li><strong>Deletion:</strong> O(h)</li>
+        <li><strong>Space:</strong> O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="kd-tree">
+  <div class="algo-card">
+    <h3>25. KD Tree (k-dimensional Tree)</h3>
+    <p><strong>Category:</strong> Data Structures, Multidimensional Search Tree</p>
+    <p><strong>Description:</strong> A space-partitioning data structure for organizing points in a k-dimensional space. It is widely used for nearest neighbor searches and range queries in multidimensional datasets.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Multidimensional data search:</strong> KD Trees allow efficient searching of points in multiple dimensions, used in geographic information systems (GIS), robotics, and computer graphics.</li>
+      <li><strong>Nearest neighbor queries:</strong> Key for recommendation systems, pattern recognition, and machine learning models like K-NN classifiers.</li>
+      <li><strong>Spatial indexing:</strong> Useful in databases and cloud services that handle multi-attribute data for fast lookup and retrieval.</li>
+      <li><strong>Collision detection and ray tracing:</strong> KD Trees speed up queries in 3D rendering and physics simulations.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Splits the dataset along one dimension at each level, cycling through dimensions.</li>
+        <li>Constructs a binary tree that partitions points into hyperrectangles.</li>
+        <li>Search queries recursively prune branches that can’t contain the target point.</li>
+      </ul>
+    </details>
+
+    <details open>
+  <summary>📊 Visualization</summary>
+  <div style="text-align: center;">
+    <img src="/assets/kd.jpg" alt="KD Tree Visualization" style="width: 80%; max-width: 600px; border-radius: 8px; margin: 20px 0;">
+    <figcaption style="font-weight: bold; margin-top: 8px;">KD Tree Example Visualization</figcaption>
+  </div>
+</details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p>See full implementation on GitHub:</p>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/KDTree" target="_blank">https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/KDTree</a></p>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Build:</strong> O(n log n)</li>
+        <li><strong>Search:</strong> Average O(log n), worst O(n)</li>
+        <li><strong>Space:</strong> O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="sqrt-decomposition">
+  <div class="algo-card">
+    <h3>26. Square Root Decomposition</h3>
+    <p><strong>Category:</strong> Query Optimization, Online Queries, Lightweight Updates</p>
+    <p><strong>Description:</strong> A block-based technique that divides data into √N-sized chunks to answer range queries (like sum, min, max) and handle point updates efficiently in O(√N) time per operation.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li> Quickly track and update item quantities across fulfillment center sections, allowing efficient range sum queries on stock levels.</li>
+      <li> Used to fetch time-series summaries (like CPU usage, order volumes) from partitions of logs stored in Amazon CloudWatch.</li>
+      <li> Helps in adjusting delivery times dynamically by efficiently updating and querying sub-routes of a large delivery schedule matrix.</li>
+      <li> Enables fast computation of discounts, taxes, and offers by maintaining real-time aggregates on a customer's cart items.</li>
+      <li> Useful in cost-effective monitoring solutions where Segment Trees may be overkill and lightweight, fast approximations are preferred.</li>
+    </ul>
+   
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Divides the input array into √N-sized blocks.</li>
+        <li>Each block maintains a summary (sum/min/max/etc.).</li>
+        <li>To answer a range query, iterate through full blocks and partially covered edges.</li>
+        <li>Point updates affect only one element and one block summary.</li>
+      </ul>
+      <div style="text-align: center;">
+      <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 600px;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th>Concept</th>
+      <th>Square Root Decomposition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Divide array into</td>
+      <td>√N blocks</td>
+    </tr>
+    <tr>
+      <td>Preprocess</td>
+      <td>Sum/min/max for each block</td>
+    </tr>
+    <tr>
+      <td>Query time</td>
+      <td>O(√N)</td>
+    </tr>
+    <tr>
+      <td>Update time</td>
+      <td>O(1) (just update array and one block)</td>
+    </tr>
+    <tr>
+      <td>Best use case</td>
+      <td>Mixed queries &amp; updates in medium-sized data</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+    </details>
+
+   <details open>
+  <summary>📊 Visualization</summary>
+    <div style="text-align: center;">
+    <figcaption style="font-weight: bold; margin-top: 8px;">Square root Decomposition for range sum query (query and update is show above)</figcaption>
+    <img src="/assets/sqroot.jpg" alt="Sqroot Decompostion" style="width: 100%; max-width: 600px; border-radius: 8px;border: black 3px solid;">
+</div>
+  
+</details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p>See full implementation on GitHub:</p>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/SqrtDecomposition" target="_blank">https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/SqrtDecomposition</a></p>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(√N) per query or update</li>
+        <li><strong>Space:</strong> O(N)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+  </div>
+</section>
+<section id="consistent-hashing">
+  <div class="algo-card">
+    <h3>27. Consistent Hashing</h3>
+    <p><strong>Category:</strong> Hashing, Distributed Systems</p>
+    <p><strong>Description:</strong> A hashing technique that minimizes key remapping when nodes are added or removed, ideal for distributed caches and storage.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Distributed Caches (e.g., Amazon DynamoDB, Memcached):</strong> Efficiently distributes keys among nodes to minimize cache misses during scaling.</li>
+      <li><strong>Load Balancing:</strong> Evenly distributes user requests across servers with minimal disruption when servers join or leave.</li>
+      <li><strong>Cloud Storage Systems:</strong> Ensures minimal data reshuffling in distributed file systems.</li>
+    </ul>
+   
+<details open>
+  <summary>🧠 How It Works</summary>
+  <ul>
+    <li>Instead of using modulo with the number of servers, consistent hashing uses a ring/hash circle.</li>
+    <li>Imagine a circle where both servers and keys are hashed to positions on this circle using the same hash function.</li>
+    <li>Each key is assigned to the next server clockwise on the ring.</li>
+    <li>When a server is removed or added, only keys between that server and its neighbor move.</li>
+    <li>Map servers and keys to a hash ring (a circle) using a hash function.</li>
+    <li>Assign each key to the closest server clockwise on the ring.</li>
+    <li>When a server is added or removed, only keys assigned to that server or affected neighbors are reassigned.</li>
+    <li>Minimizes data movement during changes in the number of servers.</li>
+    <li>Balances load effectively even with dynamic server changes.</li>
+  </ul>
+</details>
+    <details open>
+  <summary>📊 Visualization</summary>
+  <div style="text-align: center; margin-bottom: 20px;">
+  <img src="/assets/consistent.jpg" alt="Consistent Hashing Ring Illustration" style="width: 100%; max-width: 500px; border-radius: 10px; box-shadow: 0 2px 12px #0001;">
+  <figcaption style="font-weight: bold; margin-top: 8px;">Consistent Hashing Ring Illustration</figcaption>
+</div>
+<div class="consistent-cards">
+  <div class="card">
+    <h2> Overview</h2>
+    <ul>
+      <li><span class="highlight">Books</span> = Keys (Data Items)</li>
+      <li><span class="highlight">Shelves</span> = Nodes (Servers)</li>
+      <li>Each key is hashed onto a circular ring.</li>
+      <li>Key goes to the first node clockwise on the ring.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2> Before Adding Node D</h2>
+    <ul>
+      <li>Ring has Nodes A, B, and C.</li>
+      <li>Key 1 → Node A</li>
+      <li>Key 2 → Node B</li>
+      <li>Key 3 → Node C</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2> After Adding Node D</h2>
+    <ul>
+      <li>Node D is placed between A and C.</li>
+      <li>Only Key 3 now moves to Node D.</li>
+      <li>Keys 1 & 2 remain on Nodes A & B.</li>
+      <li>Minimal data movement.</li>
+    </ul>
+  </div>
+
+  
+</div>
+ 
+  <iframe 
+    src="https://gallery.selfboot.cn/en/algorithms/hashring" 
+    width="100%" 
+    height="500" 
+    style="border:1px solid #ccc; border-radius:10px;">
+  </iframe>
+  <p style="font-size: 0.9rem;">If the visualization does not load, <a href="https://gallery.selfboot.cn/en/algorithms/hashring" target="_blank">click here to open it in a new tab</a>.</p>
+</details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/ConsistentHashing" target="_blank">Click here for code</a></p>
+
+    </details>
+  </div>
+</section>
+
+<section id="bloom-filters">
+  <div class="algo-card">
+    <h3>28. Bloom Filters</h3>
+    <p><strong>Category:</strong> Probabilistic Data Structures</p>
+    <p><strong>Description:</strong> Space-efficient structure to test whether an element is a member of a set, allowing false positives but no false negatives.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Cloud Storage Systems:</strong> Quickly check if data exists before fetching from disk or network (e.g., Amazon S3).</li>
+      <li><strong>Database Systems:</strong> Filter out unnecessary disk reads in key-value stores.</li>
+      <li><strong>Web Caches and Security:</strong> Check URL blacklists or spam filters efficiently.</li>
+    </ul>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/BloomFilters" target="_blank">Click here for code</a></p>
+    </details>
+  </div>
+</section>
+<h2 id="titles">Amazon Prime</h2>
+
+<section id="aho-corasick">
+  <div class="algo-card">
+    <h3>📌 Aho-Corasick Algorithm</h3>
+    <p><strong>Category:</strong> Multiple Keyword Search</p>
+    <p><strong>Description:</strong> Aho-Corasick builds a Trie out of multiple patterns and uses BFS with failure links to perform simultaneous pattern matching in linear time.</p>
+
+    <p><strong>📦 Business Case (Amazon Prime):</strong></p>
+    <ul>
+      <li>Efficiently matches user search terms like "action, betrayal, sci-fi" in movie descriptions.</li>
+      <li>Used in backend search engines to find content with multiple features or genres simultaneously.</li>
+      <li>Helps in auto-tagging or classifying video metadata based on detected keywords.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Build a Trie with all search patterns (e.g., action, betrayal, sci-fi).</li>
+        <li>Link nodes using BFS-based failure links to fallback when a mismatch occurs.</li>
+        <li>Scan the movie text in one go and track all matches simultaneously.</li>
+        <li>Linear-time complexity independent of the number of patterns.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://www.cs.usfca.edu/~galles/visualization/Trie.html" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Use the interface to insert multiple patterns and see how the Trie forms and searches them.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(N + L + Z)</li>
+        <li><strong>Space:</strong> O(L * Σ), where L = total length of patterns, Σ = alphabet size</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="huffman-coding">
+  <div class="algo-card">
+    <h3>📌 Huffman Coding</h3>
+    <p><strong>Category:</strong> Data Compression</p>
+    <p><strong>Description:</strong> Huffman Coding is a greedy algorithm used to compress data without losing information. It assigns variable-length binary codes to input characters based on their frequencies—the more frequent a character, the shorter its code.</p>
+
+    <p><strong>🎬 Business Case (Amazon Prime):</strong></p>
+    <ul>
+      <li>Used in compressing movie subtitles or captions to save storage and bandwidth.</li>
+      <li>Efficient for storing compressed metadata like actor tags, genres, or user notes.</li>
+      <li>Helps in optimizing stream buffer storage by compressing frequently accessed UI strings or identifiers.</li>
+      <li>Can be integrated in offline download storage mechanisms where space is limited.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Count frequency of each character in the input.</li>
+        <li>Build a priority queue (min-heap) where each node is a character and its frequency.</li>
+        <li>Extract two nodes with lowest frequency and merge them into a new node with combined frequency.</li>
+        <li>Repeat until one node remains — this forms the root of the Huffman Tree.</li>
+        <li>Assign binary codes by traversing the tree: left as 0, right as 1.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/heap?slide=1" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Use the tree view and explore how the min-heap is used to build the Huffman Tree.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time Complexity:</strong> O(n log n), where n is the number of characters.</li>
+        <li><strong>Space Complexity:</strong> O(n) for storing codes and the tree.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="union-find">
+  <div class="algo-card">
+    <h3>📌 Union-Find (Disjoint Set Union)</h3>
+    <p><strong>Category:</strong> Cluster Detection in User Behavior</p>
+    <p><strong>Description:</strong> DSU efficiently maintains and merges disjoint sets, and is useful for detecting components or groups.</p>
+
+    <p><strong>📦 Business Case (Amazon Prime):</strong></p>
+    <ul>
+      <li>Groups users into clusters based on similar watch history or genre preferences.</li>
+      <li>Supports backend recommendation engine by identifying user segments.</li>
+      <li>Can help discover trending communities or niche content segments.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Each user initially belongs to their own set.</li>
+        <li>Union operation merges sets of users who watched similar types of content.</li>
+        <li>Find operation uses path compression to efficiently retrieve the cluster ID.</li>
+        <li>Combines union-by-rank to optimize merging operations.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/dsu" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Use the visual tool to perform union and find operations and track cluster formation.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Trie" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(α(n)) per operation (very close to constant)</li>
+        <li><strong>Space:</strong> O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="page-replacement">
+  <div class="algo-card">
+    <h3>29. Page Replacement Algorithms (LRU, LFU)</h3>
+    <p><strong>Category:</strong> Operating Systems, Caching</p>
+    <p><strong>Description:</strong> Algorithms to decide which memory pages to evict when new pages need to be loaded.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Operating Systems:</strong> Manage physical memory efficiently for multi-tasking systems.</li>
+      <li><strong>Cloud Computing:</strong> Optimize cache management in distributed systems and CDNs.</li>
+      <li><strong>Database Systems:</strong> Improve buffer cache hit rates for faster query processing.</li>
+    </ul>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/PageReplacement" target="_blank">Click here for code</a></p>
+    </details>
+  </div>
+</section>
+<!-- ---------- 3. Boyer-Moore – Alexa Intent Matching ---------------->
+<section id="boyer-moore" style="margin-top:50px;">
+  <div class="algo-card">
+    <h3>📌 Boyer-Moore Algorithm</h3>
+    <p><strong>Category:</strong> Alexa Intent Matching</p>
+    <p><strong>Description:</strong> Matches patterns right-to-left using the Bad-Character and Good-Suffix heuristics, often skipping large chunks of text, making it perfect for long voice-to-text commands.</p>
+
+    <p><strong>📦 Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Matching user voice commands to Alexa skill templates quickly.</li>
+      <li>Filtering long chat strings for offensive phrases in real time.</li>
+      <li>Searching large codebases in CodeCatalyst for specific function names.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Pre-compute two heuristic tables: Bad-Character &amp; Good-Suffix.</li>
+        <li>Align pattern with text; compare from right to left.</li>
+        <li>On mismatch, shift pattern by max heuristic value (can skip many chars).</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/stringmatching?slide=4"
+              width="100%" height="430"
+              style="border:1px solid #ccc;border-radius:10px;"></iframe>
+      <p style="font-size:0.9rem;">Select “Boyer-Moore” to see bad-character / good-suffix skips.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code (C++)</summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/String/BoyerMoore"
+         target="_blank" class="code-btn">
+         <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Best Time:</strong> Sub-linear &nbsp;≈ O(n/m)</li>
+        <li><strong>Worst Time:</strong> O(n m) (pathological)</li>
+        <li><strong>Space:</strong> O(m + σ) — pattern + alphabet size</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<section id="pagerank">
+  <div class="algo-card">
+    <h3>30. PageRank Algorithm</h3>
+    <p><strong>Category:</strong> Graph Algorithm, Ranking</p>
+    <p><strong>Description:</strong> PageRank assigns a numerical weight to each node (webpage) in a linked graph to measure its relative importance based on incoming links.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li><strong>Search Engines:</strong> Ranking web pages by their authority and relevance based on link structure (the original Google use case).</li>
+      <li><strong>Recommendation Systems:</strong> Ranking products, services, or users in social networks based on their connectivity or influence.</li>
+      <li><strong>Cloud Data Services:</strong> Prioritizing data nodes or services in distributed cloud systems for efficient resource allocation and retrieval.</li>
+      <li><strong>Social Network Analysis:</strong> Identifying influential users or important nodes in social graphs.</li>
+      <li><strong>Web Crawling & Indexing:</strong> Efficient ordering of pages to crawl or index based on their importance.</li>
+    </ul>
+    
+    <details open>
+      <summary>🧠 Explanation</summary>
+  <ul>
+    <li>Conway’s Game of Life is a <strong>zero-player game</strong> designed by British mathematician <strong>John Conway</strong> in 1970. It's a <strong>cellular automaton</strong> — a simulation where a grid of cells evolves over time based on a set of simple rules.</li>
+    <li>The game takes place on a <strong>grid</strong> (like a chessboard), where each <strong>cell</strong> is either Alive (1) or Dead (0).</li>
+    <li>Each cell’s state in the <strong>next generation</strong> is determined by its <strong>eight neighbors</strong> (cells around it).</li>
+  </ul>
+  <br>
+  <b>Rules of the Game:</b>
+  <ul>
+    <li><strong>Underpopulation:</strong> A live cell with fewer than 2 live neighbors dies.</li>
+    <li><strong>Survival:</strong> A live cell with 2 or 3 live neighbors lives on.</li>
+    <li><strong>Overpopulation:</strong> A live cell with more than 3 live neighbors dies.</li>
+    <li><strong>Reproduction:</strong> A dead cell with exactly 3 live neighbors becomes a live cell.</li>
+  </ul>
+  <br>
+  <h3>Example:</h3>
+   <pre>
+Gen 1:         Gen 2:
+0 1 0          0 0 0
+0 1 0   --->   1 1 1
+0 1 0          0 0 0
+  </pre>
+  <p>This is called a <strong>blinker</strong> — one of the simplest oscillators.</p>
+
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>Try interactive visualizations here:</p>
+      <ul>
+        <li><a href="https://www.cs.princeton.edu/~chazelle/courses/BIB/pagerank.htm" target="_blank">Princeton PageRank Visualization</a></li>
+        <li><a href="https://www.youtube.com/watch?v=Q4s-gk6nu74" target="_blank">PageRank explained (video)</a></li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p>Check the full PageRank implementation on GitHub:</p>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/PageRank" target="_blank">https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/PageRank</a></p>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(I * (V + E)) where I is number of iterations, V vertices, E edges</li>
+        <li><strong>Space:</strong> O(V + E)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<section id="conways-game-of-life">
+  <div class="algo-card">
+    <h3>31. Conway’s Game of Life</h3>
+    <p><strong>Category:</strong> Cellular Automaton, Simulation</p>
+    <p><strong>Description:</strong> Zero-player game simulating cell evolution on a grid based on simple rules.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <ul>
+    <li>
+      <strong>Warehouse Robotics (Kiva Bots):</strong><br>
+      Amazon can simulate how robots move inside warehouses using Game of Life rules. Each robot can be thought of as a "live" cell, and the grid helps model paths, avoid congestion, and prevent collisions — just like cells dying due to overcrowding.
+    </li>
+
+    <li>
+      <strong>Supply Chain Optimization:</strong><br>
+      Think of each cell as a warehouse. Using Game of Life logic, Amazon can model inventory movement across fulfillment centers. For example, a "dead" (empty) warehouse surrounded by "live" (stocked) warehouses might be restocked — like the reproduction rule in GoL.
+    </li>
+
+    <li>
+      <strong>Server/Node Health Monitoring (AWS):</strong><br>
+      In Amazon Web Services (AWS), each server or node can be treated as a cell. If a server fails (dead cell), and neighboring nodes are also under stress, it can simulate failure propagation or trigger auto-scaling. This helps in designing more resilient systems.
+    </li>
+
+    <li>
+      <strong>Customer Behavior Prediction:</strong><br>
+      Each customer can be represented as a cell. If surrounding users buy a product (live), the current user might also get influenced and buy it. This helps simulate product virality, social trends, and recommendation effects.
+    </li>
+
+    <li>
+      <strong>Training & Simulation for Engineers:</strong><br>
+      Amazon can use the Game of Life as a teaching tool for new engineers or interns. It’s a simple way to explain complex systems, emergent behavior, and distributed decision-making in a visually intuitive way.
+    </li>
+
+    <li>
+      <strong>AI/ML Simulation:</strong><br>
+      Game of Life-like environments can be used to train AI agents in simulations. This helps test how autonomous agents interact with others in a dynamic system — useful in reinforcement learning and research.
+    </li>
+  </ul>
+    </ul>
+    <details open>
+      <summary>🧠 Explanation</summary>
+  <ul>
+    <li>Conway’s Game of Life is a <strong>zero-player game</strong> designed by British mathematician <strong>John Conway</strong> in 1970. It's a <strong>cellular automaton</strong> — a simulation where a grid of cells evolves over time based on a set of simple rules.</li>
+    <li>The game takes place on a <strong>grid</strong> (like a chessboard), where each <strong>cell</strong> is either Alive (1) or Dead (0).</li>
+    <li>Each cell’s state in the <strong>next generation</strong> is determined by its <strong>eight neighbors</strong> (cells around it).</li>
+  </ul>
+  <br>
+  <b>Rules of the Game:</b>
+  <ul>
+    <li><strong>Underpopulation:</strong> A live cell with fewer than 2 live neighbors dies.</li>
+    <li><strong>Survival:</strong> A live cell with 2 or 3 live neighbors lives on.</li>
+    <li><strong>Overpopulation:</strong> A live cell with more than 3 live neighbors dies.</li>
+    <li><strong>Reproduction:</strong> A dead cell with exactly 3 live neighbors becomes a live cell.</li>
+  </ul>
+  <br>
+  <h3>Example:</h3>
+   <pre>
+Gen 1:         Gen 2:
+0 1 0          0 0 0
+0 1 0   --->   1 1 1
+0 1 0          0 0 0
+  </pre>
+  <p>This is called a <strong>blinker</strong>, one of the simplest oscillators.</p>
+
+    </details>
+<details open>
+  <summary>📊 Visualization</summary>
+  <div style="text-align: center;">
+    <img src="/assets/conways.gif" alt="Conway's Game of Life Animation" style="width: 100%; max-width: 500px; border-radius: 10px; margin: 20px 0;">
+    <figcaption style="font-weight: bold; margin-top: 8px;">Conway's Game of Life Simulation</figcaption>
+  </div>
+</details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p><a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/ConwaysGameOfLife" target="_blank">Click here for code</a></p>
+    </details>
+  </div>
+</section>
   <section id="references" style="margin-top: 50px; padding: 20px; background-color: #f1f1f5; border-radius: 8px;">
     <h2>References</h2>
     <ol>
-      <li id="ref1">
-        Tanxh33. "Visualise Dijkstra." <a href="https://tanxh33.github.io/visualise-dijkstra/" target="_blank" rel="noopener noreferrer">https://tanxh33.github.io/visualise-dijkstra/</a>. Accessed May 2025.
-      </li>
+      <li id="ref1">Tanxh33. "Visualise Dijkstra." <a href="https://tanxh33.github.io/visualise-dijkstra/" target="_blank" rel="noopener noreferrer">https://tanxh33.github.io/visualise-dijkstra/</a>. </li>
+      <li id="ref2">Visualizations powered by <a href="https://visualgo.net/en" target="_blank" rel="noopener noreferrer">VisuAlgo.net</a></li>
     </ol>
   </section>
 

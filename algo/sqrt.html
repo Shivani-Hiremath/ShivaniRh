@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Square Root Decomposition | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="sqrt-decomposition" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Square Root Decomposition</h1>
+    <p><strong>Category:</strong> Query Optimization, Online Queries, Lightweight Updates</p>
+    <p><strong>Description:</strong> A block-based technique that divides data into √N-sized chunks to answer range queries (like sum, min, max) and handle point updates efficiently in O(√N) time per operation.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li> Quickly track and update item quantities across fulfillment center sections, allowing efficient range sum queries on stock levels.</li>
+      <li> Used to fetch time-series summaries (like CPU usage, order volumes) from partitions of logs stored in Amazon CloudWatch.</li>
+      <li> Helps in adjusting delivery times dynamically by efficiently updating and querying sub-routes of a large delivery schedule matrix.</li>
+      <li> Enables fast computation of discounts, taxes, and offers by maintaining real-time aggregates on a customer's cart items.</li>
+      <li> Useful in cost-effective monitoring solutions where Segment Trees may be overkill and lightweight, fast approximations are preferred.</li>
+    </ul>
+   
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Divides the input array into √N-sized blocks.</li>
+        <li>Each block maintains a summary (sum/min/max/etc.).</li>
+        <li>To answer a range query, iterate through full blocks and partially covered edges.</li>
+        <li>Point updates affect only one element and one block summary.</li>
+      </ul>
+      <div style="text-align: center;">
+      <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 600px;">
+        <thead>
+          <tr style="background-color: #f2f2f2;">
+            <th>Concept</th>
+            <th>Square Root Decomposition</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Divide array into</td>
+            <td>√N blocks</td>
+          </tr>
+          <tr>
+            <td>Preprocess</td>
+            <td>Sum/min/max for each block</td>
+          </tr>
+          <tr>
+            <td>Query time</td>
+            <td>O(√N)</td>
+          </tr>
+          <tr>
+            <td>Update time</td>
+            <td>O(1) (just update array and one block)</td>
+          </tr>
+          <tr>
+            <td>Best use case</td>
+            <td>Mixed queries &amp; updates in medium-sized data</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <div style="text-align: center;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">Square root Decomposition for range sum query (query and update is shown above)</figcaption>
+        <img src="/assets/sqroot.jpg" alt="Sqroot Decomposition" style="width: 100%; max-width: 600px; border-radius: 8px;border: black 3px solid;">
+      </div>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/sqrt.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(√N) per query or update</li>
+        <li><strong>Space:</strong> O(N)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Square_root_decomposition" target="_blank">
+        Wikipedia: Square Root Decomposition
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/sqrt-square-root-decomposition-technique-set-1-introduction/" target="_blank">
+        GeeksforGeeks: Square Root Decomposition
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/data_structures/sqrt_decomposition.html" target="_blank">
+        CP-Algorithms: Sqrt Decomposition
+      </a>
+    </li>
+  </ol>
+</div>
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

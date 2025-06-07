@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A * | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+<section id="a-star">
+  <div class="algo-card">
+    <h1>A* (A-Star) Algorithm</h1>
+    <p><strong>Category:</strong> Graph Algorithm (Heuristic Search)</p>
+    <p><strong>Description:</strong> A* finds the most optimal path between a start and goal node using both actual cost (g) and estimated cost (h). It guarantees the shortest path if the heuristic is admissible.</p>
+
+    <p><strong>🚚 Business Case</strong></p>
+    <ul>
+      <li>Compute the most efficient delivery route using traffic and location data.</li>
+      <li>Guide autonomous robots through optimal picking paths in large Amazon warehouses.</li>
+      <li>Handle last-mile delivery by dynamically adjusting to blocked roads or weather alerts.</li>
+      <li>Assist drones in computing safe and shortest airborne delivery paths.</li>
+      <li>Optimize internal logistics like restocking paths inside fulfillment centers.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Start from the source node and evaluate paths using <code><b>f(n) = g(n) + h(n)</b></code>.</li>
+        <li><b>g(n)</b> = cost from source to current node.</li>
+        <li><b>h(n)</b> = heuristic estimated cost to goal (e.g., Euclidean or Manhattan distance).</li>
+        <li>Use a priority queue to pick the node with the lowest <i>f(n)</i>.</li>
+        <li>Repeat until the goal is reached with the shortest estimated cost.</li>
+      </ul>
+      <div style="text-align: center;">
+        <img src="/assets/astar.png" alt="A* Algorithm Example" style="width: 100%; max-width: 500px; border-radius: 10px; margin: 20px 0;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">Given graph</figcaption>
+      </div>
+      <div style="text-align: center;">
+        <img src="/assets/a2.png" alt="A* Algorithm Example" style="width: 100%; max-width: 500px; border-radius: 10px; margin: 20px 0;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">A* </figcaption>
+      </div>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>
+        Try out this interactive A* Algorithm demo:<br>
+        <iframe src="https://qiao.github.io/PathFinding.js/visual/" width="100%" height="500" style="border:1px solid #aaa; border-radius:8px;"></iframe>
+      </p>
+    </details>
+     <details open>
+  <summary><strong>🧠 How to Decide Heuristics?</strong></summary>
+  <p>Heuristics in A* search help estimate the remaining cost to the goal. In logistics and warehouse settings like Amazon, smart heuristics can make A* faster and more accurate. Below are key techniques to design effective heuristics using domain knowledge:</p>
+  <ul>
+    <li><strong>Base Geometry Heuristics (Manhattan, Euclidean):</strong> Use Manhattan for 4-way grids, Euclidean for drone-style diagonal movement.</li>
+    
+    <li><strong>Traffic & Congestion Awareness:</strong> Include delays from high-traffic areas using real-time data or precomputed traffic scores.</li>
+    
+    <li><strong>Intersection Waiting Time:</strong> Add average wait time at intersections to prevent route congestion and delays.</li>
+    
+    <li><strong>Zone-Based Weights:</strong> Assign penalties to slow zones like packing areas or cold storage to discourage traversal unless necessary.</li>
+    
+    <li><strong>Fuel/Energy Estimation:</strong> For drones or electric vehicles, estimate remaining energy cost using terrain, load, and weather/wind data.</li>
+    
+    <li><strong>Learning from History (Data-Driven):</strong> Use past route data to train ML models that predict remaining cost to goal more precisely than geometric distance.</li>
+    
+    <li><strong>Path Difficulty Heuristics:</strong> Penalize paths with sharp turns, slopes, or narrow passages that slow down robotic navigation.</li>
+    
+    <li><strong>Heuristics with Time Windows:</strong> Add penalties when the estimated arrival time is outside of allowed delivery slots.</li>
+    
+    <li><strong>Dynamic Obstacle Prediction:</strong> Estimate delays from human movement or temporary obstructions and reflect that in the heuristic.</li>
+    
+    <li><strong>Time-of-Day Dependent Heuristics:</strong> Adjust weights based on peak vs non-peak warehouse traffic or urban congestion patterns.</li>
+    
+    <li><strong>Map Knowledge - Avoid Trouble Spots:</strong> Use known blacklisted or blocked zones to bias heuristic away from unreliable paths.</li>
+    
+    <li><strong>Charging Station Awareness:</strong> In long-range or battery-constrained navigation, bias the heuristic toward paths with recharge stations.</li>
+    
+    <li><strong>Physical Constraints of Environment:</strong> Penalize paths unsuitable for heavy load, large size, or fragile cargo.</li>
+    
+    <li><strong>Goal-Based Tuning:</strong> For multi-pick scenarios, design the heuristic to guide efficient ordering and clustering of goal points.</li>
+  </ul>
+
+  <h4>Summary: A Good Heuristic is...</h4>
+  <table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 600px;">
+    <thead style="background-color: #f2f2f2;">
+      <tr>
+        <th>Feature</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Admissible</td>
+        <td>Never overestimates the true cost</td>
+      </tr>
+      <tr>
+        <td>Consistent</td>
+        <td>Follows triangle inequality (h(x) ≤ h(y) + cost(x, y))</td>
+      </tr>
+      <tr>
+        <td>Fast to compute</td>
+        <td>Lightweight enough for real-time usage</td>
+      </tr>
+      <tr>
+        <td>Domain-aware</td>
+        <td>Incorporates real-world constraints and context</td>
+      </tr>
+      <tr>
+        <td>Adaptable</td>
+        <td>Can be updated with traffic, time, or learned data</td>
+      </tr>
+    </tbody>
+  </table>
+</details>
+
+    <details open>
+      <summary>👩‍💻 View Code </summary>
+      <a href="https://github.com/Shivani-Hiremath/Algorithmic-Problem-Solving/tree/main/Graph/Astar" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O((V + E) log V) — with binary heap and admissible heuristic</li>
+        <li><strong>Space:</strong> O(V)</li>
+        <li><strong>Best Case:</strong> When heuristic is close to actual distance, fewer nodes are explored</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Hart, P. E., Nilsson, N. J., & Raphael, B. (1968). 
+      <a href="https://www.sciencedirect.com/science/article/pii/S0004370204000528" target="_blank">
+        A Formal Basis for the Heuristic Determination of Minimum Cost Paths
+      </a>
+    </li>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target="_blank">
+        Wikipedia: A* Search Algorithm
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/a-search-algorithm/" target="_blank">
+        GeeksforGeeks: A* Search Algorithm
+      </a>
+    </li>
+    <li>
+      Visualization powered by 
+      <a href="https://qiao.github.io/PathFinding.js/visual/" target="_blank">
+        PathFinding.js Visualizer
+      </a>
+    </li>
+  </ol>
+</div>

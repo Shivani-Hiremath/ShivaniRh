@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Min-Cost Max-Flow Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section id="min-cost-max-flow" style="margin-top: 50px;">
+    <div class="algo-card">
+      <h1>Min-Cost Max-Flow Algorithm</h1>
+      <p><strong>Category:</strong> Flow Algorithms, Network Optimization</p>
+      <p><strong>Description:</strong> Computes the maximum flow from a source to a sink in a flow network such that the cost of the flow is minimized. It extends the max-flow problem by assigning costs to each edge and aiming to achieve the maximum flow at the lowest cost.</p>
+
+      <p><strong>📦 Business Case (Amazon):</strong></p>
+      <ul>
+        <li>Assigning delivery trucks to delivery zones with minimal travel cost.</li>
+        <li>Mapping parcels to distribution hubs while minimizing fuel cost and delivery delays.</li>
+        <li>Allocating computing resources in AWS data centers efficiently based on load and energy costs.</li>
+        <li>Optimizing flow of goods in multi-tier supply chains with cost and capacity constraints.</li>
+        <li>Minimizing total shipping cost across cross-docking points in logistics networks.</li>
+      </ul>
+
+      <details open>
+        <summary>🧠 How It Works?</summary>
+        <ul>
+          <li>Construct a residual graph from the original flow network with capacities and costs.</li>
+          <li>Repeatedly find shortest path (with minimum cost) from source to sink using Dijkstra or Bellman-Ford with potentials.</li>
+          <li>Push as much flow as possible through the path found and update residual capacities and costs.</li>
+          <li>Repeat until no more augmenting paths are available that improve the cost.</li>
+        </ul>
+      </details>
+
+      <details open>
+        <summary>📊 Visualization</summary>
+        <iframe src="https://isabek.github.io/" width="100%" height="650" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+        <p style="font-size: 0.9rem;">Click 'Max Flow' and then add costs to simulate Min-Cost Max-Flow scenarios.</p>
+      </details>
+
+      <details open>
+        <summary>👩‍💻 View Code</summary>
+        <a href="/codes/min-cost-max-flow.cpp" target="_blank" class="code-btn">
+          <i class="uil uil-github"></i> Click here for code
+        </a>
+      </details>
+
+      <details open>
+        <summary>🧮 Complexity Analysis</summary>
+        <ul>
+          <li><strong>Time:</strong> O(F · E · logV), where F = total flow, E = edges, V = vertices (with Dijkstra + potentials)</li>
+          <li><strong>Space:</strong> O(V²) (adjacency matrix) or O(E) (adjacency list)</li>
+          <li><strong>Best Use Case:</strong> When both capacity and cost matter, especially in logistics and infrastructure allocation</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Minimum-cost_flow_problem" target="_blank">
+          Wikipedia: Minimum-Cost Flow Problem
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/graph/min_cost_flow.html" target="_blank">
+          CP-Algorithms: Min-Cost Max-Flow
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/minimum-cost-maximum-flow-problem/" target="_blank">
+          GeeksforGeeks: Minimum Cost Maximum Flow Problem
+        </a>
+      </li>
+      <li>
+        Visualization powered by 
+        <a href="https://isabek.github.io/" target="_blank">
+          Isabek's Min-Cost Max-Flow Visualizer: Github
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subset Sum Problem | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+  <style>
+    .true-cell {
+      background-color: #b2f2bb;
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+    .false-cell {
+      background-color: #ffe3e3;
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+    table, th, td {
+      border: 1px solid #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section class="algo-card" style="max-width: 1300px; margin: 48px auto 32px auto; padding: 32px 36px 32px 36px;">
+    <h1>Subset Sum Problem</h1>
+    <p><strong>Category:</strong> Dynamic Programming</p>
+    <p><strong>Description:</strong> Determines whether a subset of given numbers adds up to a target sum.</p>
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li>Validating gift card purchases.</li>
+      <li>Creating product bundles within budget.</li>
+      <li>Suggesting combos in recommendation systems.</li>
+      <li>The algorithm scales efficiently across millions of products using 1D DP optimization.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Create a DP table: dp[i][j] where i = index, j = sum.</li>
+        <li>Initialize base case: dp[0][0] = true.</li>
+        <li>Use previous results to decide inclusion/exclusion of each item.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>Given nums = {3, 34, 4, 12, 5, 2}, target sum = 9</p>
+      <p>Step-by-step DP Table Update</p>
+      <div id="dp-visual" style="margin: 20px 0;"></div>
+      <button onclick="startVisualization()">▶ Start Visualization</button>
+      <script>
+        const nums = [3, 34, 4, 12, 5, 2];
+        const target = 9;
+        const delay = 200;
+        const n = nums.length;
+
+        // Create DP table and set first column to true
+        const dp = Array.from({ length: n + 1 }, () => Array(target + 1).fill(false));
+        for (let i = 0; i <= n; i++) {
+          dp[i][0] = true; // First column (sum = 0) should be true
+        }
+
+        const container = document.getElementById("dp-visual");
+
+        function renderTable() {
+          let html = "<table style='border-collapse: collapse; text-align: center;'>";
+          html += "<tr><th>i\\j</th>";
+          for (let j = 0; j <= target; j++) {
+            html += `<th>${j}</th>`;
+          }
+          html += "</tr>";
+
+          for (let i = 0; i <= n; i++) {
+            html += `<tr><th>${i}</th>`;
+            for (let j = 0; j <= target; j++) {
+              const cellValue = dp[i][j] ? "T" : "F";
+              const cellClass = dp[i][j] ? "true-cell" : "false-cell";
+              html += `<td class="${cellClass}">${cellValue}</td>`;
+            }
+            html += "</tr>";
+          }
+          html += "</table>";
+          container.innerHTML = html;
+        }
+
+        renderTable(); // Show initial table with first column true
+
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function startVisualization() {
+          for (let i = 1; i <= n; i++) {
+            for (let j = 1; j <= target; j++) { // j=1 because j=0 already handled
+              dp[i][j] = dp[i - 1][j];
+              if (j >= nums[i - 1]) {
+                dp[i][j] = dp[i][j] || dp[i - 1][j - nums[i - 1]];
+              }
+              renderTable();
+              await sleep(delay);
+            }
+          }
+        }
+      </script>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/subset-sum.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(N × Sum)</li>
+        <li><strong>Space:</strong> O(Sum)</li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Subset_sum_problem" target="_blank">
+          Wikipedia: Subset Sum Problem
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/subset-sum-problem-dp-25/" target="_blank">
+          GeeksforGeeks: Subset Sum Problem
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/algebra/subset_sum.html" target="_blank">
+          CP-Algorithms: Subset Sum
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

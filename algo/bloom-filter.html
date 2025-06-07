@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bloom Filters | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="bloom-filters" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>28. Bloom Filters</h3>
+    <p><strong>Category:</strong> Probabilistic Data Structures</p>
+    <p><strong>Description:</strong> Space-efficient structure to test whether an element is a member of a set, allowing false positives but no false negatives.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Cloud Storage Systems:</strong> Quickly check if data exists before fetching from disk or network (e.g., Amazon S3).</li>
+      <li><strong>Database Systems:</strong> Filter out unnecessary disk reads in key-value stores.</li>
+      <li><strong>Web Caches and Security:</strong> Check URL blacklists or spam filters efficiently.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Initialize a bit array of size <em>m</em>, all set to 0.</li>
+        <li>Choose <em>k</em> independent hash functions.</li>
+        <li>To add an element, hash it with each function and set the corresponding bits to 1.</li>
+        <li>To check membership, hash the element with all <em>k</em> functions and check if all corresponding bits are 1.</li>
+        <li>If any bit is 0, the element is definitely not in the set. If all are 1, the element is probably in the set (could be a false positive).</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <div style="text-align: center;">
+        <img src="/assets/bloomfilter.png" alt="Bloom Filter Visualization" style="width: 100%; max-width: 500px; border-radius: 10px; margin: 20px 0;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">Bloom Filter Example</figcaption>
+      </div>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <p><a href="/codes/bloom-filter.cpp" target="_blank">Click here for code</a></p>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(k) per insert/query (k = number of hash functions)</li>
+        <li><strong>Space:</strong> O(m) (m = size of bit array)</li>
+        <li><strong>False Positive Rate:</strong> Depends on m, k, and number of inserted elements</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Bloom, B. H. (1970). 
+      <a href="https://dl.acm.org/doi/10.1145/362686.362692" target="_blank">
+        Space/Time Trade-offs in Hash Coding with Allowable Errors
+      </a>
+    </li>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Bloom_filter" target="_blank">
+        Wikipedia: Bloom Filter
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/bloom-filter-data-structure/" target="_blank">
+        GeeksforGeeks: Bloom Filter Data Structure
+      </a>
+    </li>
+    <li>
+      <a href="https://systemdesign.one/bloom-filters-explained/" target="_blank">
+        System Design One: Bloom Filters Explained
+      </a>
+    </li>
+    <li>
+      Visualization inspired by 
+      <a href="https://visualgo.net/en/hashtable" target="_blank">
+        VisuAlgo: Hash Table & Bloom Filter
+      </a>
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

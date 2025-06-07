@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KD Tree | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="kd-tree" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>KD Tree (k-dimensional Tree)</h1>
+    <p><strong>Category:</strong> Data Structures, Multidimensional Search Tree</p>
+    <p><strong>Description:</strong> A space-partitioning data structure for organizing points in a k-dimensional space. It is widely used for nearest neighbor searches and range queries in multidimensional datasets.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Multidimensional data search:</strong> KD Trees allow efficient searching of points in multiple dimensions, used in geographic information systems (GIS), robotics, and computer graphics.</li>
+      <li><strong>Nearest neighbor queries:</strong> Key for recommendation systems, pattern recognition, and machine learning models like K-NN classifiers.</li>
+      <li><strong>Spatial indexing:</strong> Useful in databases and cloud services that handle multi-attribute data for fast lookup and retrieval.</li>
+      <li><strong>Collision detection and ray tracing:</strong> KD Trees speed up queries in 3D rendering and physics simulations.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Splits the dataset along one dimension at each level, cycling through dimensions.</li>
+        <li>Constructs a binary tree that partitions points into hyperrectangles.</li>
+        <li>Search queries recursively prune branches that can’t contain the target point.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <div style="text-align: center;">
+        <img src="/assets/kd.jpg" alt="KD Tree Visualization" style="width: 80%; max-width: 600px; border-radius: 8px; margin: 20px 0;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">KD Tree Example Visualization</figcaption>
+      </div>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/kd-tree.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Build:</strong> O(n log n)</li>
+        <li><strong>Search:</strong> Average O(log n), worst O(n)</li>
+        <li><strong>Space:</strong> O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Bentley, J. L. (1975).
+      <a href="https://en.wikipedia.org/wiki/K-d_tree" target="_blank">
+        Wikipedia: k-d Tree
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/k-dimensional-tree/" target="_blank">
+        GeeksforGeeks: K-Dimensional Tree
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/data_structures/kd_tree.html" target="_blank">
+        CP-Algorithms: KD Tree
+      </a>
+    </li>
+    <li>
+      Visualization inspired by 
+      <a href="https://www.cs.usfca.edu/~galles/visualization/KDTree.html" target="_blank">
+        USFCA: KD Tree Visualizer
+      </a>
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

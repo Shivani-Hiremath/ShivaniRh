@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quick Sort | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="quick-sort" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Quick Sort Algorithm</h1>
+    <p><strong>Category:</strong> Sorting, Divide and Conquer</p>
+    <p><strong>Description:</strong> Efficient sorting algorithm using divide and conquer by selecting a pivot, partitioning array, and recursively sorting partitions.</p>
+
+    <p><strong>Business Case :</strong></p>
+    <ul>
+      <li>Sorting product listings by price, rating, or popularity to improve user experience.</li>
+      <li>Ordering shipment batches by destination or priority to optimize delivery routes.</li>
+      <li>Sorting inventory based on stock levels or expiration dates to manage warehouse efficiently.</li>
+      <li>Ranking customer reviews or recommendation scores for fast retrieval.</li>
+      <li>Sorting log data by timestamp for error tracking and performance monitoring.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Choose a pivot element from the array (commonly last or random element).</li>
+        <li>Partition the array so elements less than pivot are on left, greater on right.</li>
+        <li>Recursively apply the same process to left and right subarrays.</li>
+      </ul>
+    </details>
+   
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://jhabarsingh.github.io/DSALGO-VISUALIZER/templates/divide_and_conquer/quick.html" width="100%" height="430" style="border:1px solid #ccc;border-radius:10px;"></iframe>
+      <p style="font-size: 0.9rem; text-align:center;">
+        If the visualization does not load, 
+        <a href="https://jhabarsingh.github.io/DSALGO-VISUALIZER/templates/divide_and_conquer/quick.html" target="_blank">
+          click here to open it in a new tab
+        </a>.
+      </p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/quick-sort.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> Average case O(N log N), Worst case O(N²) (depends on pivot choice)</li>
+        <li><strong>Space:</strong> O(log N) due to recursion stack</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Hoare, C. A. R. (1961).
+      <a href="https://en.wikipedia.org/wiki/Quicksort" target="_blank">
+        Wikipedia: Quicksort
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/quick-sort/" target="_blank">
+        GeeksforGeeks: Quick Sort
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/sorting/quick-sort.html" target="_blank">
+        CP-Algorithms: Quick Sort
+      </a>
+    </li>
+    <li>
+      Visualization powered by 
+      <a href="https://jhabarsingh.github.io/DSALGO-VISUALIZER/templates/divide_and_conquer/quick.html" target="_blank">
+        DSALGO Visualizer: Quick Sort
+      </a>
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

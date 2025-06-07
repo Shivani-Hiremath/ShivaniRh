@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Union-Find (Disjoint Set Union) | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="union-find" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Union-Find (Disjoint Set Union)</h1>
+    <p><strong>Category:</strong> Cluster Detection in User Behavior</p>
+    <p><strong>Description:</strong> DSU efficiently maintains and merges disjoint sets, and is useful for detecting components or groups.</p>
+
+    <p><strong>📦 Business Case (Amazon Prime):</strong></p>
+    <ul>
+      <li>Groups users into clusters based on similar watch history or genre preferences.</li>
+      <li>Supports backend recommendation engine by identifying user segments.</li>
+      <li>Can help discover trending communities or niche content segments.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Each user initially belongs to their own set.</li>
+        <li>Union operation merges sets of users who watched similar types of content.</li>
+        <li>Find operation uses path compression to efficiently retrieve the cluster ID.</li>
+        <li>Combines union-by-rank to optimize merging operations.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/dsu" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Use the visual tool to perform union and find operations and track cluster formation.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/union-find.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(α(n)) per operation (very close to constant)</li>
+        <li><strong>Space:</strong> O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Disjoint-set_data_structure" target="_blank">
+        Wikipedia: Disjoint-set data structure
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/union-find/" target="_blank">
+        GeeksforGeeks: Union-Find
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/data_structures/disjoint_set_union.html" target="_blank">
+        CP-Algorithms: Disjoint Set Union
+      </a>
+    </li>
+    <li>
+      Visualization powered by 
+      <a href="https://visualgo.net/en/dsu" target="_blank">
+        VisuAlgo: DSU Visualizer
+      </a>
+    </li>
+  </ol>
+</div>
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

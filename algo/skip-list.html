@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skip List | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="skip-list" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Skip List</h1>
+    <p><strong>Category:</strong> Data Structures, Probabilistic, Indexed Search</p>
+    <p><strong>Description:</strong> A layered linked list data structure that allows fast search, insertion, and deletion operations — expected O(log n) time. It’s a simpler alternative to balanced trees with probabilistic balancing.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Real-time indexing:</strong> Efficiently index large datasets for quick lookups in distributed databases and caching systems.</li>
+      <li><strong>Dynamic ordered data:</strong> Ideal for systems where frequent insertions and deletions happen alongside fast search queries, such as messaging queues or leaderboard rankings.</li>
+      <li><strong>Cloud services & distributed storage:</strong> Skip lists are used in distributed key-value stores like Apache Cassandra for maintaining sorted data efficiently with concurrency support.</li>
+      <li><strong>Memory-efficient alternatives:</strong> When balanced trees are too complex or costly to maintain, skip lists provide a probabilistic, simpler data structure with comparable performance.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Multiple layers of linked lists where higher layers act as "express lanes" for faster traversal.</li>
+        <li>Elements are promoted to higher levels randomly, ensuring balanced height probabilistically.</li>
+        <li>Searches start from the top layer, skipping many elements, and drop down levels for precise positioning.</li>
+      </ul>
+      <div style="text-align: center;">
+        <img src="/assets/skip.jpg" alt="Skip List Visualization" style="width: 60%; max-width: 600px; border-radius: 8px; height: 500px;">
+      </div>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <img src="/assets/skiplist.jpg" alt="Skip List Visualization" style="width: 100%; max-width: 600px; border-radius: 8px; height: 500px;">
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/skip-list.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Search:</strong> O(log n) average</li>
+        <li><strong>Insertion:</strong> O(log n) average</li>
+        <li><strong>Deletion:</strong> O(log n) average</li>
+        <li><strong>Space:</strong> O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Pugh, W. (1990).
+      <a href="https://en.wikipedia.org/wiki/Skip_list" target="_blank">
+        Wikipedia: Skip List
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/skip-list/" target="_blank">
+        GeeksforGeeks: Skip List
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/data_structures/skip_list.html" target="_blank">
+        CP-Algorithms: Skip List
+      </a>
+    </li>
+    <li>
+      Visualization inspired by 
+      <a href="https://www.cs.usfca.edu/~galles/visualization/SkipList.html" target="_blank">
+        USFCA: Skip List Visualizer
+      </a>
+    </li>
+  </ol>
+</div>
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

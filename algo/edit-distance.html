@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Distance | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section class="algo-card" style="max-width: 950px; margin: 48px auto 32px auto; padding: 32px 36px 32px 36px;">
+    <h1>Edit Distance (Levenshtein Distance)</h1>
+    <p><strong>Category:</strong> Dynamic Programming</p>
+    <p><strong>Description:</strong> Calculates the minimum number of operations (insert, delete, replace) required to convert one string to another.</p>
+    <p><strong>💼 Business Case:</strong></p>
+    <ul>
+      <li><b>Edit distance</b> helps fix spelling mistakes in search and shows the correct results by picking the word with the lowest edit distance. (e.g., "hedphones" → "headphones")</li>
+      <li>It suggests the right words while typing, even if there are small errors. (e.g., "iphon" → "iPhone")</li>
+      <li>It finds items with similar names, even if they are spelled slightly differently. (e.g., "nikke shoes" → "Nike shoes")</li>
+      <li>It connects users with similar interests, even if they use different words. </li>
+      <li>It treats different spellings or short forms of the same word as one, giving better recommendations. (e.g., "SciFi" and "Sci-Fi")</li>
+    </ul>
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Create a DP table dp[i][j] where i and j represent indices in word1 and word2.</li>
+        <li>dp[i][j] represents the minimum operations to convert word1[0..i-1] to word2[0..j-1].</li>
+        <li>Base cases: converting to/from empty string.</li>
+        <li>Recursive case: If characters match, no operation. Else, choose min of insert, delete, replace.</li>
+      </ul>
+    </details>
+    <details open>
+      <summary>📊 Visualization</summary>
+      <div style="text-align: center;">
+        <img src="/assets/editDistance.jpg" alt="Edit Distance Visualization" style="width: 100%; max-width: 600px; border-radius: 8px; margin-bottom: 20px;height: 600px;">
+      </div>
+      <p>Example: word1 = "kitten", word2 = "sitting"</p>
+      <div id="edit-dp-visual" style="margin: 20px 0; display: flex; justify-content: center;"></div>
+      <button onclick="startEditDistanceVisualization()">▶ Start</button>
+      <script>
+        const word1 = "kitten";
+        const word2 = "sitting";
+        const delay2 = 500;
+        const m = word1.length;
+        const n2 = word2.length;
+        let editDp = [];
+        let currentI = -1;
+        let currentJ = -1;
+
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        function renderTable() {
+          let html = "<table border='1' cellpadding='8' style='border-collapse: collapse; background-color: #f9f9ff; text-align: center;'>";
+          html += "<tr><th></th><th></th>";
+          for (let j = 0; j < word2.length; j++) {
+            html += `<th>${word2[j]}</th>`;
+          }
+          html += "</tr>";
+
+          for (let i = 0; i <= m; i++) {
+            html += "<tr>";
+            html += i === 0 ? "<th></th>" : `<th>${word1[i - 1]}</th>`;
+            html += `<th>${i}</th>`;
+
+            for (let j = 0; j <= n2; j++) {
+              let bgColor = "#fff";
+              if (i === 0 || j === 0) bgColor = "#e0e0e0";
+              if (i === currentI && j === currentJ) bgColor = "#b2f0b2"; // active cell
+              html += `<td style="background-color:${bgColor}">${editDp[i][j]}</td>`;
+            }
+            html += "</tr>";
+          }
+
+          html += "</table>";
+          document.getElementById("edit-dp-visual").innerHTML = html;
+        }
+
+        function initializeDP() {
+          editDp = Array.from({ length: m + 1 }, () => Array(n2 + 1).fill(0));
+          for (let i = 0; i <= m; i++) editDp[i][0] = i;
+          for (let j = 0; j <= n2; j++) editDp[0][j] = j;
+          currentI = -1;
+          currentJ = -1;
+          renderTable();
+        }
+
+        async function startEditDistanceVisualization() {
+          initializeDP();
+          await sleep(delay2);
+
+          for (let i = 1; i <= m; i++) {
+            for (let j = 1; j <= n2; j++) {
+              if (word1[i - 1] === word2[j - 1]) {
+                editDp[i][j] = editDp[i - 1][j - 1];
+              } else {
+                editDp[i][j] = 1 + Math.min(
+                  editDp[i - 1][j],     // delete
+                  editDp[i][j - 1],     // insert
+                  editDp[i - 1][j - 1]  // replace
+                );
+              }
+              currentI = i;
+              currentJ = j;
+              renderTable();
+              await sleep(delay2);
+            }
+          }
+
+          currentI = -1;
+          currentJ = -1;
+          renderTable(); // final render to remove highlight
+        }
+
+        // Initial table shown on page load
+        initializeDP();
+      </script>
+    </details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/edit-distance.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+    <details open>
+      <summary>📊 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(m × n)</li>
+        <li><strong>Space:</strong> O(m × n)</li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        Levenshtein, V. I. (1966).
+        <a href="https://en.wikipedia.org/wiki/Levenshtein_distance" target="_blank">
+          Wikipedia: Levenshtein Distance
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/edit-distance-dp-5/" target="_blank">
+          GeeksforGeeks: Edit Distance (DP-5)
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/string/edit_distance.html" target="_blank">
+          CP-Algorithms: Edit Distance
+        </a>
+      </li>
+      
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

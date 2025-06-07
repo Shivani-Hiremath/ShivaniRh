@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page Replacement Algorithms | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section id="page-replacement" style="margin-top: 50px;">
+    <div class="algo-card">
+      <h1>Page Replacement Algorithms (LRU, LFU)</h1>
+      <p><strong>Category:</strong> Operating Systems, Caching</p>
+      <p><strong>Description:</strong> Algorithms to decide which memory pages to evict when new pages need to be loaded.</p>
+
+      <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+      <ul>
+        <li><strong>Operating Systems:</strong> Manage physical memory efficiently for multi-tasking systems.</li>
+        <li><strong>Cloud Computing:</strong> Optimize cache management in distributed systems and CDNs.</li>
+        <li><strong>Database Systems:</strong> Improve buffer cache hit rates for faster query processing.</li>
+      </ul>
+
+      <details open>
+        <summary>🧠 How It Works?</summary>
+        <ul>
+          <li><strong>LRU (Least Recently Used):</strong> Evicts the page that has not been used for the longest time. Uses a queue or doubly linked list for O(1) updates.</li>
+          <li><strong>LFU (Least Frequently Used):</strong> Evicts the page with the lowest access frequency. Uses a min-heap or frequency map for efficient tracking.</li>
+          <li>Both algorithms aim to minimize page faults and maximize cache hits.</li>
+        </ul>
+      </details>
+
+
+
+      <details open>
+        <summary>🧮 Complexity Analysis</summary>
+        <ul>
+          <li><strong>LRU:</strong> O(1) access and update with hash map + doubly linked list</li>
+          <li><strong>LFU:</strong> O(1) access and update with hash map + frequency list</li>
+          <li><strong>Space:</strong> O(N), where N = cache size</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Page_replacement_algorithm" target="_blank">
+          Wikipedia: Page Replacement Algorithms
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/page-replacement-algorithms-in-operating-systems/" target="_blank">
+          GeeksforGeeks: Page Replacement Algorithms
+        </a>
+      </li>
+      <li>
+        Visualization powered by 
+        <a href="https://visualgo.net/en/paging" target="_blank">
+          VisuAlgo: Paging Visualizer
+        </a>
+      </li>
+    </ol>
+  </div>
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boyer-Moore Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="boyer-moore" style="margin-top:50px;">
+  <div class="algo-card">
+    <h1>Boyer-Moore Algorithm</h1>
+    <p><strong>Category:</strong> Alexa Intent Matching</p>
+    <p><strong>Description:</strong> Matches patterns right-to-left using the Bad-Character and Good-Suffix heuristics, often skipping large chunks of text, making it perfect for long voice-to-text commands.</p>
+
+    <p><strong>📦 Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Matching user voice commands to Alexa skill templates quickly.</li>
+      <li>Filtering long chat strings for offensive phrases in real time.</li>
+      <li>Searching large codebases in CodeCatalyst for specific function names.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Pre-compute two heuristic tables: Bad-Character &amp; Good-Suffix.</li>
+        <li>Align pattern with text; compare from right to left.</li>
+        <li>On mismatch, shift pattern by max heuristic value (can skip many chars).</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <img src="/assets/bm.gif"
+              width="100%" height="430"
+              style="border:1px solid #ccc;border-radius:10px;"></img>
+      <p style="font-size:0.9rem;">Select “Boyer-Moore” to see bad-character / good-suffix skips.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/boyer-moore.cpp"
+         target="_blank" class="code-btn">
+         <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Best Time:</strong> Sub-linear &nbsp;≈ O(n/m)</li>
+        <li><strong>Worst Time:</strong> O(n m) (pathological)</li>
+        <li><strong>Space:</strong> O(m + σ) — pattern + alphabet size</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Boyer, R. S., & Moore, J. S. (1977).
+      <a href="https://dl.acm.org/doi/10.1145/359842.359859" target="_blank">
+        A Fast String Searching Algorithm
+      </a>
+    </li>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Boyer%E2%80%93Moore_string-search_algorithm" target="_blank">
+        Wikipedia: Boyer–Moore String-Search Algorithm
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/boyer-moore-algorithm-for-pattern-searching/" target="_blank">
+        GeeksforGeeks: Boyer-Moore Algorithm
+      </a>
+    </li>
+    <li>
+      Visualization powered by 
+      <a href="https://medium.com/@siddharth.21/the-boyer-moore-string-search-algorithm-674906cab162" target="_blank">
+        Medium
+      </a>
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

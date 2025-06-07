@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mo’s Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="mos-algo" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h3>📌 Mo’s Algorithm</h3>
+    <p><strong>Category:</strong> Query Optimization / Offline Queries</p>
+    <p><strong>Description:</strong> Efficiently answers range queries on static arrays using offline sorting and square root decomposition.</p>
+
+    <p><strong>Business Case (Amazon Analytics):</strong></p>
+    <ul>
+      <li>Answering range queries on user sales or activity data quickly.</li>
+      <li>Analyzing campaign performance over time intervals.</li>
+      <li>Efficiently processing logs and metrics in AWS big data services.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works</summary>
+      <ul>
+        <li>Sort queries offline based on block and right endpoint.</li>
+        <li>Process queries moving pointers to add/remove elements from current range.</li>
+        <li>Maintains frequency/count data efficiently to answer each query.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <p>Coming Soon.</p>
+    </details>
+
+    
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/mo.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+    
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li>Time Complexity: O((n + q) * √n), where q = number of queries</li>
+        <li>Space Complexity: O(n)</li>
+      </ul>
+    </details>
+  </div>
+  </section>
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

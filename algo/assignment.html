@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hungarian Algorithm (Assignment Problem) | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+ <section id="assignment-problem">
+  <div class="algo-card">
+    <h1> Assignment Problem</h1>
+    <p><strong>Category:</strong> Optimization, Matching, Hungarian Algorithm</p>
+    <p><strong>Description:</strong> Assign <em>n</em> agents to <em>n</em> tasks so each task is done by exactly one agent and the total cost is minimised. A classic solution is the Hungarian algorithm running in O(n³).</p>
+
+    <p><strong>📦Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Warehouse robots ↔ picking routes</li>
+      <li>Parcels ↔ delivery vans</li>
+      <li>Support tickets ↔ agents</li>
+      <li>Drones ↔ delivery coordinates</li>
+      <li>Ads ↔ on‑page slots</li>
+      <li>Compute jobs ↔ AWS instances</li>
+      <li>Packages ↔ last‑mile hubs</li>
+    </ul>
+ <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Model as a bipartite graph: agents on one side, tasks on the other, edges weighted by cost.</li>
+        <li>Hungarian algorithm subtracts row/column minima, covers zeros, adjusts the matrix until an optimal zero‑covering matching is found.</li>
+        <li>Result is a minimum‑cost one‑to‑one assignment.</li>
+      </ul>
+      </details>
+    <!-- 1. Visualisation comes first -->
+    <details open>
+      <summary>📊 Visualisation</summary>
+     <div style="text-align: center;">
+    <img src="/assets/assign.png" alt="Assignment Algorithm Example" style="width: 100%; max-width:1000px; margin: 20px 0;">
+    <figcaption style="font-weight: bold; margin-top: 8px;">Demonstration of Assignment Problem</figcaption>
+  </div>
+    </details>
+
+    <!-- 2. Code reference comes after visualisation -->
+    <details open>
+      <summary>👩‍💻 View Code </summary>
+      <a href="https://github.com/tdulcet/Hungarian-Algorithm" target="_blank" class="code-btn">GitHub – Hungarian Algorithm</a>
+    </details>
+
+    <!-- 3. How it works + complexity -->
+   <details open>
+      <h4>🧮 Complexity Analysis</h4>
+      <ul>
+        <li><strong>Time:</strong> O(n³)</li>
+        <li><strong>Space:</strong> O(n²)</li>
+        <li><strong>Optimality:</strong> Guarantees global minimum cost for square matrices with non‑negative weights.</li>
+      </ul>
+    </details>
+  </div>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        Kuhn, H. W. "The Hungarian Method for the Assignment Problem."
+        <a href="https://www.jstor.org/stable/1906920" target="_blank">
+          JSTOR: The Hungarian Method
+        </a>
+      </li>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Hungarian_algorithm" target="_blank">
+          Wikipedia: Hungarian Algorithm
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/graph/edmonds_karp.html" target="_blank">
+          CP-Algorithms: Assignment Problem
+        </a>
+      </li>
+      <li>
+        Visualization powered by
+        <a href="https://www.youtube.com/watch?v=QGfn7JeXK54" target="_blank">
+          YouTube: Hungarian Algorithm Animation
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/tdulcet/Hungarian-Algorithm" target="_blank">
+          GitHub – Hungarian Algorithm
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tim Sort | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="tim-sort" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Tim Sort</h1>
+    <p><strong>Category:</strong> Hybrid Sorting Algorithm</p>
+    <p><strong>Description:</strong> Tim Sort is a hybrid stable sorting algorithm derived from merge sort and insertion sort. It is optimized to perform well on many kinds of real-world data by exploiting existing order in the array.</p>
+
+    <p><strong>📦 Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Efficiently sorting partially sorted customer order histories for faster access and display.</li>
+      <li>Sorting product listings by multiple criteria such as price, ratings, and availability where data often arrives sorted in chunks.</li>
+      <li>Optimizing sorting of event logs and clickstream data, which tends to have locally ordered runs.</li>
+      <li>Handling large datasets like inventory or transaction records where partial ordering exists due to batch updates.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Uses a combination of merge sort and insertion sort.</li>
+        <li>Designed to take advantage of existing order in data, making it efficient for real-world scenarios.</li>
+        <li>Splits the data into small chunks called "runs" (typically size 32 or 64).</li>
+        <li>Sorts each run using insertion sort, which is efficient for small or nearly sorted arrays.</li>
+        <li>Merges runs using a merge sort-like process to produce a fully sorted array.</li>
+        <li>Exploits existing order in data to minimize comparisons and copying.</li>
+      </ul>
+      <div style="text-align: center;">
+        <img src="/assets/tim.png" alt="Tim Sort Visualization" style="width: 100%; max-width: 500px; border-radius: 10px; margin: 20px 0;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">Tim Sort Process Visualization</figcaption>
+      </div>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/sorting" width="100%" height="500" style="border:1px solid #ccc; border-radius: 10px;"></iframe>
+      <p style="font-size: 0.9rem;">Select "Tim Sort" from the dropdown to see the step-by-step animation.</p>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/tim-sort.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(n log n) worst case, O(n) best case for nearly sorted data</li>
+        <li><strong>Space:</strong> O(n)</li>
+        <li><strong>Stability:</strong> Stable sort, preserves relative order of equal elements</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Tim Peters (2002).
+      <a href="https://en.wikipedia.org/wiki/Timsort" target="_blank">
+        Wikipedia: Timsort
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/timsort/" target="_blank">
+        GeeksforGeeks: TimSort
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/sorting/timsort.html" target="_blank">
+        CP-Algorithms: TimSort
+      </a>
+    </li>
+    <li>
+      Visualization powered by 
+      <a href="https://visualgo.net/en/sorting" target="_blank">
+        VisuAlgo: Sorting Visualizer
+      </a>
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

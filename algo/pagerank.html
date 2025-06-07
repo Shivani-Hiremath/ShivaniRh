@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PageRank Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="pagerank" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>PageRank Algorithm</h1>
+    <p><strong>Category:</strong> Graph Algorithms, Ranking</p>
+    <p><strong>Description:</strong> PageRank is an iterative algorithm that measures the importance of each node in a directed graph, originally used by Google to rank web pages. It assigns a score to each node based on the number and quality of links to it.</p>
+
+    <p><strong>📦 Business Case (Amazon Search & Recommendations):</strong></p>
+    <ul>
+      <li>Ranking products or sellers based on their relevance and popularity in the network of user interactions.</li>
+      <li>Improving search results by surfacing highly connected or referenced products.</li>
+      <li>Detecting influential users or items in social graphs or review networks.</li>
+      <li>Optimizing recommendations by leveraging the link structure of co-purchased or co-viewed products.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Initialize all nodes with equal PageRank.</li>
+        <li>Iteratively update each node’s score based on the scores of nodes linking to it, divided by their out-degree.</li>
+        <li>Apply a damping factor (usually 0.85) to model random jumps.</li>
+        <li>Repeat until scores converge (change is below a threshold).</li>
+      </ul>
+    </details>
+
+    
+
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(K × (V + E)), where K = iterations, V = nodes, E = edges</li>
+        <li><strong>Space:</strong> O(V + E)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      Page, L., Brin, S., Motwani, R., & Winograd, T. (1999).
+      <a href="https://en.wikipedia.org/wiki/PageRank" target="_blank">
+        Wikipedia: PageRank
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/page-rank-algorithm-implementation/" target="_blank">
+        GeeksforGeeks: PageRank Algorithm
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/graph/pagerank.html" target="_blank">
+        CP-Algorithms: PageRank
+      </a>
+    </li>
+    
+  </ol>
+</div>
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

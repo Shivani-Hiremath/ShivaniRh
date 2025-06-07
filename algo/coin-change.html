@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coin Change Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section id="coin-change" style="margin-top: 50px;">
+    <div class="algo-card">
+      <h1>Coin Change Algorithm</h1>
+      <p><strong>Category:</strong> Dynamic Programming, Optimization</p>
+      <p><strong>Description:</strong> Finds the minimum number of coins needed to make a certain amount from given coin denominations, or counts the total number of ways to make that amount.</p>
+
+      <p><strong>Business Case:</strong></p>
+      <ul>
+        <li>Optimizing packaging by minimizing the number of standard box sizes to pack products efficiently.</li>
+        <li>Calculating the minimum change returned in cash-on-delivery transactions using available coin/bill denominations.</li>
+        <li>Allocating AWS compute/storage units in fixed sizes to fulfill client resource requests efficiently.</li>
+        <li>Bundling products into fixed-size quantities for discounts and promotions.</li>
+        <li>Breaking down gift card values into smaller denominations for redemption flexibility.</li>
+      </ul>
+
+      <details open>
+        <summary>🧠 How It Works?</summary>
+        <ul>
+          <li>Initialize an array dp[] where dp[x] stores the minimum coins needed for amount x.</li>
+          <li>Set dp[0] = 0 (0 coins needed to make amount 0).</li>
+          <li>For each coin, update dp for amounts greater or equal to coin’s value.</li>
+          <li>Result is dp[amount], the minimum coins needed, or count of combinations.</li>
+        </ul>
+      </details>
+
+      <details open>
+        <summary>📊 Visualization</summary>
+        <p style="text-align:center;">Visualizing how coin denominations build up to target amount step-by-step.</p>
+        <iframe 
+          src="https://jhabarsingh.github.io/DSALGO-VISUALIZER/templates/dynamic/coin_change_making.html" 
+          width="100%" 
+          height="650" 
+          style="border:1px solid #ccc; border-radius:10px;">
+        </iframe>
+        <p style="font-size: 0.9rem; text-align:center;">
+          If the visualization does not load, 
+          <a href="https://jhabarsingh.github.io/DSALGO-VISUALIZER/templates/dynamic/coin_change_making.html" target="_blank">
+            click here to open it in a new tab
+          </a>.
+        </p>
+      </details>
+
+      <details open>
+        <summary>👩‍💻 View Code</summary>
+        <a href="/codes/coin-change.cpp" target="_blank" class="code-btn">
+          <i class="uil uil-github"></i> Click here for code
+        </a>
+      </details>
+
+      <details open>
+        <summary>🧮 Complexity Analysis</summary>
+        <ul>
+          <li><strong>Time:</strong> O(N * M), where N = amount, M = number of coins</li>
+          <li><strong>Space:</strong> O(N) for dp array</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        <a href="https://en.wikipedia.org/wiki/Change-making_problem" target="_blank">
+          Wikipedia: Change-making problem
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/coin-change-dp-7/" target="_blank">
+          GeeksforGeeks: Coin Change (DP-7)
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/dynamic_programming/coin_change.html" target="_blank">
+          CP-Algorithms: Coin Change
+        </a>
+      </li>
+      <li>
+        Visualization powered by 
+        <a href="https://jhabarsingh.github.io/DSALGO-VISUALIZER/templates/dynamic/coin_change_making.html" target="_blank">
+          DSALGO Visualizer
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

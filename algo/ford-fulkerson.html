@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ford-Fulkerson Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section class="algo-card" style="max-width: 950px; margin: 48px auto 32px auto; padding: 32px 36px 32px 36px;">
+    <h1>Ford-Fulkerson Algorithm</h1>
+    <p><strong>Category:</strong> Graph, Network Flow</p>
+    <p><strong>Description:</strong> Computes the maximum flow in a flow network using augmenting paths.</p>
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li>Maximizing the flow of goods through Amazon's supply chain network.</li>
+      <li>Optimizing bandwidth allocation in AWS data centers.</li>
+      <li>Resource allocation in logistics and delivery systems.</li>
+    </ul>
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Finds augmenting paths from source to sink using BFS or DFS.</li>
+        <li>Increases flow along these paths until no more augmenting paths exist.</li>
+        <li>Updates residual capacities after each augmentation.</li>
+      </ul>
+    </details>
+    <details open>
+      <summary>📊 Visualization</summary>
+      <img src="/assets/ford.png" width="80%" height="430"
+              style="border:1px solid #ccc;border-radius:10px;"></img>
+      <p style="font-size:0.9rem;">Select "Ford-Fulkerson" to see flow augmentations.</p>
+    </details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/ford-fulkerson.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li>Time: O(E × max_flow)</li>
+        <li>Space: O(V + E)</li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        Ford, L. R., & Fulkerson, D. R. (1956).
+        <a href="https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm" target="_blank">
+          Wikipedia: Ford–Fulkerson Algorithm
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/graph/edmonds_karp.html" target="_blank">
+          CP-Algorithms: Ford-Fulkerson (Edmonds-Karp)
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/ford-fulkerson-algorithm-for-maximum-flow-problem/" target="_blank">
+          GeeksforGeeks: Ford-Fulkerson Algorithm
+        </a>
+      </li>
+      <li>
+        
+        <a href="https://medium.com/@jithmisha/solving-the-maximum-flow-problem-with-ford-fulkerson-method-3fccc2883dc7" target="_blank">
+            Medium
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

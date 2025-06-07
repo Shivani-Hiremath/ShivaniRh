@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boruvka’s Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section class="algo-card" style="max-width: 1300px; margin: 48px auto 32px auto; padding: 32px 36px 32px 36px;">
+    <h1>Boruvka’s Algorithm</h1>
+    <p><strong>Category:</strong> Graph, Minimum Spanning Tree</p>
+    <p><strong>Description:</strong> Builds a minimum spanning tree by repeatedly adding the cheapest edge from each component.</p>
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li>Parallelizing the process of connecting various warehouses in the logistics network.</li>
+      <li>Distributed computation of MST in large-scale cloud networks.</li>
+      <li>Efficient infrastructure planning for Amazon’s distributed systems.</li>
+    </ul>
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Initially, each node is its own component.</li>
+        <li>In each phase, add the cheapest edge from each component to another component.</li>
+        <li>Repeat until only one component remains.</li>
+      </ul>
+    </details>
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/mst?slide=3" width="100%" height="430"
+              style="border:1px solid #ccc;border-radius:10px;"></iframe>
+      <p style="font-size:0.9rem;">Select "Boruvka" to see parallel MST construction.</p>
+    </details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/boruvka.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li>Time: O(E log V)</li>
+        <li>Space: O(V + E)</li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        Borůvka, O. (1926). 
+        <a href="https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm" target="_blank">
+          Wikipedia: Borůvka’s Algorithm
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/graph/boruvka.html" target="_blank">
+          CP-Algorithms: Borůvka’s Algorithm
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/boruvkas-algorithm-greedy-algo-9/" target="_blank">
+          GeeksforGeeks: Borůvka’s Algorithm
+        </a>
+      </li>
+      <li>
+        Visualization powered by 
+        <a href="https://visualgo.net/en/mst?slide=3" target="_blank">
+          VisuAlgo: MST Visualizer
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

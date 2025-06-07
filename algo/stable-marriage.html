@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stable Marriage Problem | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section class="algo-card" style="max-width: 950px; margin: 48px auto 32px auto; padding: 32px 36px 32px 36px;">
+    <section id="stable-marriage">
+      <div class="algo-card">
+        <h1>Stable Marriage Problem</h1>
+        <p><strong>Category:</strong> Matching Algorithm</p>
+        <p><strong>Description:</strong> The Stable Marriage Problem seeks to find a stable matching between two equally sized sets of elements given an ordering of preferences for each element. A matching is stable if there is no pair of elements that would both prefer each other over their current partners.</p>
+
+        <p><strong>Business Case (Amazon):</strong></p>
+        <ul>
+          <li>Matching delivery personnel to delivery zones based on mutual preferences (e.g., experience in area vs. route convenience).</li>
+          <li>Assigning interns to projects based on intern preferences and project needs.</li>
+          <li>Pairing customer service agents to types of tickets or customers for better satisfaction.</li>
+          <li>Matching buyers and sellers in a marketplace based on mutual preferences.</li>
+        </ul>
+
+        <details open>
+          <summary>🧠 How It Works?</summary>
+          <ul>
+            <li>Each person (from one group) proposes to their highest-preferred person (from the other group) who hasn’t rejected them.</li>
+            <li>The receiving person accepts the proposal if they are free or prefer the new proposer over their current match.</li>
+            <li>This continues until everyone is matched.</li>
+            <li>The algorithm ensures no pair would prefer each other over their assigned match.</li>
+          </ul>
+        </details>
+
+        <details open>
+          <summary>📊 Visualization</summary>
+          <style>
+            body {
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              background: #f5f7fa;
+              margin: 20px;
+              color: #333;
+            }
+            .algo-card h2 {
+              color: #9a9a9a;
+              margin-bottom: 15px;
+            }
+            .algo-card p {
+              font-size: 1rem;
+              line-height: 1.6;
+            }
+            .step-title {
+              font-weight: 700;
+              color: #2e7d32;
+              margin: 25px 0 12px 0;
+              font-size: 1.2rem;
+            }
+            .grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 15px;
+              margin-bottom: 20px;
+              text-align: center;
+            }
+            .grid div {
+              background: #fff;
+              padding: 14px 10px;
+              border-radius: 8px;
+              box-shadow: 0 1px 6px rgb(0 0 0 / 0.1);
+              font-size: 0.95rem;
+            }
+            .header {
+              font-weight: 700;
+              background-color: #66bb6a;
+              color: white;
+            }
+            .match {
+              background-color: #c8e6c9;
+              font-weight: 600;
+            }
+            .propose {
+              background-color: #fff9c4;
+            }
+            hr {
+              margin: 30px 0;
+              border: none;
+              border-top: 1.5px solid #e0e0e0;
+            }
+            @media (max-width: 650px) {
+              .grid {
+                grid-template-columns: 1fr;
+              }
+            }
+          </style>
+          <p>In this example, <strong>Drivers (D1, D2, D3)</strong> are matched to <strong>Delivery Zones (Z1, Z2, Z3)</strong> based on mutual preferences. The goal is to find a <em>stable</em> matching where no driver-zone pair prefers each other over their current matches.</p>
+          <hr />
+          <h3>Preferences</h3>
+          <table style="width:100%; border-collapse: collapse; margin-bottom: 25px;">
+            <thead>
+              <tr style="background: #66bb6a; color: white;">
+                <th style="padding:8px; border: 1px solid #ddd;">Driver</th>
+                <th style="padding:8px; border: 1px solid #ddd;">Preferences (Zones)</th>
+                <th style="padding:8px; border: 1px solid #ddd;">Zone</th>
+                <th style="padding:8px; border: 1px solid #ddd;">Preferences (Drivers)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:8px; border: 1px solid #ddd;">D1</td>
+                <td style="padding:8px; border: 1px solid #ddd;">Z2 &gt; Z1 &gt; Z3</td>
+                <td style="padding:8px; border: 1px solid #ddd;">Z1</td>
+                <td style="padding:8px; border: 1px solid #ddd;">D3 &gt; D1 &gt; D2</td>
+              </tr>
+              <tr>
+                <td style="padding:8px; border: 1px solid #ddd;">D2</td>
+                <td style="padding:8px; border: 1px solid #ddd;">Z1 &gt; Z3 &gt; Z2</td>
+                <td style="padding:8px; border: 1px solid #ddd;">Z2</td>
+                <td style="padding:8px; border: 1px solid #ddd;">D1 &gt; D3 &gt; D2</td>
+              </tr>
+              <tr>
+                <td style="padding:8px; border: 1px solid #ddd;">D3</td>
+                <td style="padding:8px; border: 1px solid #ddd;">Z1 &gt; Z2 &gt; Z3</td>
+                <td style="padding:8px; border: 1px solid #ddd;">Z3</td>
+                <td style="padding:8px; border: 1px solid #ddd;">D2 &gt; D3 &gt; D1</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr />
+          <div class="step-title">Step 0: Initialization - Everyone is free, no matches yet</div>
+          <div class="grid">
+            <div class="header">Drivers</div>
+            <div class="header">Current Proposals</div>
+            <div class="header">Zones (Free/Matched)</div>
+            <div>D1</div><div>-</div><div>Free</div>
+            <div>D2</div><div>-</div><div>Free</div>
+            <div>D3</div><div>-</div><div>Free</div>
+          </div>
+          <hr />
+          <div class="step-title">Step 1: Drivers propose to their top choice</div>
+          <div class="grid">
+            <div class="header">Drivers</div>
+            <div class="header">Current Proposals</div>
+            <div class="header">Zones (Free/Matched)</div>
+            <div>D1</div><div class="propose">Proposes to Z2</div><div>Z2 (Free)</div>
+            <div>D2</div><div class="propose">Proposes to Z1</div><div>Z1 (Free)</div>
+            <div>D3</div><div class="propose">Proposes to Z1</div><div>Z1 (Contested)</div>
+          </div>
+          <hr />
+          <div class="step-title">Step 2: Zones decide which proposal to accept</div>
+          <div class="grid">
+            <div class="header">Drivers</div>
+            <div class="header">Status</div>
+            <div class="header">Zones</div>
+            <div>D1</div><div class="match">Matched with Z2</div><div>Z2 (Matched with D1)</div>
+            <div>D2</div><div>Rejected by Z1, free again</div><div>Z1 (Matched with D3)</div>
+            <div>D3</div><div class="match">Matched with Z1</div><div>Z1 (Matched with D3)</div>
+          </div>
+          <hr />
+          <div class="step-title">Step 3: Rejected drivers propose to next choice</div>
+          <div class="grid">
+            <div class="header">Drivers</div>
+            <div class="header">Current Proposals</div>
+            <div class="header">Zones (Free/Matched)</div>
+            <div>D1</div><div>Matched with Z2</div><div>Z2 (Matched with D1)</div>
+            <div>D2</div><div class="propose">Proposes to Z3</div><div>Z3 (Free)</div>
+            <div>D3</div><div>Matched with Z1</div><div>Z1 (Matched with D3)</div>
+          </div>
+          <hr />
+          <div class="step-title">Step 4: Zones decide again - Final matches</div>
+          <div class="grid">
+            <div class="header">Drivers</div>
+            <div class="header">Match</div>
+            <div class="header">Zones</div>
+            <div>D1</div><div class="match">Z2</div><div>Z2 (Matched with D1)</div>
+            <div>D2</div><div class="match">Z3</div><div>Z3 (Matched with D2)</div>
+            <div>D3</div><div class="match">Z1</div><div>Z1 (Matched with D3)</div>
+          </div>
+          <hr />
+          <h3>Summary:</h3>
+          <p>
+            Each driver proposes to zones based on preference order.<br />
+            Zones accept the best proposal and reject others.<br />
+            Rejected drivers try next zones.<br />
+            Process repeats until everyone is matched.<br />
+            Resulting matches are stable - no driver-zone pair would prefer each other over their current partners.
+          </p>
+        </details>
+
+        <details open>
+          <summary>👩‍💻 View Code</summary>
+          <a href="/codes/stable-marriage.cpp" target="_blank" class="code-btn">
+            <i class="uil uil-github"></i> Click here for code
+          </a>
+        </details>
+
+        <details open>
+          <summary>🧮 Complexity Analysis</summary>
+          <ul>
+            <li><strong>Time Complexity:</strong> O(n²) where n is the number of elements in one group</li>
+            <li><strong>Space Complexity:</strong> O(n)</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        Gale, D., & Shapley, L. S. (1962).
+        <a href="https://en.wikipedia.org/wiki/Stable_marriage_problem" target="_blank">
+          Wikipedia: Stable Marriage Problem
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/stable-marriage-problem/" target="_blank">
+          GeeksforGeeks: Stable Marriage Problem
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/graph/stable_matching.html" target="_blank">
+          CP-Algorithms: Stable Marriage Problem
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>

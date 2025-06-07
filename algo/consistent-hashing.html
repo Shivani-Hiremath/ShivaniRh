@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Consistent Hashing | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="consistent-hashing" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Consistent Hashing</h1>
+    <p><strong>Category:</strong> Hashing, Distributed Systems</p>
+    <p><strong>Description:</strong> A hashing technique that minimizes key remapping when nodes are added or removed, ideal for distributed caches and storage.</p>
+
+    <p><strong>📦 Business Case (Where & How to Use):</strong></p>
+    <ul>
+      <li><strong>Distributed Caches (e.g., Amazon DynamoDB, Memcached):</strong> Efficiently distributes keys among nodes to minimize cache misses during scaling.</li>
+      <li><strong>Load Balancing:</strong> Evenly distributes user requests across servers with minimal disruption when servers join or leave.</li>
+      <li><strong>Cloud Storage Systems:</strong> Ensures minimal data reshuffling in distributed file systems.</li>
+    </ul>
+   
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Instead of using modulo with the number of servers, consistent hashing uses a ring/hash circle.</li>
+        <li>Imagine a circle where both servers and keys are hashed to positions on this circle using the same hash function.</li>
+        <li>Each key is assigned to the next server clockwise on the ring.</li>
+        <li>When a server is removed or added, only keys between that server and its neighbor move.</li>
+        <li>Map servers and keys to a hash ring (a circle) using a hash function.</li>
+        <li>Assign each key to the closest server clockwise on the ring.</li>
+        <li>When a server is added or removed, only keys assigned to that server or affected neighbors are reassigned.</li>
+        <li>Minimizes data movement during changes in the number of servers.</li>
+        <li>Balances load effectively even with dynamic server changes.</li>
+      </ul>
+    </details>
+    <details open>
+      <summary>📊 Visualization</summary>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="/assets/consistent.jpg" alt="Consistent Hashing Ring Illustration" style="width: 100%; max-width: 500px; border-radius: 10px; box-shadow: 0 2px 12px #0001;">
+        <figcaption style="font-weight: bold; margin-top: 8px;">Consistent Hashing Ring Illustration</figcaption>
+      </div>
+      <div class="consistent-cards">
+        <div class="card">
+          <h2> Overview</h2>
+          <ul>
+            <li><span class="highlight">Books</span> = Keys (Data Items)</li>
+            <li><span class="highlight">Shelves</span> = Nodes (Servers)</li>
+            <li>Each key is hashed onto a circular ring.</li>
+            <li>Key goes to the first node clockwise on the ring.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2> Before Adding Node D</h2>
+          <ul>
+            <li>Ring has Nodes A, B, and C.</li>
+            <li>Key 1 → Node A</li>
+            <li>Key 2 → Node B</li>
+            <li>Key 3 → Node C</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2> After Adding Node D</h2>
+          <ul>
+            <li>Node D is placed between A and C.</li>
+            <li>Only Key 3 now moves to Node D.</li>
+            <li>Keys 1 & 2 remain on Nodes A & B.</li>
+            <li>Minimal data movement.</li>
+          </ul>
+        </div>
+      </div>
+      <iframe 
+        src="https://gallery.selfboot.cn/en/algorithms/hashring" 
+        width="100%" 
+        height="500" 
+        style="border:1px solid #ccc; border-radius:10px;">
+      </iframe>
+      <p style="font-size: 0.9rem;">If the visualization does not load, <a href="https://gallery.selfboot.cn/en/algorithms/hashring" target="_blank">click here to open it in a new tab</a>.</p>
+    </details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/consistent-hashing.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Insert/Remove Node:</strong> O(log N) with balanced trees or O(1) with hash ring</li>
+        <li><strong>Key Lookup:</strong> O(1) average</li>
+        <li><strong>Space:</strong> O(N + K), N = nodes, K = keys</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Consistent_hashing" target="_blank">
+        Wikipedia: Consistent Hashing
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/consistent-hashing-introduction/" target="_blank">
+        GeeksforGeeks: Consistent Hashing Introduction
+      </a>
+    </li>
+    <li>
+      <a href="https://www.cockroachlabs.com/blog/consistent-hashing/" target="_blank">
+        Cockroach Labs: Consistent Hashing Explained
+      </a>
+    </li>
+    <li>
+      Visualization powered by 
+      <a href="https://gallery.selfboot.cn/en/algorithms/hashring" target="_blank">
+        Selfboot: Consistent Hashing Visualizer
+      </a>
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

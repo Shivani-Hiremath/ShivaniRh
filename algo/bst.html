@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Binary Search Tree | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<header>
+  <h1>Shivani's Portfolio</h1>
+  <nav>
+    <a href="../main.html">Home</a>
+  </nav>
+</header>
+<section id="binary-search-tree" style="margin-top: 50px;">
+  <div class="algo-card">
+    <h1>Binary Search Tree (BST)</h1>
+    <p><strong>Category:</strong> Data Structures, Tree</p>
+    <p><strong>Description:</strong> A tree data structure where each node has at most two children, with the left child containing values less than the parent and the right child containing values greater than the parent. Supports efficient search, insertion, and deletion.</p>
+
+    <p><strong>📦 Business Case:</strong></p>
+    <ul>
+      <li><strong>Sorted data storage:</strong> BSTs maintain data in sorted order allowing fast lookup, insertion, and deletion — useful in databases and file systems.</li>
+      <li><strong>In-memory indexing:</strong> BSTs provide quick access to records when building indexes for search engines or in-memory caches.</li>
+      <li><strong>Dynamic datasets:</strong> Suitable when data is frequently inserted or removed, such as managing user sessions or event logs.</li>
+      <li><strong>Foundations for advanced trees:</strong> BSTs are the base structure for self-balancing trees (AVL, Red-Black Trees) used in high-performance systems.</li>
+    </ul>
+
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Each node has up to two children, left for smaller values, right for larger.</li>
+        <li>Operations use binary search logic to traverse the tree efficiently.</li>
+        <li>Balanced BSTs maintain height to O(log n) for optimal performance.</li>
+      </ul>
+    </details>
+
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://visualgo.net/en/bst" width="100%" height="400" frameborder="0" scrolling="no"></iframe>
+    </details>
+
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/bst.cpp" target="_blank" class="code-btn">
+        <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Search:</strong> O(h), where h is tree height (O(log n) average, O(n) worst)</li>
+        <li><strong>Insertion:</strong> O(h)</li>
+        <li><strong>Deletion:</strong> O(h)</li>
+        <li><strong>Space:</strong> O(n)</li>
+      </ul>
+    </details>
+  </div>
+</section>
+
+<div class="references-card">
+  <h2>References</h2>
+  <ol>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Binary_search_tree" target="_blank">
+        Wikipedia: Binary Search Tree
+      </a>
+    </li>
+    <li>
+      <a href="https://www.geeksforgeeks.org/binary-search-tree-data-structure/" target="_blank">
+        GeeksforGeeks: Binary Search Tree Data Structure
+      </a>
+    </li>
+    <li>
+      <a href="https://visualgo.net/en/bst" target="_blank">
+        VisuAlgo: BST Visualization
+      </a>
+    </li>
+    <li>
+      <a href="https://cp-algorithms.com/data_structures/binary_search_tree.html" target="_blank">
+        CP-Algorithms: Binary Search Tree
+      </a>
+    </li>
+  </ol>
+</div>
+
+<footer>
+  <p>Created by Shivani | © 2025</p>
+</footer>

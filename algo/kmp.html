@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KMP Algorithm | Amazon-APS</title>
+  <link rel="stylesheet" href="../dstyle.css" />
+</head>
+<body>
+  <header>
+    <h1>Shivani's Portfolio</h1>
+    <nav>
+      <a href="../main.html">Home</a>
+    </nav>
+  </header>
+  <section class="algo-card" style="max-width: 950px; margin: 48px auto 32px auto; padding: 32px 36px 32px 36px;">
+    <h1>Knuth-Morris-Pratt (KMP) Algorithm</h1>
+    <p><strong>Category:</strong> Product Search Optimisation (E-commerce)</p>
+    <p><strong>Description:</strong> Linear-time substring search that uses a prefix-function table to skip redundant comparisons, making “search-as-you-type” smooth on millions of product titles and descriptions.</p>
+    <p><strong>📦 Business Case (Amazon):</strong></p>
+    <ul>
+      <li>Real-time “did you mean?” suggestions in the search bar.</li>
+      <li>Fast autocomplete matching against huge product catalogues.</li>
+      <li>Lightning search inside long product descriptions or reviews.</li>
+    </ul>
+    <details open>
+      <summary>🧠 How It Works?</summary>
+      <ul>
+        <li>Pre-compute the <em>Longest Prefix Suffix</em> (LPS) table for the pattern (O(m)).</li>
+        <li>Scan the text; on mismatch, jump using LPS instead of restarting (O(n)).</li>
+        <li>Total complexity = O(n + m) without backtracking.</li>
+      </ul>
+    </details>
+    <details open>
+      <summary>📊 Visualization</summary>
+      <iframe src="https://leoriether.github.io/kmp-simulator/" width="100%" height="430"
+              style="border:1px solid #ccc;border-radius:10px;"></iframe>
+      <p style="font-size:0.9rem;">Select “KMP” in the visualiser to watch step-by-step skips.</p>
+    </details>
+    <details open>
+      <summary>👩‍💻 View Code</summary>
+      <a href="/codes/kmp.cpp" target="_blank" class="code-btn">
+         <i class="uil uil-github"></i> Click here for code
+      </a>
+    </details>
+    <details open>
+      <summary>🧮 Complexity Analysis</summary>
+      <ul>
+        <li><strong>Time:</strong> O(n + m)</li>
+        <li><strong>Space:</strong> O(m) (LPS table)</li>
+        <li><strong>Stable / Streaming:</strong> Yes—works left-to-right, single pass.</li>
+      </ul>
+    </details>
+  </section>
+
+  <div class="references-card">
+    <h2>References</h2>
+    <ol>
+      <li>
+        Knuth, D. E., Morris, J. H., & Pratt, V. R. (1977).
+        <a href="https://en.wikipedia.org/wiki/Knuth–Morris–Pratt_algorithm" target="_blank">
+          Wikipedia: Knuth–Morris–Pratt Algorithm
+        </a>
+      </li>
+      <li>
+        <a href="https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/" target="_blank">
+          GeeksforGeeks: KMP Algorithm for Pattern Searching
+        </a>
+      </li>
+      <li>
+        <a href="https://cp-algorithms.com/string/prefix-function.html" target="_blank">
+          CP-Algorithms: Prefix Function (KMP)
+        </a>
+      </li>
+      <li>
+        Visualization powered by 
+        <a href="https://leoriether.github.io/kmp-simulator/" target="_blank">
+          KMP Visualizer
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <footer>
+    <p>Created by Shivani | © 2025</p>
+  </footer>
+</body>
+</html>
